@@ -37,7 +37,7 @@ public class PlayerInventory : MonoBehaviour
 
 	public static bool AddItem(Item itemToAdd)
 	{
-		// Check if player has item already.
+		// Check if player has items already.
 		if (_inventory.Count > 0)
 		{
 			// Loop through the entire inventory
@@ -46,7 +46,7 @@ public class PlayerInventory : MonoBehaviour
 				// If the item being added exists in inventory already
 				if (itemToAdd.Name == _inventory[cnt].Name)
 				{
-					// If player can hold more than one of the item
+					// Item is stackable
 					if (_inventory[cnt].MaxAmount > 1)
 					{
 						// If the player has less than the max amount, add item to inventory
@@ -57,20 +57,28 @@ public class PlayerInventory : MonoBehaviour
 							return true;
 						}
 					}
-					// Add item to inventory
+					// Non stackable
 					else
 					{
-						_inventory.Add(itemToAdd);
-						Debug.Log("Player Has Item And It Is Not Stackable: Item Added");
-						return true;
+						// If player has room
+						if (_inventory.Count < _curInventorySlots)
+						{
+							_inventory.Add(itemToAdd);
+							Debug.Log("Player Has Item And It Is Not Stackable: Item Added");
+							return true;
+						}
 					}
 				}
-				// Player does not have item already
+				// New Item
 				else
 				{
-					_inventory.Add(itemToAdd);
-					Debug.Log("Player Does Not Have Item: Item Added");
-					return true;
+					// If player has room
+					if (_inventory.Count < _curInventorySlots)
+					{
+						_inventory.Add(itemToAdd);
+						Debug.Log("Player Does Not Have Item: Item Added");
+						return true;
+					}
 				}
 			}
 		}

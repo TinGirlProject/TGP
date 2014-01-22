@@ -31,10 +31,22 @@ public class PlayerGUI : MonoBehaviour
 	private const float DOUBLE_CLICK_TIMER_THRESHHOLD = 0.5f;							// Time between clicks for it to be considered a double click.
 	private Item _selectedItem;															// What item is selected by the player.
 
+	private Rect[] _slotRects = new Rect[6 * 4];
+
 	// Use this for initialization
 	void Start () 
 	{
+		int cnt = 0;
 		//_inventoryRows = PlayerInventory.MaxInventorySlots / _inventoryCols;
+		for (int y = 0; y < _inventoryRows; y++)
+		{
+			for (int x = 0; x < _inventoryCols; x++)
+			{
+				_slotRects[cnt] = new Rect((_offset * 0.5f) + (x * _slotWidth), 20 +  (y * _slotHeight), _slotWidth, _slotHeight);
+
+				cnt++;
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -47,9 +59,14 @@ public class PlayerGUI : MonoBehaviour
 			testItem.Icon = Resources.Load("Item Icons/Weapons/" + testItem.Name) as Texture2D;
 			
 			PlayerInventory.AddItem(testItem);
-				//Debug.Log("Item Added");
-			//else
-				//Debug.Log("Item NOT Added");
+		}
+
+		if (Input.GetKeyDown (KeyCode.O)) 
+		{
+			if (PlayerInventory.IncreaseCurInventorySlots())
+			{
+				Debug.Log ("Sweet");
+			}
 		}
 
 		if (Input.GetKeyUp(KeyCode.I))
@@ -72,6 +89,8 @@ public class PlayerGUI : MonoBehaviour
 
 	private void InventoryWindow(int id)
 	{
+		Event curEvent = Event.current;
+
 		int cnt = 0;
 
 		for (int y = 0; y < _inventoryRows; y++)
@@ -80,8 +99,18 @@ public class PlayerGUI : MonoBehaviour
 			{
 				if(cnt < PlayerInventory.Inventory.Count)
 				{
-					GUI.Box(new Rect((_offset * 0.5f) + (x * _slotWidth), 20 +  (y * _slotHeight), _slotWidth, _slotHeight), 
-					        new GUIContent(PlayerInventory.Inventory[cnt].Icon, PlayerInventory.Inventory[cnt].Description), "Inventory Item");
+					GUI.Box(_slotRects[cnt], new GUIContent(PlayerInventory.Inventory[cnt].Icon, PlayerInventory.Inventory[cnt].Description), "Inventory Item");
+
+					if (_slotRects[cnt].Contains(curEvent.mousePosition))
+					{
+						if (curEvent.type == EventType.MouseDown)
+						{
+							Debug.Log ("Box " + cnt + " clicked.");
+							_selectedItem = PlayerInventory.Inventory[cnt];
+
+							GUI.Box(new Rect(Input.mousePosition.x - 16, Screen.height - Input.mousePosition.y + 16, 32, 32), new GUIContent(PlayerInventory.Inventory[cnt].Icon, "Inventory Item"));
+						}
+					}
 
 //					if (_selectedItem == PlayerInventory.Inventory[cnt])
 //					{
@@ -133,9 +162,9 @@ public class PlayerGUI : MonoBehaviour
 //						//}
 //					}
 				}
-				else
+				else if (cnt < PlayerInventory.CurInventorySlots)
 				{
-					GUI.Box(new Rect((_offset * 0.5f) + (x * _slotWidth), 20 +  (y * _slotHeight), _slotWidth, _slotHeight), ""/*(x + y * _inventoryCols).ToString()*/, "Empty Slot");
+					GUI.Box(_slotRects[cnt], ""/*(x + y * _inventoryCols).ToString()*/, "Empty Slot");
 				}
 				
 				cnt++;
