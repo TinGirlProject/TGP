@@ -23,27 +23,29 @@ public class PlayerGUI : MonoBehaviour
 	/**************************************************/
 	private bool _displayInventoryWindow = false;										// Should we show the inventory window?
 	private const int INVENTORY_WINDOW_ID = 1;											// Unique window ID for inventory window.
-	private Rect _inventoryWindowRect = new Rect(10, Screen.height - 163, 202, 153);	// Inventory rect.
+	private Rect _inventoryWindowRect = new Rect(10, Screen.height - 178, 202, 173);	// Inventory rect.
 	private int _inventoryCols = 6;														// Default inventory window columns.
 	private int _inventoryRows = 4;														// Default inventory window rows.
 
 	private float _doubleClickTimer = 0;												// Timer to determine time between clicks.
 	private const float DOUBLE_CLICK_TIMER_THRESHHOLD = 0.5f;							// Time between clicks for it to be considered a double click.
 	private Item _selectedItem;															// What item is selected by the player.
+	private Item _clickedItem;															// What item is clicked by the player.
 
 	private Rect[] _slotRects = new Rect[6 * 4];
 
 	// Use this for initialization
 	void Start () 
 	{
+		// Count for slotRects array initialization loop.
 		int cnt = 0;
-		//_inventoryRows = PlayerInventory.MaxInventorySlots / _inventoryCols;
+		// Initialize the array holding all possible inventory rects.
+		// This will be used for mouse position detection over the inventory slots.
 		for (int y = 0; y < _inventoryRows; y++)
 		{
 			for (int x = 0; x < _inventoryCols; x++)
 			{
 				_slotRects[cnt] = new Rect((_offset * 0.5f) + (x * _slotWidth), 20 +  (y * _slotHeight), _slotWidth, _slotHeight);
-
 				cnt++;
 			}
 		}
@@ -52,6 +54,7 @@ public class PlayerGUI : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		// Create a hatchet for testing.
 		if (Input.GetKeyDown(KeyCode.P))
 		{
 			Item testItem = new Item("Hatchet", "This is a test item", 1, 1);
@@ -60,7 +63,7 @@ public class PlayerGUI : MonoBehaviour
 			
 			PlayerInventory.AddItem(testItem);
 		}
-
+		// Increase inventory for testing.
 		if (Input.GetKeyDown (KeyCode.O)) 
 		{
 			if (PlayerInventory.IncreaseCurInventorySlots())
@@ -68,7 +71,7 @@ public class PlayerGUI : MonoBehaviour
 				Debug.Log ("Sweet");
 			}
 		}
-
+		// Display or hide the inventory window.
 		if (Input.GetKeyUp(KeyCode.I))
 		{
 			_displayInventoryWindow = !_displayInventoryWindow;
@@ -77,11 +80,39 @@ public class PlayerGUI : MonoBehaviour
 
 	void OnGUI()
 	{
+		// Register the current event so that we don't have to keep calling it.
+		Event curEvent = Event.current;
+
 		GUI.skin = playerSkin;
 
 		if (_displayInventoryWindow)
 		{
 			_inventoryWindowRect = GUI.Window(INVENTORY_WINDOW_ID, _inventoryWindowRect, InventoryWindow, "Inventory");
+		}
+
+		if (_selectedItem != null)
+		{
+			GUI.Box(new Rect(Input.mousePosition.x - 16, Screen.height - Input.mousePosition.y - 16, 32, 32), new GUIContent(_selectedItem.Icon), "Inventory Item");
+
+			if (_inventoryWindowRect.Contains(curEvent.mousePosition))
+			{
+				Debug.Log("Mouse over inventory window.");
+				if (curEvent.type == EventType.MouseUp)
+				{
+					if (PlayerInventory.AddItem(_selectedItem))
+					{
+						_selectedItem = null;
+					}
+				}
+			}
+			else
+			{
+				if (curEvent.type == EventType.MouseUp)
+				{
+					Debug.Log("Item Destroyed");
+					_selectedItem = null;
+				}
+			}
 		}
 
 		DisplayTooltip();
@@ -99,16 +130,17 @@ public class PlayerGUI : MonoBehaviour
 			{
 				if(cnt < PlayerInventory.Inventory.Count)
 				{
-					GUI.Box(_slotRects[cnt], new GUIContent(PlayerInventory.Inventory[cnt].Icon, PlayerInventory.Inventory[cnt].Description), "Inventory Item");
+					GUI.Box(_slotRects[cnt], new GUIContent(PlayerInventory.Inventory[cnt].Icon, PlayerInventory.Inventory[cnt].ToolTip()), "Inventory Item");
 
 					if (_slotRects[cnt].Contains(curEvent.mousePosition))
 					{
-						if (curEvent.type == EventType.MouseDown)
+						if (curEvent.type == EventType.MouseDrag && _selectedItem == null)
 						{
-							Debug.Log ("Box " + cnt + " clicked.");
 							_selectedItem = PlayerInventory.Inventory[cnt];
-
-							GUI.Box(new Rect(Input.mousePosition.x - 16, Screen.height - Input.mousePosition.y + 16, 32, 32), new GUIContent(PlayerInventory.Inventory[cnt].Icon, "Inventory Item"));
+							if (!PlayerInventory.RemoveItem(_selectedItem))
+							{
+								Debug.LogWarning("Could not remove item.");
+							}
 						}
 					}
 
@@ -191,7 +223,7 @@ public class PlayerGUI : MonoBehaviour
 		if(_toolTip != "")
 		{
 			float x = _offset;
-			float y = Screen.height - (213 + _offset);
+			float y = Screen.height - (223 + _offset);
 			int width = 202;
 			int height = 50;
 

@@ -73,4 +73,9 @@ public class Item
 		set { _icon = value; }
 	}
 #endregion
+
+	public virtual string ToolTip()
+	{
+		return Name + "\n" + Description;
+	}
 }

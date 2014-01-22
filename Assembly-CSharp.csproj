@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ItemGenerator.cs" />
      <Compile Include="Assets\PlayerGUI.cs" />
      <Compile Include="Assets\Potion.cs" />
      <Compile Include="Assets\Scripts\ColliderGizmo.cs" />
@@ -54,6 +53,7 @@
      <Compile Include="Assets\Scripts\GameCamera.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Item Classes\Item.cs" />
+     <Compile Include="Assets\Scripts\Item Classes\ItemGenerator.cs" />
      <Compile Include="Assets\Scripts\MathP.cs" />
      <Compile Include="Assets\Scripts\Platform.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />

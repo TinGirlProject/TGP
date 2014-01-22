@@ -69,17 +69,14 @@ public class PlayerInventory : MonoBehaviour
 						}
 					}
 				}
-				// New Item
-				else
-				{
-					// If player has room
-					if (_inventory.Count < _curInventorySlots)
-					{
-						_inventory.Add(itemToAdd);
-						Debug.Log("Player Does Not Have Item: Item Added");
-						return true;
-					}
-				}
+			}
+
+			// New Item, add if player has room.
+			if (_inventory.Count < _curInventorySlots)
+			{
+				_inventory.Add(itemToAdd);
+				Debug.Log("Player Does Not Have Item: Item Added");
+				return true;
 			}
 		}
 		// If inventory is empty, add the item.
@@ -112,7 +109,7 @@ public class PlayerInventory : MonoBehaviour
 				// Otherwise, remove the item completely
 				else
 				{
-					_inventory.Remove(itemToRemove);
+					_inventory.RemoveAt(cnt);
 					Debug.Log("Item Removed");
 					return true;
 				}
