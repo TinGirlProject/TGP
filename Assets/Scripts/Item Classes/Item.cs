@@ -7,7 +7,7 @@
 /// </summary>
 using UnityEngine;
 
-public class Item 
+public class Item
 {
 	protected string _name;									// Name of the item.
 	protected string _description;							// Description of the item.

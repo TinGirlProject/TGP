@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// Player inventory.cs
 /// Written By Galen Manuel
-/// Last modified January 21st, 2014.
+/// Last modified January 22nd, 2014.
 /// 
 /// This class will hold the player's inventory including money and
 /// all functions relating to the inventory.
@@ -53,14 +53,23 @@ public class PlayerInventory : MonoBehaviour
 						if (_inventory[cnt].CurAmount < _inventory[cnt].MaxAmount)
 						{
 							_inventory[cnt].CurAmount++;
+							Debug.Log("Player Has Item And It Is Stackable: Item Added");
 							return true;
 						}
+					}
+					// Add item to inventory
+					else
+					{
+						_inventory.Add(itemToAdd);
+						Debug.Log("Player Has Item And It Is Not Stackable: Item Added");
+						return true;
 					}
 				}
 				// Player does not have item already
 				else
 				{
 					_inventory.Add(itemToAdd);
+					Debug.Log("Player Does Not Have Item: Item Added");
 					return true;
 				}
 			}
@@ -69,9 +78,11 @@ public class PlayerInventory : MonoBehaviour
 		else
 		{
 			_inventory.Add(itemToAdd);
+			Debug.Log("Player Has Empty Inventory: Item Added");
 			return true;
 		}
 		// Player could not add item
+		Debug.Log("Item NOT Added");
 		return false;
 	}
 
@@ -87,17 +98,20 @@ public class PlayerInventory : MonoBehaviour
 				if (_inventory[cnt].CurAmount > 1)
 				{
 					_inventory[cnt].CurAmount--;
+					Debug.Log("Item Removed");
 					return true;
 				}
 				// Otherwise, remove the item completely
 				else
 				{
 					_inventory.Remove(itemToRemove);
+					Debug.Log("Item Removed");
 					return true;
 				}
 			}
 		}
 		// Player could not remove item
+		Debug.Log("Item NOT Removed");
 		return false;
 	}
 
