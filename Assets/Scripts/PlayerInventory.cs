@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// Player inventory.cs
 /// Written By Galen Manuel
-/// Last modified January 14th, 2014.
+/// Last modified January 21st, 2014.
 /// 
 /// This class will hold the player's inventory including money and
 /// all functions relating to the inventory.
@@ -12,53 +12,70 @@ using System.Collections.Generic;
 
 public class PlayerInventory : MonoBehaviour 
 {
-	private List<Item> _inventory = new List<Item>();
-	private int _curInventorySlots;
-	private int _maxInventorySlots;
-	private int _curMoney;
-	private int _maxMoney;
+	private static List<Item> _inventory = new List<Item>();		// The actual inventory
+	private static int _curInventorySlots;							// Current number of inventory slots
+	private static int _maxInventorySlots;							// Max number of inventory slots
+	private static int _curMoney;									// Current amount of money.
+	private static int _maxMoney;									// Max amount of money.
 
+	private Item testItem;
+
+	// Default Constructor.
 	public PlayerInventory()
 	{
-		DontDestroyOnLoad(this.gameObject);
 		// Default values
-		_curInventorySlots = 9;
-		_maxInventorySlots = 18;
+		_curInventorySlots = 6;
+		_maxInventorySlots = 24;
 		_curMoney = 0;
 		_maxMoney = 999999;
 	}
 
-	public bool AddItem(Item itemToAdd)
+	private void Awake()
 	{
-		// Loop through the entire inventory
-		for (int cnt = 0; cnt < _inventory.Count; cnt++)
+		DontDestroyOnLoad(this.gameObject);
+	}
+
+	public static bool AddItem(Item itemToAdd)
+	{
+		// Check if player has item already.
+		if (_inventory.Count > 0)
 		{
-			// If the item being added exists in inventory already
-			if (itemToAdd.Name == _inventory[cnt].Name)
+			// Loop through the entire inventory
+			for (int cnt = 0; cnt < _inventory.Count; cnt++)
 			{
-				// If player can hold more than one of the item
-				if (_inventory[cnt].MaxAmount > 1)
+				// If the item being added exists in inventory already
+				if (itemToAdd.Name == _inventory[cnt].Name)
 				{
-					// If the player has less than the max amount, add item to inventory
-					if (_inventory[cnt].CurAmount < _inventory[cnt].MaxAmount)
+					// If player can hold more than one of the item
+					if (_inventory[cnt].MaxAmount > 1)
 					{
-						_inventory.Add(itemToAdd);
-						return true;
+						// If the player has less than the max amount, add item to inventory
+						if (_inventory[cnt].CurAmount < _inventory[cnt].MaxAmount)
+						{
+							_inventory[cnt].CurAmount++;
+							return true;
+						}
 					}
 				}
+				// Player does not have item already
+				else
+				{
+					_inventory.Add(itemToAdd);
+					return true;
+				}
 			}
-			// Player does not have item already
-			else
-			{
-				_inventory.Add(itemToAdd);
-				return true;
-			}
+		}
+		// If inventory is empty, add the item.
+		else
+		{
+			_inventory.Add(itemToAdd);
+			return true;
 		}
 		// Player could not add item
 		return false;
 	}
 
-	public bool RemoveItem(Item itemToRemove)
+	public static bool RemoveItem(Item itemToRemove)
 	{
 		// Loop through the entire inventory
 		for (int cnt = 0; cnt < _inventory.Count; cnt++)
@@ -84,7 +101,7 @@ public class PlayerInventory : MonoBehaviour
 		return false;
 	}
 
-	public void ModifyMoney(int moneyMod)
+	public static void ModifyMoney(int moneyMod)
 	{
 		// Modify player's cur money
 		_curMoney += moneyMod;
@@ -98,39 +115,43 @@ public class PlayerInventory : MonoBehaviour
 			_curMoney = _maxMoney;
 	}
 
-	public bool IncreaseCurInventorySlots()
+	public static bool IncreaseCurInventorySlots()
 	{
+		// Check if adding a new inventory slot would be more than the max slots allowed.
 		if (_curInventorySlots + 1 > _maxInventorySlots)
+		{
 			return false;
+		}
 
+		// If all good, add inventory slot.
 		_curInventorySlots++;
 		return true;
 	}
 
-	public List<Item> Inventory
+	public static List<Item> Inventory
 	{
 		get { return _inventory; }
 	}
 
-	public int CurInventorySlots
+	public static int CurInventorySlots
 	{
 		get { return _curInventorySlots; }
 		set { _curInventorySlots = value; }
 	}
 
-	public int MaxInventorySlots
+	public static int MaxInventorySlots
 	{
 		get { return _maxInventorySlots; }
 		set { _maxInventorySlots = value; }
 	}
 
-	public int CurMoney
+	public static int CurMoney
 	{
 		get { return _curMoney; }
 		set { _curMoney = value; }
 	}
 
-	public int MaxMoney
+	public static int MaxMoney
 	{
 		get { return _maxMoney; }
 		set { _maxMoney = value; }

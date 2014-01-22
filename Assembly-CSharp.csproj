@@ -46,7 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ItemGenerator.cs" />
      <Compile Include="Assets\PlayerGUI.cs" />
+     <Compile Include="Assets\Potion.cs" />
      <Compile Include="Assets\Scripts\ColliderGizmo.cs" />
      <Compile Include="Assets\Scripts\Entity.cs" />
      <Compile Include="Assets\Scripts\GameCamera.cs" />

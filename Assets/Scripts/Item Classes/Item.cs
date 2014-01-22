@@ -1,7 +1,7 @@
 /// <summary>
 /// Item.cs
 /// Written By Galen Manuel
-/// Last modified January 14th, 2014.
+/// Last modified January 21st, 2014.
 /// 
 ///Base class for all items in game.
 /// </summary>
@@ -9,11 +9,11 @@ using UnityEngine;
 
 public class Item 
 {
-	protected string _name;
-	protected string _description;
-	private int _maxAmount;
-	private int _curAmount;
-	//private Texture2D _icon;
+	protected string _name;									// Name of the item.
+	protected string _description;							// Description of the item.
+	private int _maxAmount;									// Max amount of this item in inventory. Greater than one if stackable.
+	private int _curAmount;									// Current amount of item.
+	private Texture2D _icon;								// Item icon in inventory.
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="Item"/> class
@@ -67,10 +67,10 @@ public class Item
 		set{ _maxAmount = value; }
 	}
 	
-//	public Texture2D Icon
-//	{
-//		get { return _icon; }
-//		set { _icon = value; }
-//	}
+	public Texture2D Icon
+	{
+		get { return _icon; }
+		set { _icon = value; }
+	}
 #endregion
 }
