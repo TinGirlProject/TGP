@@ -5,6 +5,7 @@ public class Objective
 {
 	protected string _description;
 	protected bool _objectiveComplete;
+	protected Quest _myQuest;
 
 	public void CompleteObjective()
 	{

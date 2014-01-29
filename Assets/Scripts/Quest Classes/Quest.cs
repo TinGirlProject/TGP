@@ -25,7 +25,7 @@ public class Quest : MonoBehaviour
 		_questComplete = true;
 	}
 
-	public void UpdateObjectives(Objective toUpdate)
+	public void UpdateObjective(Objective toUpdate)
 	{
 
 	}

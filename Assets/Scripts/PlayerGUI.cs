@@ -57,7 +57,7 @@ public class PlayerGUI : MonoBehaviour
 		// Create a hatchet for testing.
 		if (Input.GetKeyDown(KeyCode.P))
 		{
-			Item testItem = new Item("Hatchet", "This is a test item", 1, 1);
+			Item testItem = new Item("Hatchet", "This is a test item", 1, 1, false);
 			
 			testItem.Icon = Resources.Load("Item Icons/Weapons/" + testItem.Name) as Texture2D;
 			
@@ -109,8 +109,19 @@ public class PlayerGUI : MonoBehaviour
 			{
 				if (curEvent.type == EventType.MouseUp)
 				{
-					Debug.Log("Item Destroyed");
-					_selectedItem = null;
+					if (_selectedItem.CanBeDestroyed)
+					{
+						Debug.Log("Item Destroyed");
+						_selectedItem = null;
+					}
+					else
+					{
+						Debug.Log ("Item CAN'T be destroyed, returning to inventory.");
+						if (PlayerInventory.AddItem(_selectedItem))
+						{
+							_selectedItem = null;
+						}
+					}
 				}
 			}
 		}

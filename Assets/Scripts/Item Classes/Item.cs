@@ -11,6 +11,7 @@ public class Item
 {
 	protected string _name;									// Name of the item.
 	protected string _description;							// Description of the item.
+	protected bool _canBeDestroyed;
 	private int _maxAmount;									// Max amount of this item in inventory. Greater than one if stackable.
 	private int _curAmount;									// Current amount of item.
 	private Texture2D _icon;								// Item icon in inventory.
@@ -25,6 +26,7 @@ public class Item
 		_description = "Missing Description";
 		_curAmount = -1;
 		_maxAmount = -1;
+		_canBeDestroyed = false;
 	}
 
 	/// <summary>
@@ -34,12 +36,13 @@ public class Item
 	/// <param name="description">Description.</param>
 	/// <param name="maxAmt">Max amt.</param>
 	/// <param name="curAmt">Current amt.</param>
-	public Item(string name, string description, int maxAmt, int curAmt)
+	public Item(string name, string description, int maxAmt, int curAmt, bool canBeDestroyed)
 	{
 		_name = name;
 		_description = description;
 		_maxAmount = maxAmt;
-		_curAmount = curAmt;	
+		_curAmount = curAmt;
+		_canBeDestroyed = canBeDestroyed;
 	}
 
 #region Setters and Getters	
@@ -71,6 +74,12 @@ public class Item
 	{
 		get { return _icon; }
 		set { _icon = value; }
+	}
+
+	public bool CanBeDestroyed
+	{
+		get { return _canBeDestroyed; }
+		set { _canBeDestroyed = value; }
 	}
 #endregion
 

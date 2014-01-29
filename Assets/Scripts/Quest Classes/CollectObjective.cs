@@ -14,12 +14,14 @@ public class CollectObjective : Objective
 		_curAmount = 0;
 		_neededAmount = 0;
 		_itemNeeded = null;
+		_myQuest = null;
 	}
 
-	public CollectObjective(string description, uint neededAmount, Item itemToCollect)
+	public CollectObjective(string description, Quest myQuest, uint neededAmount, Item itemToCollect)
 	{
 		_description = description;
 		_objectiveComplete = false;
+		_myQuest = myQuest;
 		_neededAmount = neededAmount;
 		_itemNeeded = itemToCollect;
 	}
@@ -36,10 +38,11 @@ public class CollectObjective : Objective
 
 			if (_curAmount == _neededAmount)
 			{
+				_objectiveComplete = true;
+				_myQuest.SendMessage("UpdateObjective", this, SendMessageOptions.RequireReceiver);
 				return true;
 			}
 		}
-
 		return false;
 	}
 }
