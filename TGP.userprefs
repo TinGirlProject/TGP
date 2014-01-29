@@ -1,13 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PlayerGUI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Quest Classes\CollectObjective.cs">
     <Files>
-      <File FileName="Assets\Scripts\Item Classes\ItemGenerator.cs" Line="9" Column="59" />
-      <File FileName="Assets\Scripts\Item Classes\ItemGenerator.cs" Line="9" Column="59" />
-      <File FileName="Assets\PlayerGUI.cs" Line="95" Column="26" />
-      <File FileName="Assets\Scripts\PlayerInventory.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Quest Classes\CollectObjective.cs" Line="1" Column="19" />
+      <File FileName="Assets\Scripts\Item Classes\QuestItem.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Item Classes\Item.cs" Line="1" Column="1" />
-      <File FileName="Assets\Potion.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Quest Classes\CollectObjective.cs" Line="1" Column="19" />
+      <File FileName="Assets\Scripts\Quest Classes\Objective.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
