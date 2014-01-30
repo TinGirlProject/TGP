@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class QuestItem : Item 
+public class RustyBattery : QuestItem 
 {
-	private Quest _myQuest;
 
 	// Use this for initialization
 	void Start () 

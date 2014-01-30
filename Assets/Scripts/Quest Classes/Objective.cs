@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Objective.cs
+/// Written By Galen Manuel
+/// Last modified January 29th, 2014.
+/// 
+/// This is the base class for all quest objectives in the game.
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class Objective 

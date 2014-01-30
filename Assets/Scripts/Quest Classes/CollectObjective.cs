@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// CollectObjective.cs
+/// Written By Galen Manuel
+/// Last modified January 29th, 2014.
+/// 
+/// This class is what all collect objectives will be.
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class CollectObjective : Objective 
@@ -39,7 +46,7 @@ public class CollectObjective : Objective
 			if (_curAmount == _neededAmount)
 			{
 				_objectiveComplete = true;
-				_myQuest.SendMessage("UpdateObjective", this, SendMessageOptions.RequireReceiver);
+				_myQuest.UpdateObjective(this);
 				return true;
 			}
 		}

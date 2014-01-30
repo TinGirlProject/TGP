@@ -1,10 +1,10 @@
 ﻿/// <summary>
-/// Player inventory.cs
+/// PlayerInventory.cs
 /// Written By Galen Manuel
-/// Last modified January 22nd, 2014.
+/// Last modified January 29th, 2014.
 /// 
-/// This class will hold the player's inventory including money and
-/// all functions relating to the inventory.
+/// This class will hold the player's inventory, money and quests and
+/// all functions relating to them.
 /// </summary>
 using UnityEngine;
 using System.Collections;
@@ -12,13 +12,15 @@ using System.Collections.Generic;
 
 public class PlayerInventory : MonoBehaviour 
 {
-	private static List<Item> _inventory = new List<Item>();		// The actual inventory
-	private static int _curInventorySlots;							// Current number of inventory slots
-	private static int _maxInventorySlots;							// Max number of inventory slots
-	private static int _curMoney;									// Current amount of money.
-	private static int _maxMoney;									// Max amount of money.
+	private static List<Item> _inventory = new List<Item>();			// The actual inventory
+	private static int _curInventorySlots;								// Current number of inventory slots
+	private static int _maxInventorySlots;								// Max number of inventory slots
+	private static int _curMoney;										// Current amount of money.
+	private static int _maxMoney;										// Max amount of money.
 
-	private Item testItem;
+	private static List<Quest> _activeQuests = new List<Quest>();		// Player's active quests
+	private static List<Quest> _completedQuests = new List<Quest>();	// Player's completed quests
+	private static int _maxNumberOfQuests;								// Max number of quests
 
 	// Default Constructor.
 	public PlayerInventory()
@@ -34,7 +36,7 @@ public class PlayerInventory : MonoBehaviour
 	{
 		DontDestroyOnLoad(this.gameObject);
 	}
-
+#region Inventory and Money functions
 	public static bool AddItem(Item itemToAdd)
 	{
 		// Check if player has items already.
@@ -53,7 +55,7 @@ public class PlayerInventory : MonoBehaviour
 						if (_inventory[cnt].CurAmount < _inventory[cnt].MaxAmount)
 						{
 							_inventory[cnt].CurAmount++;
-							Debug.Log("Player Has Item And It Is Stackable: Item Added");
+							Debug.Log("Player has \"" + itemToAdd.Name + "\" and it is stackable: \"" + itemToAdd.Name + "\" added");
 							return true;
 						}
 					}
@@ -64,7 +66,7 @@ public class PlayerInventory : MonoBehaviour
 						if (_inventory.Count < _curInventorySlots)
 						{
 							_inventory.Add(itemToAdd);
-							Debug.Log("Player Has Item And It Is Not Stackable: Item Added");
+							Debug.Log("Player has \"" + itemToAdd.Name + "\" and it is not stackable: \"" + itemToAdd.Name + "\" added");
 							return true;
 						}
 					}
@@ -75,7 +77,7 @@ public class PlayerInventory : MonoBehaviour
 			if (_inventory.Count < _curInventorySlots)
 			{
 				_inventory.Add(itemToAdd);
-				Debug.Log("Player Does Not Have Item: Item Added");
+				Debug.Log("Player does not have \"" + itemToAdd.Name + "\": \"" + itemToAdd.Name + "\" added");
 				return true;
 			}
 		}
@@ -83,11 +85,11 @@ public class PlayerInventory : MonoBehaviour
 		else
 		{
 			_inventory.Add(itemToAdd);
-			Debug.Log("Player Has Empty Inventory: Item Added");
+			Debug.Log("Player has empty inventory: \"" + itemToAdd.Name + "\" added");
 			return true;
 		}
 		// Player could not add item
-		Debug.Log("Item NOT Added");
+		Debug.Log("\"" + itemToAdd.Name + "\" NOT added");
 		return false;
 	}
 
@@ -103,20 +105,20 @@ public class PlayerInventory : MonoBehaviour
 				if (_inventory[cnt].CurAmount > 1)
 				{
 					_inventory[cnt].CurAmount--;
-					Debug.Log("Item Removed");
+					Debug.Log("\"" + itemToRemove.Name + "\" removed");
 					return true;
 				}
 				// Otherwise, remove the item completely
 				else
 				{
 					_inventory.RemoveAt(cnt);
-					Debug.Log("Item Removed");
+					Debug.Log("\"" + itemToRemove.Name + "\" removed");
 					return true;
 				}
 			}
 		}
 		// Player could not remove item
-		Debug.Log("Item NOT Removed");
+		Debug.Log("\"" + itemToRemove.Name + "\" NOT removed");
 		return false;
 	}
 
@@ -146,7 +148,50 @@ public class PlayerInventory : MonoBehaviour
 		_curInventorySlots++;
 		return true;
 	}
+#endregion
 
+#region Quest Functions
+	public static bool AddQuest(Quest questToAdd)
+	{
+		// Check if player has quests already.
+		if (_activeQuests.Count > 0)
+		{
+			// Loop through active quests
+			for (int cnt = 0; cnt < _activeQuests.Count; cnt++)
+			{
+				// If the quest being added exists in active quests already
+				if (questToAdd.Name == _activeQuests[cnt].Name)
+				{
+					/* 
+					 * Take quest and destroy it
+					 * return false with reason?
+					 */
+					return false;
+				}
+			}
+			
+			// New Quest, add if player has room.
+			if (_activeQuests.Count < _maxNumberOfQuests)
+			{
+				_activeQuests.Add(questToAdd);
+				Debug.Log("Player does not have \"" + questToAdd.Name + "\": \"" + questToAdd.Name + "\" added");
+				return true;
+			}
+		}
+		// If no active quests, add the quest.
+		else
+		{
+			_activeQuests.Add(questToAdd);
+			Debug.Log("Player has empty Quest Log: \"" + questToAdd.Name + "\" added");
+			return true;
+		}
+		// Player could not add item
+		Debug.Log("\"" + questToAdd.Name + "\" NOT added");
+		return false;
+	}
+#endregion
+
+#region Setters and Getters
 	public static List<Item> Inventory
 	{
 		get { return _inventory; }
@@ -175,4 +220,21 @@ public class PlayerInventory : MonoBehaviour
 		get { return _maxMoney; }
 		set { _maxMoney = value; }
 	}
+
+	public static List<Quest> ActiveQuests
+	{
+		get { return _activeQuests; }
+	}
+
+	public static List<Quest> CompletedQuests
+	{
+		get { return _completedQuests; }
+	}
+	
+	public static int MaxNumberOfQuests
+	{
+		get { return _maxNumberOfQuests; }
+		set { _maxNumberOfQuests = value; }
+	}
+#endregion
 }

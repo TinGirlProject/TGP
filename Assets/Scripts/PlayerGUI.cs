@@ -111,12 +111,12 @@ public class PlayerGUI : MonoBehaviour
 				{
 					if (_selectedItem.CanBeDestroyed)
 					{
-						Debug.Log("Item Destroyed");
+						Debug.Log("\"" + _selectedItem.Name + "\" destroyed");
 						_selectedItem = null;
 					}
 					else
 					{
-						Debug.Log ("Item CAN'T be destroyed, returning to inventory.");
+						Debug.Log ("\"" + _selectedItem.Name + "\" CAN'T be destroyed, returning to inventory.");
 						if (PlayerInventory.AddItem(_selectedItem))
 						{
 							_selectedItem = null;

@@ -3,7 +3,7 @@
 /// Written By Galen Manuel
 /// Last modified January 21st, 2014.
 /// 
-///Base class for all items in game.
+/// Base class for all items in game.
 /// </summary>
 using UnityEngine;
 
