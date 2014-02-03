@@ -36,7 +36,8 @@ public class PlayerInventory : MonoBehaviour
 	{
 		DontDestroyOnLoad(this.gameObject);
 	}
-#region Inventory and Money functions
+
+	#region Inventory and Money functions
 	public static bool AddItem(Item itemToAdd)
 	{
 		// Check if player has items already.
@@ -148,10 +149,10 @@ public class PlayerInventory : MonoBehaviour
 		_curInventorySlots++;
 		return true;
 	}
-#endregion
+	#endregion
 
-#region Quest Functions
-	public static bool AddQuest(Quest questToAdd)
+	#region Quest Functions
+	public static bool AddActiveQuest(Quest questToAdd)
 	{
 		// Check if player has quests already.
 		if (_activeQuests.Count > 0)
@@ -189,9 +190,9 @@ public class PlayerInventory : MonoBehaviour
 		Debug.Log("\"" + questToAdd.Name + "\" NOT added");
 		return false;
 	}
-#endregion
+	#endregion
 
-#region Setters and Getters
+	#region Setters and Getters
 	public static List<Item> Inventory
 	{
 		get { return _inventory; }
@@ -236,5 +237,5 @@ public class PlayerInventory : MonoBehaviour
 		get { return _maxNumberOfQuests; }
 		set { _maxNumberOfQuests = value; }
 	}
-#endregion
+	#endregion
 }
