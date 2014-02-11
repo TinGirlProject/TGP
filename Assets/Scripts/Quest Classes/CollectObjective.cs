@@ -12,7 +12,7 @@ public class CollectObjective : Objective
 {
 	private uint _curAmount;
 	private uint _neededAmount;
-	private Item _itemNeeded;
+	private string _itemNeeded;
 
 	public CollectObjective()
 	{
@@ -20,11 +20,11 @@ public class CollectObjective : Objective
 		_objectiveComplete = false;
 		_curAmount = 0;
 		_neededAmount = 0;
-		_itemNeeded = null;
+		_itemNeeded = "";
 		_myQuest = null;
 	}
 
-	public CollectObjective(string description, Quest myQuest, uint neededAmount, Item itemToCollect)
+	public CollectObjective(string description, Quest myQuest, uint neededAmount, string itemToCollect)
 	{
 		_description = description;
 		_objectiveComplete = false;
