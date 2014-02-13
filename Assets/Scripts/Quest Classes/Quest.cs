@@ -21,8 +21,8 @@ public class Quest
 	{
 		_name = "Missing Name";
 		_description = "Missing Description";
-		_activeObjectives = null;
-		_completeObjectives = null;
+		_activeObjectives = new List<Objective>();
+		_completeObjectives = new List<Objective>();
 		_questComplete = false;
 	}
 
@@ -38,6 +38,7 @@ public class Quest
 	public void CompleteQuest()
 	{
 		_questComplete = true;
+		PlayerQuests.CompleteActiveQuest(this);
 	}
 
 	public void UpdateObjective(Objective toUpdate)
@@ -48,6 +49,10 @@ public class Quest
 			{
 				_activeObjectives.Remove(toUpdate);
 				_completeObjectives.Add(toUpdate);
+				if (_activeObjectives.Count == 0)
+				{
+					CompleteQuest();
+				}
 			}
 		}
 	}

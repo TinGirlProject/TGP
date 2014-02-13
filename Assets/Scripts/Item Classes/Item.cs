@@ -11,10 +11,10 @@ public class Item
 {
 	protected string _name;									// Name of the item.
 	protected string _description;							// Description of the item.
-	protected bool _canBeDestroyed;
-	private int _maxAmount;									// Max amount of this item in inventory. Greater than one if stackable.
-	private int _curAmount;									// Current amount of item.
-	private Texture2D _icon;								// Item icon in inventory.
+	protected bool _canBeDestroyed;							// Can this item be destroyed?
+	protected int _maxAmount;									// Max amount of this item in inventory. Greater than one if stackable.
+	protected int _curAmount;									// Current amount of item.
+	protected Texture2D _icon;								// Item icon in inventory.
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="Item"/> class

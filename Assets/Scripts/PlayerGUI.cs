@@ -76,6 +76,14 @@ public class PlayerGUI : MonoBehaviour
 		{
 			_displayInventoryWindow = !_displayInventoryWindow;
 		}
+
+//		if (PlayerQuests.ActiveQuests.Count > 0)
+//		{
+//			for (int cnt = 0; cnt < PlayerQuests.ActiveQuests.Count; cnt++)
+//			{
+//				Debug.Log (PlayerQuests.ActiveQuests[cnt].Description);
+//			}
+//		}
 	}
 
 	void OnGUI()

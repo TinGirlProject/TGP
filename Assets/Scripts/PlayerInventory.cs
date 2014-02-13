@@ -12,15 +12,14 @@ using System.Collections.Generic;
 
 public class PlayerInventory : MonoBehaviour 
 {
-	private static List<Item> _inventory = new List<Item>();			// The actual inventory
-	private static int _curInventorySlots;								// Current number of inventory slots
-	private static int _maxInventorySlots;								// Max number of inventory slots
-	private static int _curMoney;										// Current amount of money.
-	private static int _maxMoney;										// Max amount of money.
+	private static List<Item> _inventory = new List<Item>();					// The actual inventory
+	private static int _curInventorySlots;										// Current number of inventory slots
+	private static int _maxInventorySlots;										// Max number of inventory slots
+	private static int _curMoney;												// Current amount of money.
+	private static int _maxMoney;												// Max amount of money.
 
-	private static List<Quest> _activeQuests = new List<Quest>();		// Player's active quests
-	private static List<Quest> _completedQuests = new List<Quest>();	// Player's completed quests
-	private static int _maxNumberOfQuests;								// Max number of quests
+	private static List<QuestItem> _questInventory = new List<QuestItem>();		// The actual inventory
+	private static int _maxQuestInventorySlots;									// Current number of inventory slots
 
 	// Default Constructor.
 	public PlayerInventory()
@@ -28,6 +27,7 @@ public class PlayerInventory : MonoBehaviour
 		// Default values
 		_curInventorySlots = 6;
 		_maxInventorySlots = 24;
+		_maxQuestInventorySlots = _maxInventorySlots;
 		_curMoney = 0;
 		_maxMoney = 999999;
 	}
@@ -151,43 +151,103 @@ public class PlayerInventory : MonoBehaviour
 	}
 	#endregion
 
-	#region Quest Functions
-	public static bool AddActiveQuest(Quest questToAdd)
+	#region Quest Inventory functions
+	public static bool AddQuestItem(QuestItem itemToAdd)
 	{
-		// Check if player has quests already.
-		if (_activeQuests.Count > 0)
+		// Check if player has items already.
+		if (_questInventory.Count > 0)
 		{
-			// Loop through active quests
-			for (int cnt = 0; cnt < _activeQuests.Count; cnt++)
+			// Loop through the entire inventory
+			for (int cnt = 0; cnt < _questInventory.Count; cnt++)
 			{
-				// If the quest being added exists in active quests already
-				if (questToAdd.Name == _activeQuests[cnt].Name)
+				// If the item being added exists in inventory already
+				if (itemToAdd.Name == _questInventory[cnt].Name)
 				{
-					/* 
-					 * Take quest and destroy it
-					 * return false with reason?
-					 */
-					return false;
+					// Item is stackable
+					if (_questInventory[cnt].MaxAmount > 1)
+					{
+						// If the player has less than the max amount, add item to inventory
+						if (_questInventory[cnt].CurAmount < _questInventory[cnt].MaxAmount)
+						{
+							_questInventory[cnt].CurAmount++;
+							Debug.Log("Player has \"" + itemToAdd.Name + "\" and it is stackable: \"" + itemToAdd.Name + "\" added");
+							for ( int i = 0; i < PlayerQuests.ActiveQuests.Count; i++)
+							{
+								Debug.Log("Active Quest Count: " + PlayerQuests.ActiveQuests.Count);
+								for (int j = 0; j < PlayerQuests.ActiveQuests[i].ActiveObjectives.Count; j++)
+								{
+									Debug.Log("Active Quest Objective Count: " + PlayerQuests.ActiveQuests[i].ActiveObjectives.Count);
+									if (itemToAdd.Name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].CollectItemNeeded)
+									{
+										PlayerQuests.ActiveQuests[i].ActiveObjectives[j].CollectItemCollected(itemToAdd);
+									}
+								}
+							}
+							return true;
+						}
+
+					}
+					// Non stackable
+					else
+					{
+						// If player has room
+						if (_questInventory.Count < _maxQuestInventorySlots)
+						{
+							_questInventory.Add(itemToAdd);
+							Debug.Log("Player has \"" + itemToAdd.Name + "\" and it is not stackable: \"" + itemToAdd.Name + "\" added");
+							for ( int i = 0; i < PlayerQuests.ActiveQuests.Count; i++)
+							{
+								for (int j = 0; j < PlayerQuests.ActiveQuests[i].ActiveObjectives.Count; j++)
+								{
+									if (itemToAdd.Name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].CollectItemNeeded)
+									{
+										PlayerQuests.ActiveQuests[i].ActiveObjectives[j].CollectItemCollected(itemToAdd);
+									}
+								}
+							}
+							return true;
+						}
+					}
 				}
 			}
 			
-			// New Quest, add if player has room.
-			if (_activeQuests.Count < _maxNumberOfQuests)
+			// New Item, add if player has room.
+			if (_questInventory.Count < _maxQuestInventorySlots)
 			{
-				_activeQuests.Add(questToAdd);
-				Debug.Log("Player does not have \"" + questToAdd.Name + "\": \"" + questToAdd.Name + "\" added");
+				_questInventory.Add(itemToAdd);
+				Debug.Log("Player does not have \"" + itemToAdd.Name + "\": \"" + itemToAdd.Name + "\" added");
+				for ( int i = 0; i < PlayerQuests.ActiveQuests.Count; i++)
+				{
+					for (int j = 0; j < PlayerQuests.ActiveQuests[i].ActiveObjectives.Count; j++)
+					{
+						if (itemToAdd.Name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].CollectItemNeeded)
+						{
+							PlayerQuests.ActiveQuests[i].ActiveObjectives[j].CollectItemCollected(itemToAdd);
+						}
+					}
+				}
 				return true;
 			}
 		}
-		// If no active quests, add the quest.
+		// If inventory is empty, add the item.
 		else
 		{
-			_activeQuests.Add(questToAdd);
-			Debug.Log("Player has empty Quest Log: \"" + questToAdd.Name + "\" added");
+			_questInventory.Add(itemToAdd);
+			Debug.Log("Player has empty quest inventory: \"" + itemToAdd.Name + "\" added");
+			for ( int i = 0; i < PlayerQuests.ActiveQuests.Count; i++)
+			{
+				for (int j = 0; j < PlayerQuests.ActiveQuests[i].ActiveObjectives.Count; j++)
+				{
+					if (itemToAdd.Name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].CollectItemNeeded)
+					{
+						PlayerQuests.ActiveQuests[i].ActiveObjectives[j].CollectItemCollected(itemToAdd);
+					}
+				}
+			}
 			return true;
 		}
 		// Player could not add item
-		Debug.Log("\"" + questToAdd.Name + "\" NOT added");
+		Debug.Log("\"" + itemToAdd.Name + "\" NOT added");
 		return false;
 	}
 	#endregion
@@ -222,20 +282,15 @@ public class PlayerInventory : MonoBehaviour
 		set { _maxMoney = value; }
 	}
 
-	public static List<Quest> ActiveQuests
+	public List<QuestItem> QuestInventory
 	{
-		get { return _activeQuests; }
+		get { return _questInventory; }
 	}
 
-	public static List<Quest> CompletedQuests
+	public int MaxQuestInventorySlots
 	{
-		get { return _completedQuests; }
-	}
-	
-	public static int MaxNumberOfQuests
-	{
-		get { return _maxNumberOfQuests; }
-		set { _maxNumberOfQuests = value; }
+		get { return _maxQuestInventorySlots; }
+		set { _maxQuestInventorySlots = value; }
 	}
 	#endregion
 }
