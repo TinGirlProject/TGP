@@ -10,13 +10,7 @@ public class TestMainQuestGiver : MonoBehaviour
 		{
 			Quest quest = new Quest(); 
 
-			Objective objective = new Objective();
-
-			objective.Description = "Collect 3 'Rusty Battery'.";
-			objective.MyQuest = quest;
-			objective.CollectCurAmount = 0;
-			objective.CollectNeededAmount = 3;
-			objective.CollectItemNeeded = "Rusty Battery";
+			CollectObjective objective = new CollectObjective("Collect 3 'Rusty Battery'.", quest, 3, "Rusty Battery");
 
 			quest.Name = "Power Outage";
 			quest.Description = "Meep has lost some power from chasing that butterfly.\n" +

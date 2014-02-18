@@ -30,7 +30,7 @@ public class RustyBattery : MonoBehaviour
 
 					for (int j = 0; j < PlayerQuests.ActiveQuests[i].ActiveObjectives.Count; j++)
 					{
-						if (PlayerQuests.ActiveQuests[i].ActiveObjectives[j].CollectItemNeeded == transform.name)
+						if (PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemNeeded == transform.name)
 						{
 							_myObjective = PlayerQuests.ActiveQuests[i].ActiveObjectives[j];
 						}
@@ -47,7 +47,7 @@ public class RustyBattery : MonoBehaviour
 			QuestItem bat = new QuestItem(transform.name, "An old old battery.", 3, 1, false, _myQuest);
 			bat.Icon = Resources.Load("Item Icons/Quest Items/" + bat.Name) as Texture2D;
 
-			if (PlayerInventory.AddQuestItem(bat))
+			if (PlayerInventory.AddItem(bat))
 				Destroy(this.gameObject);
 		}
 	}
