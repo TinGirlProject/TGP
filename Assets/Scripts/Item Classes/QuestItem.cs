@@ -1,6 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿/// <summary>
+/// QuestItem.cs
+/// 
+/// @Galen Manuel
+/// @Feb. 24th, 2014
+/// 
+/// This is the base class for all quest items in the game.
+/// </summary>
 public class QuestItem : Item 
 {
 	private Quest _myQuest;

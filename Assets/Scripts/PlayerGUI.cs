@@ -1,7 +1,8 @@
 ﻿/// <summary>
 /// Player GUI.cs
-/// Written By Galen Manuel
-/// Last modified January 22nd, 2014.
+/// 
+/// @Galen Manuel
+/// @Feb.24th, 2014
 /// 
 /// This class will control all the GUI in reagards to the player.
 /// </summary>

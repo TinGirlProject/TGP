@@ -1,18 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerQuests.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Item Classes\RustyBattery.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerInventory.cs" Line="75" Column="12" />
-      <File FileName="Assets\Scripts\PlayerQuests.cs" Line="86" Column="3" />
-      <File FileName="Assets\Scripts\Quest Classes\TestMainQuestGiver.cs" Line="13" Column="111" />
-      <File FileName="Assets\Scripts\PlayerGUI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerInventory.cs" Line="5" Column="20" />
+      <File FileName="Assets\Scripts\PlayerQuests.cs" Line="17" Column="48" />
+      <File FileName="Assets\Scripts\PlayerGUI.cs" Line="264" Column="1" />
       <File FileName="Assets\Scripts\Item Classes\QuestItem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Item Classes\Item.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Quest Classes\Quest.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Quest Classes\Objective.cs" Line="68" Column="41" />
-      <File FileName="Assets\Scripts\Item Classes\Potion.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Item Classes\RustyBattery.cs" Line="21" Column="4" />
-      <File FileName="Assets\Scripts\Quest Classes\CollectObjective.cs" Line="48" Column="37" />
+      <File FileName="Assets\Scripts\Item Classes\Item.cs" Line="9" Column="19" />
+      <File FileName="Assets\Scripts\Quest Classes\Quest.cs" Line="35" Column="26" />
+      <File FileName="Assets\Scripts\Quest Classes\Objective.cs" Line="5" Column="20" />
+      <File FileName="Assets\Scripts\Item Classes\Potion.cs" Line="19" Column="80" />
+      <File FileName="Assets\Scripts\Item Classes\RustyBattery.cs" Line="8" Column="60" />
+      <File FileName="Assets\Scripts\Quest Classes\CollectObjective.cs" Line="14" Column="25" />
+      <File FileName="Assets\Scripts\Quest Classes\GoToObjective.cs" Line="51" Column="24" />
+      <File FileName="Assets\Scripts\Quest Classes\SubQuestGiver.cs" Line="2" Column="26" />
+      <File FileName="Assets\Scripts\Quest Classes\MainQuestGiver.cs" Line="20" Column="45" />
+      <File FileName="Assets\Scripts\AreaInfo.cs" Line="31" Column="39" />
+      <File FileName="Assets\Scripts\PlayerAttributes.cs" Line="28" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

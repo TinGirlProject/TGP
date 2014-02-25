@@ -1,4 +1,13 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// RustyBattery.cs
+/// 
+/// @Galen Manuel
+/// @Feb. 24th, 2014
+/// 
+/// This class will control the visibility of the item in the game world and add the 
+/// item to the player's inventory if the player has space.
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class RustyBattery : MonoBehaviour 
@@ -44,10 +53,12 @@ public class RustyBattery : MonoBehaviour
 	{
 		if (c.transform.tag.Equals("Player") && _playerOnQuest)
 		{
+			bool collected = false;
 			QuestItem bat = new QuestItem(transform.name, "An old old battery.", 3, 1, false, _myQuest);
 			bat.Icon = Resources.Load("Item Icons/Quest Items/" + bat.Name) as Texture2D;
 
-			if (PlayerInventory.AddItem(bat))
+			collected = PlayerInventory.AddItem(bat);
+			if (collected)
 				Destroy(this.gameObject);
 		}
 	}

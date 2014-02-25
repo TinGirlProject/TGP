@@ -1,12 +1,20 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// PlayerQuests.cs
+/// 
+/// @Galen Manuel
+/// @Feb. 24th, 2014
+/// 
+/// This classs holds all the functionality fo rthe player's active and complete quests.
+/// </summary>
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerQuests : MonoBehaviour 
 {	
-	private static List<Quest> _activeQuests = new List<Quest>();		// Player's active quests
-	private static List<Quest> _completedQuests = new List<Quest>();	// Player's completed quests
-	private static int _maxNumberOfQuests;								// Max number of quests
+	private static List<Quest> _activeQuests = new List<Quest>();		
+	private static List<Quest> _completedQuests = new List<Quest>();	
+	private static int _maxNumberOfQuests;								
 
 	public PlayerQuests()
 	{

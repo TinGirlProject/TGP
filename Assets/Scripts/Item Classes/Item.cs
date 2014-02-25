@@ -1,7 +1,8 @@
 /// <summary>
 /// Item.cs
-/// Written By Galen Manuel
-/// Last modified January 21st, 2014.
+/// 
+/// @Galen Manuel
+/// @Feb.24th, 2014
 /// 
 /// Base class for all items in game.
 /// </summary>
@@ -9,35 +10,26 @@ using UnityEngine;
 
 public class Item
 {
-	protected string _name;									// Name of the item.
-	protected string _description;							// Description of the item.
-	protected bool _canBeDestroyed;							// Can this item be destroyed?
-	protected int _maxAmount;									// Max amount of this item in inventory. Greater than one if stackable.
-	protected int _curAmount;									// Current amount of item.
+	protected string _name;
+	protected string _description;
+	protected bool _canBeDestroyed;
+	protected int _maxAmount;								// Greater than one if stackable.
+	protected int _curAmount;
 	protected Texture2D _icon;								// Item icon in inventory.
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="Item"/> class
-	/// using defaults.
-	/// </summary>
+	
 	public Item()
 	{
+		// Default all variables
 		_name = "Missing Name";
 		_description = "Missing Description";
 		_curAmount = -1;
 		_maxAmount = -1;
 		_canBeDestroyed = false;
 	}
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="Item"/> class.
-	/// </summary>
-	/// <param name="name">Name.</param>
-	/// <param name="description">Description.</param>
-	/// <param name="maxAmt">Max amt.</param>
-	/// <param name="curAmt">Current amt.</param>
+	
 	public Item(string name, string description, int maxAmt, int curAmt, bool canBeDestroyed)
 	{
+		// Assigns all variables
 		_name = name;
 		_description = description;
 		_maxAmount = maxAmt;
@@ -85,6 +77,6 @@ public class Item
 
 	public virtual string ToolTip()
 	{
-		return Name + "\n" + Description;
+		return Name + "\n" + Description + "\n" + CurAmount;
 	}
 }

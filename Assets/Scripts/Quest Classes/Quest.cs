@@ -1,7 +1,8 @@
 ﻿/// <summary>
 /// Quest.cs
-/// Written By Galen Manuel
-/// Last modified January 29th, 2014.
+/// 
+/// @Galen Manuel
+/// @Feb.24th, 2014
 /// 
 /// This is the base class for all quests in the game.
 /// </summary>
@@ -16,23 +17,28 @@ public class Quest
 	private List<Objective> _activeObjectives;
 	private List<Objective> _completeObjectives;
 	private bool _questComplete;
+	private QuestTypes _type;
 
 	public Quest()
 	{
+		// Default all variables
 		_name = "Missing Name";
 		_description = "Missing Description";
 		_activeObjectives = new List<Objective>();
 		_completeObjectives = new List<Objective>();
 		_questComplete = false;
+		_type = QuestTypes.eNONE_QUEST;
 	}
 
-	public Quest(string name, string description, List<Objective> activeObjectives)
+	public Quest(string name, string description, List<Objective> activeObjectives, QuestTypes type)
 	{
+		// Assign all variables
 		_name = name;
 		_description = description;
 		_activeObjectives = activeObjectives;
 		_completeObjectives = new List<Objective>();
 		_questComplete = false;
+		_type = type;
 	}
 
 	public void CompleteQuest()
@@ -84,4 +90,17 @@ public class Quest
 		get { return _questComplete; }
 		set { _questComplete = value; }
 	}
+
+	public QuestTypes QuestType
+	{
+		get { return _type; }
+		set { _type = value; }
+	}
+}
+
+public enum QuestTypes
+{
+	eMAIN_QUEST,
+	eSUB_QUEST,
+	eNONE_QUEST
 }
