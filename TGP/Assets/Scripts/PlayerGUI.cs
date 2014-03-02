@@ -2,7 +2,7 @@
 /// Player GUI.cs
 /// 
 /// @Galen Manuel
-/// @Feb.24th, 2014
+/// @Mar. 1st, 2014
 /// 
 /// This class will control all the GUI in reagards to the player.
 /// </summary>
@@ -17,6 +17,8 @@ public class PlayerGUI : MonoBehaviour
 	private float _offset = 10;
 	private float _slotWidth = 32;
 	private float _slotHeight = 32;
+	private float _itemCountWidth = 10;
+	private float _itemCountHeight = 10;
 	private string _toolTip = "";
 
 	/**************************************************/
@@ -34,6 +36,7 @@ public class PlayerGUI : MonoBehaviour
 	private Item _clickedItem;															// What item is clicked by the player.
 
 	private Rect[] _slotRects = new Rect[6 * 4];
+	private Rect[] _itemCountRects = new Rect[6 * 4];
 
 	// Use this for initialization
 	void Start () 
@@ -50,6 +53,20 @@ public class PlayerGUI : MonoBehaviour
 				cnt++;
 			}
 		}
+
+		// Count for itemCountRects array initialization loop.
+		cnt = 0;
+		// Initialize the array holding all possible inventory rects.
+		// This will be used for mouse position detection over the inventory slots.
+		for (int y = 0; y < _inventoryRows; y++)
+		{
+			for (int x = 0; x < _inventoryCols; x++)
+			{
+				_itemCountRects[cnt] = new Rect((_offset * 0.5f) + ((x + _slotWidth - _itemCountWidth) * _slotWidth), 20 +  ((y + _slotHeight - _itemCountHeight) * _slotHeight), _itemCountWidth, _itemCountHeight);
+				cnt++;
+			}
+		}
+
 	}
 	
 	// Update is called once per frame
@@ -78,13 +95,10 @@ public class PlayerGUI : MonoBehaviour
 			_displayInventoryWindow = !_displayInventoryWindow;
 		}
 
-//		if (PlayerQuests.ActiveQuests.Count > 0)
-//		{
-//			for (int cnt = 0; cnt < PlayerQuests.ActiveQuests.Count; cnt++)
-//			{
-//				Debug.Log (PlayerQuests.ActiveQuests[cnt].Description);
-//			}
-//		}
+		if (Input.GetKeyUp(KeyCode.J))
+		{
+
+		}
 	}
 
 	void OnGUI()
@@ -151,6 +165,11 @@ public class PlayerGUI : MonoBehaviour
 				if(cnt < PlayerInventory.Inventory.Count)
 				{
 					GUI.Box(_slotRects[cnt], new GUIContent(PlayerInventory.Inventory[cnt].Icon, PlayerInventory.Inventory[cnt].ToolTip()), "Inventory Item");
+
+					if (PlayerInventory.Inventory[cnt].CurAmount > 1)
+					{
+						GUI.Box(_itemCountRects[cnt], PlayerInventory.Inventory[cnt].CurAmount.ToString());
+					}
 
 					if (_slotRects[cnt].Contains(curEvent.mousePosition))
 					{
@@ -224,6 +243,8 @@ public class PlayerGUI : MonoBehaviour
 		}
 
 		SetToolTip();
+
+		GUI.DragWindow();
 	}
 
 	private void SetToolTip()
