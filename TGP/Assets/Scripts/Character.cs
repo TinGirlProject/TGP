@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
         public float walkSpeed = 8;
         public float runSpeed = 12;
         public float acceleration = 30;
-        public float jumpHeight = 12;
+        public float jumpHeight = 8;
         public float slideDeceleration = 10;
         public float initiateSlideThreshold = 9;
     }
@@ -75,6 +75,8 @@ public class Character : MonoBehaviour
         ChangeState(InAirState.NONE);
         ChangeState(GroundedState.STANDING);
         ChangeState(PaceState.WALKING);
+		ladderState = LadderState.NONE;
+		wallJumpState = WallJumpState.NONE;
     }
 
     #region Health
@@ -123,6 +125,14 @@ public class Character : MonoBehaviour
                 ChangeState(InAirState.FALLING);
             }
         }
+		else if (other.tag == "LadderTop")
+		{
+			ladderState = LadderState.NONE;
+		}
+		else if (other.tag == "LadderBottom")
+		{
+			ladderState = LadderState.NONE;
+		}
     }
 
     public void ChangeState(System.Enum newState)
@@ -268,10 +278,10 @@ public class Character : MonoBehaviour
             ChangeState(GroundedState.STANDING);
         }
         // Allow jumping in only these states
-        else if (groundedState != GroundedState.NONE || inAirState == InAirState.WALLHOLDING
-                 || inAirState == InAirState.CLIMBING)
+        else if ((groundedState != GroundedState.NONE && ladderState == LadderState.NONE) || 
+					inAirState == InAirState.WALLHOLDING || (inAirState == InAirState.CLIMBING && ladderState == LadderState.TOP))
         {
-            ChangeState(InAirState.JUMPING);
+			ChangeState(InAirState.JUMPING);
         }
     }
 
