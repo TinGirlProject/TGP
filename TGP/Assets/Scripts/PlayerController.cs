@@ -51,7 +51,8 @@ public class PlayerController : Character
         // Slide Input
         if (Input.GetButtonDown("Slide"))
         {
-            Slide(true);
+			Debug.Log("Slide");
+			Slide(true);
         }
         else if (Input.GetButtonUp("Slide"))
         {

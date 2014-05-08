@@ -31,16 +31,25 @@ public class CharacterCollision : MonoBehaviour
     // Distance to raycast infront
     private float skin = .005f;
 
+	[SerializeField]
     private float xMinValue;
+	[SerializeField]
     private float xMaxValue;
+	[SerializeField]
     private float yMinValue;
+	[SerializeField]
     private float yMaxValue;
     #endregion
 
+	[SerializeField]
     private bool onSlope = false;
+	[SerializeField]
     bool connectedXRight = false;
+	[SerializeField]
     bool connectedXLeft = false;
+	[SerializeField]
     bool connectedYUp = false;
+	[SerializeField]
     bool connectedYDown = false;
 
     // Platform support
@@ -165,7 +174,7 @@ public class CharacterCollision : MonoBehaviour
                     float angle = Vector3.Angle(hit.normal, Vector3.down);
 
                     // Store min and max values
-                    if (angle > 80 && angle < 100)
+                    if (angle > 60 && angle < 120)
                     {
                         if (dir < 0 && hit.point.x < xMinValue)
                         {
@@ -211,10 +220,10 @@ public class CharacterCollision : MonoBehaviour
         Vector2 finalTransform = new Vector2(moveAmount.x + deltaPlatformPos.x, moveAmount.y);
         transform.Translate(finalTransform, Space.World);
 
-        if (connectedYDown && transform.position.y + moveAmount.y < yMinValue)
+        
+		if (connectedYDown && transform.position.y + moveAmount.y < yMinValue)
         {
-            // Ensure player doesnt fall through floor
-            transform.position = new Vector3(transform.position.x, yMinValue, 0);
+			transform.position = new Vector3(transform.position.x, yMinValue, 0);
             if (c.getInAirState() != Character.InAirState.JUMPING)
             {
                 c.ChangeState(Character.InAirState.NONE);
@@ -237,13 +246,12 @@ public class CharacterCollision : MonoBehaviour
 
         if (connectedXLeft && transform.position.x < xMinValue)
         {
-            // Ensure player doesnt pass through wall
-            transform.position = new Vector3(xMinValue, transform.position.y, 0);
+			transform.position = new Vector3(xMinValue, transform.position.y, 0);
             c.ChangeState(Character.PaceState.NONE);
         }
         else if (connectedXRight && transform.position.x > xMaxValue)
         {
-            transform.position = new Vector3(xMaxValue, transform.position.y, 0);
+			transform.position = new Vector3(xMaxValue, transform.position.y, 0);
             c.ChangeState(Character.PaceState.NONE);
         }
     }

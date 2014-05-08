@@ -201,7 +201,7 @@ public class Character : MonoBehaviour
                     break;
                 case GroundedState.SLIDING:
                     targetSpeedX = 0;
-
+					Debug.Log("Change to Slide state");
                     cp.SetCollider(slideColliderSize, slideColliderCentre);
                     animator.SetBool("Sliding", true);
                     break;
