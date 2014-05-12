@@ -85,7 +85,7 @@ public class CharacterCollision : MonoBehaviour
         ray = new Ray(origin, direction);
         Debug.DrawRay(origin, direction * (size.y / 2 + skin), Color.green);
 
-        if (Physics.Raycast(ray, out hit, size.y + skin))
+        if (Physics.Raycast(ray, out hit, size.y + skin, collisionMask))
         {
             groundValue = hit.point.y;
 

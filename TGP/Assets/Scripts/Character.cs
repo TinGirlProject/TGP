@@ -34,6 +34,8 @@ public class Character : MonoBehaviour
     private float targetSpeedX;
     private float targetSpeedY;
 
+	protected bool canMove;
+
     // Move directions
     private float moveDirX;
     private float moveDirY;
@@ -41,6 +43,12 @@ public class Character : MonoBehaviour
     // Collider values
     private Vector3 slideColliderSize = new Vector3(10.3f, 1.5f, 3);
     private Vector3 slideColliderCentre = new Vector3(.35f, .75f, 0);
+
+	// Climbing
+	protected GameObject curLadder;
+	protected Timer enterLadderTopRight;
+	protected Timer enterLadderTopLeft;
+	protected Timer enterLadderBottom;
 
     #region States
     // Character
@@ -58,8 +66,8 @@ public class Character : MonoBehaviour
     private enum WallJumpState { HOLDING, JUMPING, NONE }
 
     // Ladders
-    private LadderState ladderState;
-    private enum LadderState { TOP, BOTTOM, MIDDLE, NONE }
+    public LadderState ladderState;
+	public enum LadderState { TOP, BOTTOM, MIDDLE, NONE, ENTERTOPLEFT, ENTERTOPRIGHT, ENTERBOTTOM, ENTERING }
     #endregion
 
     // Components
@@ -77,6 +85,8 @@ public class Character : MonoBehaviour
         ChangeState(PaceState.WALKING);
 		ladderState = LadderState.NONE;
 		wallJumpState = WallJumpState.NONE;
+
+		canMove = true;
     }
 
     #region Health
@@ -98,41 +108,41 @@ public class Character : MonoBehaviour
     }
     #endregion
 
-    void OnTriggerStay(Collider other)
+	void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Ladder")
-        {
-            ladderState = LadderState.MIDDLE;
-        }
-        else if (other.tag == "LadderTop")
-        {
-            ladderState = LadderState.TOP;
-        }
-        else if (other.tag == "LadderBottom")
-        {
-            ladderState = LadderState.BOTTOM;
-        }
+		//if (other.tag == "Ladder")
+		//{
+		//	ladderState = LadderState.MIDDLE;
+		//}
+		//else if (other.tag == "LadderTop")
+		//{
+		//	ladderState = LadderState.TOP;
+		//}
+		//else if (other.tag == "LadderBottom")
+		//{
+		//	ladderState = LadderState.BOTTOM;
+		//}
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Ladder")
-        {
-            ladderState = LadderState.NONE;
+		//if (other.tag == "Ladder")
+		//{
+		//	ladderState = LadderState.NONE;
 
-            if (inAirState == InAirState.CLIMBING)
-            {
-                ChangeState(InAirState.FALLING);
-            }
-        }
-		else if (other.tag == "LadderTop")
-		{
-			ladderState = LadderState.NONE;
-		}
-		else if (other.tag == "LadderBottom")
-		{
-			ladderState = LadderState.NONE;
-		}
+		//	if (inAirState == InAirState.CLIMBING)
+		//	{
+		//		ChangeState(InAirState.FALLING);
+		//	}
+		//}
+		//else if (other.tag == "LadderTop")
+		//{
+		//	ladderState = LadderState.NONE;
+		//}
+		//else if (other.tag == "LadderBottom")
+		//{
+		//	ladderState = LadderState.NONE;
+		//}
     }
 
     public void ChangeState(System.Enum newState)
@@ -235,8 +245,8 @@ public class Character : MonoBehaviour
 
     protected void Move(float directionX, float directionY)
     {
-        moveDirX = directionX;
-        moveDirY = directionY;
+		moveDirX = directionX;
+		moveDirY = directionY;
 
         if (moveDirX == 0)
         {
@@ -278,7 +288,7 @@ public class Character : MonoBehaviour
             ChangeState(GroundedState.STANDING);
         }
         // Allow jumping in only these states
-        else if ((groundedState != GroundedState.NONE && ladderState == LadderState.NONE) || 
+        else if ((groundedState != GroundedState.NONE) || 
 					inAirState == InAirState.WALLHOLDING || (inAirState == InAirState.CLIMBING && ladderState == LadderState.TOP))
         {
 			ChangeState(InAirState.JUMPING);
@@ -325,38 +335,41 @@ public class Character : MonoBehaviour
 
     private void HandleHorizontalMovement()
     {
-        // If character is touching the ground
-        if (groundedState != GroundedState.NONE)
-        {
-            // Slide logic
-            if (groundedState == GroundedState.SLIDING)
-            {
-                if (Mathf.Abs(currentSpeedX) < .25f)
-                {
-                    ChangeState(GroundedState.STANDING);
-                }
-            }
-        }
+		if (inAirState != InAirState.CLIMBING)
+		{
+			// If character is touching the ground
+			if (groundedState != GroundedState.NONE)
+			{
+				// Slide logic
+				if (groundedState == GroundedState.SLIDING)
+				{
+					if (Mathf.Abs(currentSpeedX) < .25f)
+					{
+						ChangeState(GroundedState.STANDING);
+					}
+				}
+			}
 
-        // Set animator parameters
-        animationSpeed = MathP.IncrementTowards(animationSpeed, Mathf.Abs(targetSpeedX), movement.acceleration);
-        animator.SetFloat("Speed", animationSpeed);
+			// Set animator parameters
+			animationSpeed = MathP.IncrementTowards(animationSpeed, Mathf.Abs(targetSpeedX), movement.acceleration);
+			animator.SetFloat("Speed", animationSpeed);
 
-        // Left and right movement
-        if (groundedState != GroundedState.SLIDING)
-        {
-            currentSpeedX = MathP.IncrementTowards(currentSpeedX, moveDirX * targetSpeedX, movement.acceleration);
+			// Left and right movement
+			if (groundedState != GroundedState.SLIDING)
+			{
+				currentSpeedX = MathP.IncrementTowards(currentSpeedX, moveDirX * targetSpeedX, movement.acceleration);
 
-            // Face Direction
-            if (moveDirX != 0 && inAirState != InAirState.WALLHOLDING)
-            {
-                transform.eulerAngles = (moveDirX > 0) ? Vector3.up * 180 : Vector3.zero;
-            }
-        }
-        else
-        {
-            currentSpeedX = MathP.IncrementTowards(currentSpeedX, moveDirX * targetSpeedX, movement.slideDeceleration);
-        }
+				// Face Direction
+				if (moveDirX != 0 && inAirState != InAirState.WALLHOLDING)
+				{
+					transform.eulerAngles = (moveDirX > 0) ? Vector3.up * 180 : Vector3.zero;
+				}
+			}
+			else
+			{
+				currentSpeedX = MathP.IncrementTowards(currentSpeedX, moveDirX * targetSpeedX, movement.slideDeceleration);
+			}
+		}
     }
 
     private void HandleVerticalMovement()
@@ -411,4 +424,27 @@ public class Character : MonoBehaviour
             currentSpeedY -= movement.gravity * Time.deltaTime;
         }
     }
+
+	private void SetCurLadder(GameObject ladder)
+	{
+		if (ladder.name == "LadderTopLeft")
+		{
+			ladderState = LadderState.ENTERTOPLEFT;
+		}
+		else if (ladder.name == "LadderTopRight")
+		{
+			ladderState = LadderState.ENTERTOPRIGHT;
+		}
+		else if (ladder.name == "LadderBottom")
+		{
+			ladderState = LadderState.ENTERBOTTOM;
+		}
+		curLadder = ladder.transform.parent.gameObject;
+	}
+
+	private void ResetCurLadder()
+	{
+		curLadder = null;
+		ladderState = LadderState.NONE;
+	}
 }
