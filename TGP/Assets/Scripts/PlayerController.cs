@@ -24,19 +24,28 @@ public class PlayerController : Character
 		{
 			enterLadderTopLeft.ResetTimer();
 			animator.SetBool("OnLadder", true);
+			transform.position = new Vector3(curLadder.transform.position.x, curLadder.transform.position.y + curLadder.transform.localScale.y * 2.5f, 0);
+			// TEMP
+			transform.Rotate(Vector3.up, 90, Space.Self);
+			ladderState = LadderState.MIDDLE;
+			inAirState = InAirState.CLIMBING;
 			canMove = true;
 		}
 		if (enterLadderTopRight.IsTimeComplete)
 		{
 			enterLadderTopRight.ResetTimer();
 			animator.SetBool("OnLadder", true);
+			transform.position = new Vector3(curLadder.transform.position.x, curLadder.transform.position.y + curLadder.transform.localScale.y * 2.5f, 0);
+			// TEMP
+			transform.Rotate(Vector3.up, 90, Space.Self);
+			ladderState = LadderState.MIDDLE;
+			inAirState = InAirState.CLIMBING;
 			canMove = true;
 		}
 		if (enterLadderBottom.IsTimeComplete)
 		{
 			enterLadderBottom.ResetTimer();
 			animator.SetBool("OnLadder", true);
-			canMove = true;
 		}
 		#endregion
 
@@ -53,21 +62,28 @@ public class PlayerController : Character
 		{
 			switch (ladderState)
 			{
-				case LadderState.ENTERTOPLEFT:
-					canMove = false;
-					animator.SetTrigger("EnterLadderTopLeft");
-					enterLadderTopLeft.StartTimer();
-					break;
-				case LadderState.ENTERTOPRIGHT:
-					canMove = false;
-					animator.SetTrigger("EnterLadderTopRight");
-					enterLadderTopRight.StartTimer();
-					break;
-				case LadderState.ENTERBOTTOM:
+			case LadderState.ENTERTOPLEFT:
+				canMove = false;
+				animator.SetTrigger("EnterLadderTopLeft");
+				enterLadderTopLeft.StartTimer();
+				break;
+			case LadderState.ENTERTOPRIGHT:
+				canMove = false;
+				animator.SetTrigger("EnterLadderTopRight");
+				enterLadderTopRight.StartTimer();
+				break;
+			case LadderState.ENTERBOTTOM:
+				if (inAirState != InAirState.CLIMBING)
+				{
 					canMove = false;
 					animator.SetTrigger("EnterLadderBottom");
 					enterLadderBottom.StartTimer();
-					break;
+				}
+				else
+				{
+
+				}
+			break;
 			}
 		}
 	}

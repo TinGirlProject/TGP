@@ -49,11 +49,14 @@ public class Character : MonoBehaviour
 	protected Timer enterLadderTopRight;
 	protected Timer enterLadderTopLeft;
 	protected Timer enterLadderBottom;
+	protected bool enteredLeft;
+	protected bool enteredRight;
+	protected bool enteredBottom;
 
     #region States
     // Character
     public enum InAirState { JUMPING, FALLING, WALLHOLDING, CLIMBING, NONE };
-    private InAirState inAirState;
+    public InAirState inAirState;
 
     public enum GroundedState { SLIDING, STANDING, CROUCHING, NONE };
     private GroundedState groundedState;
@@ -87,6 +90,9 @@ public class Character : MonoBehaviour
 		wallJumpState = WallJumpState.NONE;
 
 		canMove = true;
+		enteredLeft = false;
+		enteredRight = false;
+		enteredBottom = false;
     }
 
     #region Health
@@ -107,6 +113,14 @@ public class Character : MonoBehaviour
         Destroy(this.gameObject);
     }
     #endregion
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "LadderTop")
+		{
+
+		}
+	}
 
 	void OnTriggerStay(Collider other)
     {
@@ -430,21 +444,36 @@ public class Character : MonoBehaviour
 		if (ladder.name == "LadderTopLeft")
 		{
 			ladderState = LadderState.ENTERTOPLEFT;
+			enteredLeft = true;
+			enteredRight = false;
+			enteredBottom = false;
 		}
 		else if (ladder.name == "LadderTopRight")
 		{
 			ladderState = LadderState.ENTERTOPRIGHT;
+			enteredLeft = false;
+			enteredRight = true;
+			enteredBottom = false;
 		}
 		else if (ladder.name == "LadderBottom")
 		{
-			ladderState = LadderState.ENTERBOTTOM;
+			if (inAirState != InAirState.CLIMBING)
+			{
+				ladderState = LadderState.ENTERBOTTOM;
+				enteredLeft = false;
+				enteredRight = false;
+				enteredBottom = true;
+			}
 		}
 		curLadder = ladder.transform.parent.gameObject;
 	}
 
 	private void ResetCurLadder()
 	{
-		curLadder = null;
-		ladderState = LadderState.NONE;
+		if (ladderState != LadderState.MIDDLE)
+		{
+			curLadder = null;
+			ladderState = LadderState.NONE;
+		}
 	}
 }
