@@ -11,41 +11,102 @@ public class PlayerController : Character
 		enterLadderBottom = new Timer(1.0f);
 		enterLadderTopLeft = new Timer(1.0f);
 		enterLadderTopRight = new Timer(1.0f);
+		exitLadderBottom = new Timer(1.0f);
+		exitLadderTopLeft = new Timer(1.0f);
+		exitLadderTopRight = new Timer(1.0f);
 
 		GameManager.listOfTimers.Add(enterLadderBottom);
 		GameManager.listOfTimers.Add(enterLadderTopLeft);
 		GameManager.listOfTimers.Add(enterLadderTopRight);
+		GameManager.listOfTimers.Add(exitLadderBottom);
+		GameManager.listOfTimers.Add(exitLadderTopLeft);
+		GameManager.listOfTimers.Add(exitLadderTopRight);
 	}
 	
 	void Update()
 	{
 		#region Timer Handling
+		/*
+		 * Entering Ladders
+		 */
 		if (enterLadderTopLeft.IsTimeComplete)
 		{
 			enterLadderTopLeft.ResetTimer();
 			animator.SetBool("OnLadder", true);
 			transform.position = new Vector3(curLadder.transform.position.x, curLadder.transform.position.y + curLadder.transform.localScale.y * 2.5f, 0);
 			// TEMP
-			transform.Rotate(Vector3.up, 90, Space.Self);
+			transform.Rotate(Vector3.up, 270, Space.Self);
+
 			ladderState = LadderState.MIDDLE;
 			inAirState = InAirState.CLIMBING;
 			canMove = true;
 		}
-		if (enterLadderTopRight.IsTimeComplete)
+		else if (enterLadderTopRight.IsTimeComplete)
 		{
 			enterLadderTopRight.ResetTimer();
 			animator.SetBool("OnLadder", true);
 			transform.position = new Vector3(curLadder.transform.position.x, curLadder.transform.position.y + curLadder.transform.localScale.y * 2.5f, 0);
 			// TEMP
 			transform.Rotate(Vector3.up, 90, Space.Self);
+
 			ladderState = LadderState.MIDDLE;
 			inAirState = InAirState.CLIMBING;
 			canMove = true;
 		}
-		if (enterLadderBottom.IsTimeComplete)
+		else if (enterLadderBottom.IsTimeComplete)
 		{
 			enterLadderBottom.ResetTimer();
 			animator.SetBool("OnLadder", true);
+			transform.position = new Vector3(curLadder.transform.position.x, curLadder.transform.position.y - curLadder.transform.localScale.y * 3.5f, 0);
+			// TEMP
+			if (transform.eulerAngles.y > 0)
+				transform.Rotate(Vector3.up, 270, Space.Self);
+			else
+				transform.Rotate(Vector3.up, 90, Space.Self);
+
+			ladderState = LadderState.MIDDLE;
+			inAirState = InAirState.CLIMBING;
+			canMove = true;
+		}
+
+		/*
+		 * Exiting Ladders
+		 */
+		if (exitLadderTopLeft.IsTimeComplete)
+		{
+			exitLadderTopLeft.ResetTimer();
+			animator.SetBool("OnLadder", false);
+			transform.position = curLadderTopLeft.transform.position;
+			// TEMP
+			transform.Rotate(Vector3.up, -90, Space.Self);
+
+			ladderState = LadderState.NONE;
+			inAirState = InAirState.NONE;
+			canMove = true;
+		}
+		else if (exitLadderTopRight.IsTimeComplete)
+		{
+			exitLadderTopRight.ResetTimer();
+			animator.SetBool("OnLadder", false);
+			transform.position = curLadderTopRight.transform.position;
+			// TEMP
+			transform.Rotate(Vector3.up, 90, Space.Self);
+
+			ladderState = LadderState.NONE;
+			inAirState = InAirState.NONE;
+			canMove = true;
+		}
+		else if (exitLadderBottom.IsTimeComplete)
+		{
+			exitLadderBottom.ResetTimer();
+			animator.SetBool("OnLadder", false);
+			transform.position = curLadderBottom.transform.position;
+			// TEMP
+			transform.Rotate(Vector3.up, 90, Space.Self);
+
+			ladderState = LadderState.NONE;
+			inAirState = InAirState.NONE;
+			canMove = true;
 		}
 		#endregion
 
@@ -79,12 +140,46 @@ public class PlayerController : Character
 					animator.SetTrigger("EnterLadderBottom");
 					enterLadderBottom.StartTimer();
 				}
-				else
-				{
-
-				}
 			break;
 			}
+		}
+
+		if (ladderState == LadderState.TOP)
+		{
+			ladderState = LadderState.EXITING;
+			if (enteredLeft)
+			{
+				canMove = false;
+				animator.SetTrigger("ExitLadderTopLeft");
+				exitLadderTopLeft.StartTimer();
+			}
+			else if (enteredRight)
+			{
+				canMove = false;
+				animator.SetTrigger("ExitLadderTopRight");
+				exitLadderTopRight.StartTimer();
+			}
+			else if (enteredBottom)
+			{
+				canMove = false;
+				if (curLadderTopRight)
+				{
+					animator.SetTrigger("ExitLadderTopRight");
+					exitLadderTopRight.StartTimer();
+				}
+				else if (curLadderTopLeft)
+				{
+					animator.SetTrigger("ExitLadderTopLeft");
+					exitLadderTopLeft.StartTimer();
+				}
+			}
+		}
+		else if (ladderState == LadderState.BOTTOM)
+		{
+			ladderState = LadderState.EXITING;
+			canMove = false;
+			animator.SetTrigger("ExitLadderBottom");
+			exitLadderBottom.StartTimer();
 		}
 	}
 

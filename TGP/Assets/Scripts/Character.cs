@@ -46,9 +46,15 @@ public class Character : MonoBehaviour
 
 	// Climbing
 	protected GameObject curLadder;
+	protected GameObject curLadderTopLeft;
+	protected GameObject curLadderTopRight;
+	protected GameObject curLadderBottom;
 	protected Timer enterLadderTopRight;
 	protected Timer enterLadderTopLeft;
 	protected Timer enterLadderBottom;
+	protected Timer exitLadderTopRight;
+	protected Timer exitLadderTopLeft;
+	protected Timer exitLadderBottom;
 	protected bool enteredLeft;
 	protected bool enteredRight;
 	protected bool enteredBottom;
@@ -70,7 +76,7 @@ public class Character : MonoBehaviour
 
     // Ladders
     public LadderState ladderState;
-	public enum LadderState { TOP, BOTTOM, MIDDLE, NONE, ENTERTOPLEFT, ENTERTOPRIGHT, ENTERBOTTOM, ENTERING }
+	public enum LadderState { TOP, BOTTOM, MIDDLE, NONE, ENTERTOPLEFT, ENTERTOPRIGHT, ENTERBOTTOM, EXITING }
     #endregion
 
     // Components
@@ -116,9 +122,12 @@ public class Character : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "LadderTop")
+		if (inAirState == InAirState.CLIMBING)
 		{
-
+			if (other.tag == "LadderTop")
+				ladderState = LadderState.TOP;
+			else if (other.tag == "LadderBottom")
+				ladderState = LadderState.BOTTOM;
 		}
 	}
 
@@ -303,7 +312,7 @@ public class Character : MonoBehaviour
         }
         // Allow jumping in only these states
         else if ((groundedState != GroundedState.NONE) || 
-					inAirState == InAirState.WALLHOLDING || (inAirState == InAirState.CLIMBING && ladderState == LadderState.TOP))
+					inAirState == InAirState.WALLHOLDING)
         {
 			ChangeState(InAirState.JUMPING);
         }
@@ -404,13 +413,13 @@ public class Character : MonoBehaviour
         if (ladderState != LadderState.NONE)
         {
             if (((moveDirY == 1) || (moveDirY == -1 && groundedState != GroundedState.NONE))
-                && ladderState == LadderState.MIDDLE || ladderState == LadderState.BOTTOM)
+                && ladderState == LadderState.MIDDLE /*|| ladderState == LadderState.BOTTOM*/)
             {
                 ChangeState(InAirState.CLIMBING);
             }
 
             if (!((ladderState == LadderState.TOP && moveDirY <= 0)
-                || (ladderState == LadderState.BOTTOM && moveDirY >= 0)
+                /*|| (ladderState == LadderState.BOTTOM && moveDirY >= 0)*/
                 || ladderState == LadderState.MIDDLE))
             {
                 moveDirY = 0;
@@ -441,12 +450,17 @@ public class Character : MonoBehaviour
 
 	private void SetCurLadder(GameObject ladder)
 	{
+		Ladder theLadder = ladder.transform.parent.GetComponent<Ladder>();
+
 		if (ladder.name == "LadderTopLeft")
 		{
 			ladderState = LadderState.ENTERTOPLEFT;
 			enteredLeft = true;
 			enteredRight = false;
 			enteredBottom = false;
+			curLadderTopLeft = ladder;
+			curLadderTopRight = theLadder.TopRight;
+			curLadderBottom = theLadder.Bottom;
 		}
 		else if (ladder.name == "LadderTopRight")
 		{
@@ -454,6 +468,9 @@ public class Character : MonoBehaviour
 			enteredLeft = false;
 			enteredRight = true;
 			enteredBottom = false;
+			curLadderTopLeft = theLadder.TopLeft;
+			curLadderTopRight = ladder;
+			curLadderBottom = theLadder.Bottom;
 		}
 		else if (ladder.name == "LadderBottom")
 		{
@@ -463,6 +480,9 @@ public class Character : MonoBehaviour
 				enteredLeft = false;
 				enteredRight = false;
 				enteredBottom = true;
+				curLadderTopLeft = theLadder.TopLeft;
+				curLadderTopRight = theLadder.TopRight;
+				curLadderBottom = ladder;
 			}
 		}
 		curLadder = ladder.transform.parent.gameObject;
@@ -473,6 +493,12 @@ public class Character : MonoBehaviour
 		if (ladderState != LadderState.MIDDLE)
 		{
 			curLadder = null;
+			curLadderTopLeft = null;
+			curLadderTopRight = null;
+			curLadderBottom = null;
+			enteredLeft = false;
+			enteredRight = false;
+			enteredBottom = false;
 			ladderState = LadderState.NONE;
 		}
 	}

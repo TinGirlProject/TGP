@@ -11,11 +11,9 @@ public class GameManager : MonoBehaviour
 	public static List<Timer> listOfTimers;
 	private Timer testTimer;
 	
-	void Start() 
+	void Awake() 
     {
 		listOfTimers = new List<Timer>();
-		testTimer = new Timer(5.0f);
-		listOfTimers.Add(testTimer);
 		cam = GetComponent<CameraScrolling>();
         SpawnPlayer(playerSpawn.position);
 
