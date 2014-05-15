@@ -31,7 +31,7 @@ public class Timer
 			if (m_curTime > 0)
 			{
 				m_curTime -= Time.deltaTime * Time.timeScale;
-				Debug.Log ("Timer time: " + m_curTime);
+				//Debug.Log ("Timer time: " + m_curTime);
 			}
 			else
 			{

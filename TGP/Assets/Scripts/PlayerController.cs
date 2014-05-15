@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : Character 
 {
-	void Start() 
+	void Start()
     {
         base.Start();
 
@@ -33,7 +33,7 @@ public class PlayerController : Character
 		{
 			enterLadderTopLeft.ResetTimer();
 			animator.SetBool("OnLadder", true);
-			transform.position = new Vector3(curLadder.transform.position.x, curLadder.transform.position.y + curLadder.transform.localScale.y * 2.5f, 0);
+			transform.position = new Vector3(curLadder.transform.position.x, curLadderTop.transform.position.y - transform.localScale.y * 11f, 0);
 			// TEMP
 			transform.Rotate(Vector3.up, 270, Space.Self);
 
@@ -45,7 +45,7 @@ public class PlayerController : Character
 		{
 			enterLadderTopRight.ResetTimer();
 			animator.SetBool("OnLadder", true);
-			transform.position = new Vector3(curLadder.transform.position.x, curLadder.transform.position.y + curLadder.transform.localScale.y * 2.5f, 0);
+            transform.position = new Vector3(curLadder.transform.position.x, curLadderTop.transform.position.y - transform.localScale.y * 11f, 0);
 			// TEMP
 			transform.Rotate(Vector3.up, 90, Space.Self);
 
@@ -57,7 +57,7 @@ public class PlayerController : Character
 		{
 			enterLadderBottom.ResetTimer();
 			animator.SetBool("OnLadder", true);
-			transform.position = new Vector3(curLadder.transform.position.x, curLadder.transform.position.y - curLadder.transform.localScale.y * 3.5f, 0);
+			transform.position = new Vector3(curLadder.transform.position.x, curLadderBottom.transform.position.y + transform.localScale.y * 3f, 0);
 			// TEMP
 			if (transform.eulerAngles.y > 0)
 				transform.Rotate(Vector3.up, 270, Space.Self);
@@ -103,8 +103,9 @@ public class PlayerController : Character
 			transform.position = curLadderBottom.transform.position;
 			// TEMP
 			transform.Rotate(Vector3.up, 90, Space.Self);
+            curLadder.SendMessage("PlayerInRange", true, SendMessageOptions.RequireReceiver);
 
-			ladderState = LadderState.NONE;
+			ladderState = LadderState.ENTERBOTTOM;
 			inAirState = InAirState.NONE;
 			canMove = true;
 		}
@@ -121,10 +122,12 @@ public class PlayerController : Character
 
 		if (curLadder != null && Input.GetKeyDown(KeyCode.E))
 		{
-			switch (ladderState)
+            Debug.Log("Pressed E");
+            switch (ladderState)
 			{
 			case LadderState.ENTERTOPLEFT:
 				canMove = false;
+                curLadder.SendMessage("PlayerInRange", false, SendMessageOptions.RequireReceiver);
 				animator.SetTrigger("EnterLadderTopLeft");
 				enterLadderTopLeft.StartTimer();
 				break;
@@ -136,7 +139,9 @@ public class PlayerController : Character
 			case LadderState.ENTERBOTTOM:
 				if (inAirState != InAirState.CLIMBING)
 				{
-					canMove = false;
+                    Debug.Log("Enter Bottom");
+                    canMove = false;
+                    curLadder.SendMessage("PlayerInRange", false, SendMessageOptions.RequireReceiver);
 					animator.SetTrigger("EnterLadderBottom");
 					enterLadderBottom.StartTimer();
 				}

@@ -36,16 +36,19 @@ public class LadderCheck : MonoBehaviour
 		{
 			if (!bottomTrigger)
 			{
-				if (playerTransform.eulerAngles.y == facingAngle)
+                if (Mathf.Approximately(playerTransform.eulerAngles.y, facingAngle))
 				{
-					SendMessageUpwards("PlayerInRange", true, SendMessageOptions.RequireReceiver);
-					other.SendMessage("SetCurLadder", transform.gameObject, SendMessageOptions.RequireReceiver);
+                    SendMessageUpwards("PlayerInRange", true, SendMessageOptions.RequireReceiver);
+                    other.SendMessage("SetCurLadder", transform.gameObject, SendMessageOptions.RequireReceiver);
 				}
 			}
 			else
 			{
-				SendMessageUpwards("PlayerInRange", true, SendMessageOptions.RequireReceiver);
-				other.SendMessage("SetCurLadder", transform.gameObject, SendMessageOptions.RequireReceiver);
+                if (other.GetComponent<PlayerController>().inAirState != Character.InAirState.CLIMBING)
+                {
+                    SendMessageUpwards("PlayerInRange", true, SendMessageOptions.RequireReceiver);
+                    other.SendMessage("SetCurLadder", transform.gameObject, SendMessageOptions.RequireReceiver);
+                }
 			}
 		}
 	}
@@ -73,9 +76,12 @@ public class LadderCheck : MonoBehaviour
 					}
 					else
 					{
-						msgSent = true;
-						SendMessageUpwards("PlayerInRange", true, SendMessageOptions.RequireReceiver);
-						other.SendMessage("SetCurLadder", transform.gameObject, SendMessageOptions.RequireReceiver);
+                        if (other.GetComponent<PlayerController>().inAirState != Character.InAirState.CLIMBING)
+                        {
+                            msgSent = true;
+                            SendMessageUpwards("PlayerInRange", true, SendMessageOptions.RequireReceiver);
+                            other.SendMessage("SetCurLadder", transform.gameObject, SendMessageOptions.RequireReceiver);
+                        }
 					}
 				}
 			}

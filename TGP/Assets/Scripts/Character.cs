@@ -46,6 +46,7 @@ public class Character : MonoBehaviour
 
 	// Climbing
 	protected GameObject curLadder;
+    protected GameObject curLadderTop;
 	protected GameObject curLadderTopLeft;
 	protected GameObject curLadderTopRight;
 	protected GameObject curLadderBottom;
@@ -352,8 +353,9 @@ public class Character : MonoBehaviour
         amountToMove.x = currentSpeedX;
         amountToMove.y = currentSpeedY;
 
-        if (amountToMove.x != 0 || amountToMove.y != 0)
-            cp.Position(amountToMove * Time.deltaTime);
+        if (canMove)
+            if (amountToMove.x != 0 || amountToMove.y != 0)
+                cp.Position(amountToMove * Time.deltaTime);
     }
 
     private void HandleHorizontalMovement()
@@ -458,6 +460,7 @@ public class Character : MonoBehaviour
 			enteredLeft = true;
 			enteredRight = false;
 			enteredBottom = false;
+            curLadderTop = theLadder.Top;
 			curLadderTopLeft = ladder;
 			curLadderTopRight = theLadder.TopRight;
 			curLadderBottom = theLadder.Bottom;
@@ -467,7 +470,8 @@ public class Character : MonoBehaviour
 			ladderState = LadderState.ENTERTOPRIGHT;
 			enteredLeft = false;
 			enteredRight = true;
-			enteredBottom = false;
+            enteredBottom = false;
+            curLadderTop = theLadder.Top;
 			curLadderTopLeft = theLadder.TopLeft;
 			curLadderTopRight = ladder;
 			curLadderBottom = theLadder.Bottom;
@@ -479,7 +483,8 @@ public class Character : MonoBehaviour
 				ladderState = LadderState.ENTERBOTTOM;
 				enteredLeft = false;
 				enteredRight = false;
-				enteredBottom = true;
+                enteredBottom = true;
+                curLadderTop = theLadder.Top;
 				curLadderTopLeft = theLadder.TopLeft;
 				curLadderTopRight = theLadder.TopRight;
 				curLadderBottom = ladder;
@@ -492,7 +497,8 @@ public class Character : MonoBehaviour
 	{
 		if (ladderState != LadderState.MIDDLE)
 		{
-			curLadder = null;
+            curLadder = null;
+            curLadderTop = null;
 			curLadderTopLeft = null;
 			curLadderTopRight = null;
 			curLadderBottom = null;
