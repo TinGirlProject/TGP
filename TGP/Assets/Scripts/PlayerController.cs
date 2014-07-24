@@ -122,7 +122,7 @@ public class PlayerController : Character
 
 		if (curLadder != null && Input.GetKeyDown(KeyCode.E))
 		{
-            Debug.Log("Pressed E");
+			animator.SetFloat("Speed", 0);
             switch (ladderState)
 			{
 			case LadderState.ENTERTOPLEFT:

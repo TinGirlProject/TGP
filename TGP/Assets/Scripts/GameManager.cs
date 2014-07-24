@@ -43,17 +43,6 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKeyUp(KeyCode.I))
-		{
-			if (!testTimer.IsTimerActive && !testTimer.IsTimeComplete)
-				testTimer.StartTimer();
-			else if (testTimer.IsTimeComplete)
-			{
-				testTimer.ResetTimer();
-				testTimer.StartTimer();
-			}
-		}
-
 		if (Input.GetKeyUp(KeyCode.U))
 		{
 			if (Time.timeScale == 1)

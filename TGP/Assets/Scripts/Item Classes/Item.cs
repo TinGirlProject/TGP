@@ -2,13 +2,13 @@
 /// Item.cs
 /// 
 /// @Galen Manuel
-/// @Feb.24th, 2014
+/// @July 23rd 2014
 /// 
 /// Base class for all items in game.
 /// </summary>
 using UnityEngine;
 
-public class Item
+public class Item : ScriptableObject
 {
 	protected string _name;
 	protected string _description;

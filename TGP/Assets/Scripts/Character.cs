@@ -134,39 +134,12 @@ public class Character : MonoBehaviour
 
 	void OnTriggerStay(Collider other)
     {
-		//if (other.tag == "Ladder")
-		//{
-		//	ladderState = LadderState.MIDDLE;
-		//}
-		//else if (other.tag == "LadderTop")
-		//{
-		//	ladderState = LadderState.TOP;
-		//}
-		//else if (other.tag == "LadderBottom")
-		//{
-		//	ladderState = LadderState.BOTTOM;
-		//}
+		
     }
 
     void OnTriggerExit(Collider other)
     {
-		//if (other.tag == "Ladder")
-		//{
-		//	ladderState = LadderState.NONE;
-
-		//	if (inAirState == InAirState.CLIMBING)
-		//	{
-		//		ChangeState(InAirState.FALLING);
-		//	}
-		//}
-		//else if (other.tag == "LadderTop")
-		//{
-		//	ladderState = LadderState.NONE;
-		//}
-		//else if (other.tag == "LadderBottom")
-		//{
-		//	ladderState = LadderState.NONE;
-		//}
+		
     }
 
     public void ChangeState(System.Enum newState)
