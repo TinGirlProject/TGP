@@ -54,10 +54,10 @@ public class RustyBattery : MonoBehaviour
 		if (c.transform.tag.Equals("Player") && _playerOnQuest)
 		{
 			bool collected = false;
-			QuestItem bat = new QuestItem(transform.name, "An old old battery.", 3, 1, false, _myQuest);
-			bat.Icon = Resources.Load("Item Icons/Quest Items/" + bat.Name) as Texture2D;
+            QuestItem bat = new QuestItem(transform.name, "An old old battery.", 3, 1, false, _myQuest);
+            bat.Icon = Resources.Load("Item Icons/Quest Items/" + bat.Name) as Texture2D;
 
-			collected = PlayerInventory.AddItem(bat);
+            collected = PlayerInventoryOLD.AddItem(bat);
 			if (collected)
 				Destroy(this.gameObject);
 		}
