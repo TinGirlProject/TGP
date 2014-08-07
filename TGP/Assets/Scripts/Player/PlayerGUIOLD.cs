@@ -77,7 +77,7 @@ public class PlayerGUIOLD : MonoBehaviour
 		{
             Item testItem = new Item("Hatchet", "This is a test item", 1, 1, false);
 
-            testItem.Icon = Resources.Load("Item Icons/Weapons/" + testItem.Name) as Texture2D;
+            testItem.icon = Resources.Load("Item Icons/Weapons/" + testItem.name) as Texture2D;
 
             PlayerInventoryOLD.AddItem(testItem);
 		}
@@ -115,7 +115,7 @@ public class PlayerGUIOLD : MonoBehaviour
 
 		if (_selectedItem != null)
 		{
-			GUI.Box(new Rect(Input.mousePosition.x - 16, Screen.height - Input.mousePosition.y - 16, 32, 32), new GUIContent(_selectedItem.Icon), "Inventory Item");
+			GUI.Box(new Rect(Input.mousePosition.x - 16, Screen.height - Input.mousePosition.y - 16, 32, 32), new GUIContent(_selectedItem.icon), "Inventory Item");
 
 			if (_inventoryWindowRect.Contains(curEvent.mousePosition))
 			{
@@ -132,14 +132,14 @@ public class PlayerGUIOLD : MonoBehaviour
 			{
 				if (curEvent.type == EventType.MouseUp)
 				{
-                    if (_selectedItem.CanBeDestroyed)
+                    if (_selectedItem.canBeDestroyed)
                     {
-                        Debug.Log("\"" + _selectedItem.Name + "\" destroyed");
+                        Debug.Log("\"" + _selectedItem.name + "\" destroyed");
                         _selectedItem = null;
                     }
                     else
                     {
-                        Debug.Log("\"" + _selectedItem.Name + "\" CAN'T be destroyed, returning to inventory.");
+                        Debug.Log("\"" + _selectedItem.name + "\" CAN'T be destroyed, returning to inventory.");
                         if (PlayerInventoryOLD.AddItem(_selectedItem))
                         {
                             _selectedItem = null;
@@ -164,11 +164,11 @@ public class PlayerGUIOLD : MonoBehaviour
 			{
                 if (cnt < PlayerInventoryOLD.Inventory.Count)
                 {
-                    GUI.Box(_slotRects[cnt], new GUIContent(PlayerInventoryOLD.Inventory[cnt].Icon, PlayerInventoryOLD.Inventory[cnt].ToolTip()), "Inventory Item");
+                    GUI.Box(_slotRects[cnt], new GUIContent(PlayerInventoryOLD.Inventory[cnt].icon, PlayerInventoryOLD.Inventory[cnt].ToolTip()), "Inventory Item");
 
-                    if (PlayerInventoryOLD.Inventory[cnt].CurAmount > 1)
+                    if (PlayerInventoryOLD.Inventory[cnt].curAmount > 1)
                     {
-                        GUI.Box(_itemCountRects[cnt], PlayerInventoryOLD.Inventory[cnt].CurAmount.ToString());
+                        GUI.Box(_itemCountRects[cnt], PlayerInventoryOLD.Inventory[cnt].curAmount.ToString());
                     }
 
                     if (_slotRects[cnt].Contains(curEvent.mousePosition))
@@ -186,14 +186,14 @@ public class PlayerGUIOLD : MonoBehaviour
                     //					if (_selectedItem == PlayerInventoryOLD.Inventory[cnt])
                     //					{
                     //						GUI.Box (new Rect(Input.mousePosition.x - _slotWidth * 0.5f, (Screen.height - Input.mousePosition.y) + _slotHeight * 0.5f, _slotWidth, _slotHeight), 
-                    //						         new GUIContent(PlayerInventoryOLD.Inventory[cnt].Icon), "Inventory Item");
+                    //						         new GUIContent(PlayerInventoryOLD.Inventory[cnt].icon), "Inventory Item");
                     //					}
                     //					else
                     //					{
                     //						//if(GUI.Button(new Rect((_offset * 0.5f) + (x * _slotWidth), 20 +  (y * _slotHeight), _slotWidth, _slotHeight), 
-                    //						//              new GUIContent(PlayerInventoryOLD.Inventory[cnt].Icon, PlayerInventoryOLD.Inventory[cnt].Description), "Inventory Item"))
+                    //						//              new GUIContent(PlayerInventoryOLD.Inventory[cnt].icon, PlayerInventoryOLD.Inventory[cnt].Description), "Inventory Item"))
                     //						//{
-                    //						//	Debug.Log ("Clicked: " + PlayerInventoryOLD.Inventory[cnt].Name);
+                    //						//	Debug.Log ("Clicked: " + PlayerInventoryOLD.Inventory[cnt].name);
                     //							//if (_selectedItem == null)
                     //							//{
                     //							//	_selectedItem = PlayerInventoryOLD.Inventory[cnt];
@@ -202,7 +202,7 @@ public class PlayerGUIOLD : MonoBehaviour
                     //							//						{
                     //							//							if(Time.time - _doubleClickTimer < DOUBLE_CLICK_TIMER_THRESHHOLD)
                     //							//							{
-                    //							//								Debug.Log ("Double Clicked: " + PlayerCharacter.Inventory[cnt].Name);
+                    //							//								Debug.Log ("Double Clicked: " + PlayerCharacter.Inventory[cnt].name);
                     //							//								
                     //							//								if(PlayerCharacter.EquipedWeapon == null)
                     //							//								{

@@ -44,16 +44,16 @@ public class PlayerInventoryOLD: MonoBehaviour
 			for (int cnt = 0; cnt < _inventory.Count; cnt++)
 			{
 				// If the item being added exists in inventory already
-                if (itemToAdd.Name == _inventory[cnt].Name)
+                if (itemToAdd.name == _inventory[cnt].name)
                 {
                     // Item is stackable
-                    if (_inventory[cnt].MaxAmount > 1)
+                    if (_inventory[cnt].maxAmount > 1)
                     {
                         // If the player has less than the max amount, add item to inventory
-                        if (_inventory[cnt].CurAmount < _inventory[cnt].MaxAmount)
+                        if (_inventory[cnt].curAmount < _inventory[cnt].maxAmount)
                         {
-                            _inventory[cnt].CurAmount++;
-                            Debug.Log("Player has \"" + itemToAdd.Name + "\" and it is stackable: \"" + itemToAdd.Name + "\" added");
+                            _inventory[cnt].curAmount++;
+                            Debug.Log("Player has \"" + itemToAdd.name + "\" and it is stackable: \"" + itemToAdd.name + "\" added");
 
                             if (itemToAdd is QuestItem)
                             {
@@ -68,7 +68,7 @@ public class PlayerInventoryOLD: MonoBehaviour
                                             for (int j = 0; j < PlayerQuests.ActiveQuests[i].ActiveObjectives.Count; j++)
                                             {
                                                 Debug.Log("Active Quest Objective Count: " + PlayerQuests.ActiveQuests[i].ActiveObjectives.Count + " j: " + j);
-                                                if (itemToAdd.Name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemNeeded)
+                                                if (itemToAdd.name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemNeeded)
                                                 {
                                                     PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemCollected(itemToAdd);
                                                     return true;
@@ -89,7 +89,7 @@ public class PlayerInventoryOLD: MonoBehaviour
                         if (_inventory.Count < _curInventorySlots)
                         {
                             _inventory.Add(itemToAdd);
-                            Debug.Log("Player has \"" + itemToAdd.Name + "\" and it is not stackable: \"" + itemToAdd.Name + "\" added");
+                            Debug.Log("Player has \"" + itemToAdd.name + "\" and it is not stackable: \"" + itemToAdd.name + "\" added");
 
                             if (itemToAdd is QuestItem)
                             {
@@ -99,7 +99,7 @@ public class PlayerInventoryOLD: MonoBehaviour
                                     for (int j = 0; j < PlayerQuests.ActiveQuests[i].ActiveObjectives.Count; j++)
                                     {
                                         Debug.Log("Active Quest Objective Count: " + PlayerQuests.ActiveQuests[i].ActiveObjectives.Count);
-                                        if (itemToAdd.Name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemNeeded)
+                                        if (itemToAdd.name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemNeeded)
                                         {
                                             PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemCollected(itemToAdd);
                                             return true;
@@ -118,7 +118,7 @@ public class PlayerInventoryOLD: MonoBehaviour
 			if (_inventory.Count < _curInventorySlots)
 			{
 				_inventory.Add(itemToAdd);
-                Debug.Log("Player does not have \"" + itemToAdd.Name + "\": \"" + itemToAdd.Name + "\" added");
+                Debug.Log("Player does not have \"" + itemToAdd.name + "\": \"" + itemToAdd.name + "\" added");
 
 				if (itemToAdd is QuestItem)
 				{
@@ -128,7 +128,7 @@ public class PlayerInventoryOLD: MonoBehaviour
 						for (int j = 0; j < PlayerQuests.ActiveQuests[i].ActiveObjectives.Count; j++)
 						{
 							Debug.Log("Active Quest Objective Count: " + PlayerQuests.ActiveQuests[i].ActiveObjectives.Count);
-                            if (itemToAdd.Name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemNeeded)
+                            if (itemToAdd.name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemNeeded)
                             {
                                 PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemCollected(itemToAdd);
                                 return true;
@@ -144,7 +144,7 @@ public class PlayerInventoryOLD: MonoBehaviour
 		else
 		{
 			_inventory.Add(itemToAdd);
-			Debug.Log("Player has empty inventory: \"" + itemToAdd.Name + "\" added");
+			Debug.Log("Player has empty inventory: \"" + itemToAdd.name + "\" added");
 
 			if (itemToAdd is QuestItem)
 			{
@@ -154,7 +154,7 @@ public class PlayerInventoryOLD: MonoBehaviour
 					for (int j = 0; j < PlayerQuests.ActiveQuests[i].ActiveObjectives.Count; j++)
 					{
 						Debug.Log("Active Quest Objective Count: " + PlayerQuests.ActiveQuests[i].ActiveObjectives.Count);
-                        if (itemToAdd.Name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemNeeded)
+                        if (itemToAdd.name == PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemNeeded)
                         {
                             PlayerQuests.ActiveQuests[i].ActiveObjectives[j].ItemCollected(itemToAdd);
                             return true;
@@ -166,7 +166,7 @@ public class PlayerInventoryOLD: MonoBehaviour
 			return true;
 		}
 		// Player could not add item
-		Debug.Log("\"" + itemToAdd.Name + "\" NOT added");
+		Debug.Log("\"" + itemToAdd.name + "\" NOT added");
 		return false;
 	}
 
@@ -176,26 +176,26 @@ public class PlayerInventoryOLD: MonoBehaviour
 		for (int cnt = 0; cnt < _inventory.Count; cnt++)
 		{
 			// If the item exists in inventory
-            if (itemToRemove.Name == _inventory[cnt].Name)
+            if (itemToRemove.name == _inventory[cnt].name)
             {
                 // If player has one or more than one of the item, remove one of the item
-                if (_inventory[cnt].CurAmount > 1)
+                if (_inventory[cnt].curAmount > 1)
                 {
-                    _inventory[cnt].CurAmount--;
-                    Debug.Log("\"" + itemToRemove.Name + "\" removed");
+                    _inventory[cnt].curAmount--;
+                    Debug.Log("\"" + itemToRemove.name + "\" removed");
                     return true;
                 }
                 // Otherwise, remove the item completely
                 else
                 {
                     _inventory.RemoveAt(cnt);
-                    Debug.Log("\"" + itemToRemove.Name + "\" removed");
+                    Debug.Log("\"" + itemToRemove.name + "\" removed");
                     return true;
                 }
             }
 		}
 		// Player could not remove item
-		Debug.Log("\"" + itemToRemove.Name + "\" NOT removed");
+		Debug.Log("\"" + itemToRemove.name + "\" NOT removed");
 		return false;
 	}
 

@@ -17,11 +17,11 @@ public class QuestItem : Item
 
 	public QuestItem(string name, string description, int maxAmt, int curAmt, bool canBeDestroyed, Quest myQuest)
 	{
-		_name = name;
-		_description = description;
-		_maxAmount = maxAmt;
-		_curAmount = curAmt;
-		_canBeDestroyed = canBeDestroyed;
+		name = name;
+		description = description;
+		maxAmount = maxAmt;
+		curAmount = curAmt;
+		canBeDestroyed = canBeDestroyed;
 		_myQuest = myQuest;
 	}
 

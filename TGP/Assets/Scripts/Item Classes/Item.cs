@@ -11,73 +11,37 @@ using UnityEngine;
 [System.Serializable]
 public class Item : ScriptableObject
 {
-	public string _name;
-    public string _description;
-    public bool _canBeDestroyed;
-    public int _maxAmount;								// Greater than one if stackable.
-    public int _curAmount;
-    public Texture2D _icon;								// Item icon in inventory.
+	public string name;
+    public string description;
+    public bool canBeDestroyed;
+    public int maxAmount;								// Greater than one if stackable.
+    public int curAmount;
+    public Texture2D icon;								// Item icon in inventory.
 
     public Item()
     {
         // Default all variables
-        _name = "Missing Name";
-        _description = "Missing Description";
-        _curAmount = -1;
-        _maxAmount = -1;
-        _canBeDestroyed = false;
+        name = "Missing Name";
+        description = "Missing Description";
+        curAmount = -1;
+        maxAmount = -1;
+        canBeDestroyed = false;
     }
 
-    public Item(string name, string description, int maxAmt, int curAmt, bool canBeDestroyed)
+    public Item(string nameIn, string descriptionIn, int maxAmtIn, int curAmtIn, bool canBeDestroyedIn)
     {
         // Assigns all variables
-        _name = name;
-        _description = description;
-        _maxAmount = maxAmt;
-        _curAmount = curAmt;
-        _canBeDestroyed = canBeDestroyed;
-    }
+        name = nameIn;
+        description = descriptionIn;
+        maxAmount = maxAmtIn;
+        curAmount = curAmtIn;
+        canBeDestroyed = canBeDestroyedIn;
 
-    #region Setters and Getters
-    public string Name
-    {
-        get { return _name; }
-        set { _name = value; }
+        icon = Resources.Load(PlayerGUI.s_Item_Resources_Path + name) as Texture2D;
     }
-
-    public string Description
-    {
-        get { return _description; }
-        set { _description = value; }
-    }
-
-    public int CurAmount
-    {
-        get { return _curAmount; }
-        set { _curAmount = value; }
-    }
-
-    public int MaxAmount
-    {
-        get { return _maxAmount; }
-        set { _maxAmount = value; }
-    }
-
-    public Texture2D Icon
-    {
-        get { return _icon; }
-        set { _icon = value; }
-    }
-
-    public bool CanBeDestroyed
-    {
-        get { return _canBeDestroyed; }
-        set { _canBeDestroyed = value; }
-    }
-    #endregion
 
     public virtual string ToolTip()
     {
-        return Name + "\n" + Description + "\n" + CurAmount;
+        return name + "\n" + description + "\n" + curAmount;
     }
 }

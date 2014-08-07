@@ -44,7 +44,7 @@ public class CollectObjective : Objective
 	/// <param name="itemCollected">Item collected.</param>
 	public override bool ItemCollected(Item itemCollected)
 	{
-        if (itemCollected.Name == _itemNeeded)
+        if (itemCollected.name == _itemNeeded)
         {
             if (_curAmount + 1 <= _neededAmount)
             {

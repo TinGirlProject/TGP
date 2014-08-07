@@ -55,7 +55,7 @@ public class RustyBattery : MonoBehaviour
 		{
 			bool collected = false;
             QuestItem bat = new QuestItem(transform.name, "An old old battery.", 3, 1, false, _myQuest);
-            bat.Icon = Resources.Load("Item Icons/Quest Items/" + bat.Name) as Texture2D;
+            bat.icon = Resources.Load("Item Icons/Quest Items/" + bat.name) as Texture2D;
 
             collected = PlayerInventoryOLD.AddItem(bat);
 			if (collected)

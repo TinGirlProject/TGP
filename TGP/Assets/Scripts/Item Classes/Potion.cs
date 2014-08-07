@@ -16,7 +16,7 @@ public class Potion : MonoBehaviour
 	void Start()
 	{
         pot = new Item("Small Health Potion", "A potion that recovers\na small amount of health.", 99, 1, true);
-        pot.Icon = Resources.Load("Item Icons/Consumables/" + pot.Name) as Texture2D;
+        pot.icon = Resources.Load("Item Icons/Consumables/" + pot.name) as Texture2D;
 	}
 
 	void OnTriggerEnter(Collider other)
