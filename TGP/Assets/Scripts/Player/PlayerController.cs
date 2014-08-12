@@ -33,7 +33,7 @@ public class PlayerController : Character
 		{
 			enterLadderTopLeft.ResetTimer();
 			animator.SetBool("OnLadder", true);
-			transform.position = new Vector3(curLadder.transform.position.x, curLadderTop.transform.position.y - transform.localScale.y * 11f, 0);
+			transform.position = new Vector3(curLadder.transform.position.x, curLadderTop.transform.position.y - transform.localScale.y * 3, 0);
 			// TEMP
 			transform.Rotate(Vector3.up, 270, Space.Self);
 
@@ -45,7 +45,7 @@ public class PlayerController : Character
 		{
 			enterLadderTopRight.ResetTimer();
 			animator.SetBool("OnLadder", true);
-            transform.position = new Vector3(curLadder.transform.position.x, curLadderTop.transform.position.y - transform.localScale.y * 11f, 0);
+            transform.position = new Vector3(curLadder.transform.position.x, curLadderTop.transform.position.y - transform.localScale.y * 3, 0);
 			// TEMP
 			transform.Rotate(Vector3.up, 90, Space.Self);
 
@@ -57,7 +57,7 @@ public class PlayerController : Character
 		{
 			enterLadderBottom.ResetTimer();
 			animator.SetBool("OnLadder", true);
-			transform.position = new Vector3(curLadder.transform.position.x, curLadderBottom.transform.position.y + transform.localScale.y * 3f, 0);
+            transform.position = new Vector3(curLadder.transform.position.x, curLadderBottom.transform.position.y + transform.localScale.y, 0);
 			// TEMP
 			if (transform.eulerAngles.y > 0)
 				transform.Rotate(Vector3.up, 270, Space.Self);

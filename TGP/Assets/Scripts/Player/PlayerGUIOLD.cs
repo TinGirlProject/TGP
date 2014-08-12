@@ -132,7 +132,7 @@ public class PlayerGUIOLD : MonoBehaviour
 			{
 				if (curEvent.type == EventType.MouseUp)
 				{
-                    if (_selectedItem.canBeDestroyed)
+                    if (_selectedItem.keyItem)
                     {
                         Debug.Log("\"" + _selectedItem.name + "\" destroyed");
                         _selectedItem = null;

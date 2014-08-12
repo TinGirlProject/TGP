@@ -1,0 +1,965 @@
+fileFormatVersion: 2
+guid: 6102c54da4a44784085680ddb6bf304a
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Camera
+    100002: Hemi
+    100004: Ninja
+    100006: Ninja_Mesh
+    100008: Ninja|Arm Lower.L
+    100010: Ninja|Arm Lower.R
+    100012: Ninja|Arm Upper.L
+    100014: Ninja|Arm Upper.R
+    100016: Ninja|Chest
+    100018: Ninja|Cloth_01.L
+    100020: Ninja|Cloth_01.R
+    100022: Ninja|Cloth_02.L
+    100024: Ninja|Cloth_02.R
+    100026: Ninja|Cloth_03.L
+    100028: Ninja|Cloth_03.R
+    100030: Ninja|Cloth_04.L
+    100032: Ninja|Cloth_04.R
+    100034: Ninja|Foot.L
+    100036: Ninja|Foot.R
+    100038: Ninja|Hand.L
+    100040: Ninja|Hand.R
+    100042: Ninja|Head
+    100044: Ninja|Hips
+    100046: Ninja|Knee Target.L
+    100048: Ninja|Knee Target.R
+    100050: Ninja|Leg IK.L
+    100052: Ninja|Leg IK.R
+    100054: Ninja|Leg Lower.L
+    100056: Ninja|Leg Lower.R
+    100058: Ninja|Leg Upper.L
+    100060: Ninja|Leg Upper.R
+    100062: Ninja|Neck
+    100064: //RootNode
+    400000: Camera
+    400002: Hemi
+    400004: Ninja
+    400006: Ninja_Mesh
+    400008: Ninja|Arm Lower.L
+    400010: Ninja|Arm Lower.R
+    400012: Ninja|Arm Upper.L
+    400014: Ninja|Arm Upper.R
+    400016: Ninja|Chest
+    400018: Ninja|Cloth_01.L
+    400020: Ninja|Cloth_01.R
+    400022: Ninja|Cloth_02.L
+    400024: Ninja|Cloth_02.R
+    400026: Ninja|Cloth_03.L
+    400028: Ninja|Cloth_03.R
+    400030: Ninja|Cloth_04.L
+    400032: Ninja|Cloth_04.R
+    400034: Ninja|Foot.L
+    400036: Ninja|Foot.R
+    400038: Ninja|Hand.L
+    400040: Ninja|Hand.R
+    400042: Ninja|Head
+    400044: Ninja|Hips
+    400046: Ninja|Knee Target.L
+    400048: Ninja|Knee Target.R
+    400050: Ninja|Leg IK.L
+    400052: Ninja|Leg IK.R
+    400054: Ninja|Leg Lower.L
+    400056: Ninja|Leg Lower.R
+    400058: Ninja|Leg Upper.L
+    400060: Ninja|Leg Upper.R
+    400062: Ninja|Neck
+    400064: //RootNode
+    4300000: Ninja_Mesh
+    7400000: Ninja|Get Up
+    7400002: Ninja|Headband Wave
+    7400004: Ninja|Jump_idle
+    7400006: Ninja|Jump_run
+    7400008: Ninja|Land_idle
+    7400010: Ninja|Land_run
+    7400012: Ninja|Run
+    7400014: Ninja|Slide
+    7400016: Ninja|Walk
+    9500000: //RootNode
+    13700000: Ninja_Mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Ninja|Get Up
+      takeName: Ninja|Get Up
+      firstFrame: 0
+      lastFrame: 13
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Ninja
+        weight: 1
+      - path: Ninja/Ninja|Hips
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L/Ninja|Hand.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R/Ninja|Hand.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L/Ninja|Cloth_04.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R/Ninja|Cloth_04.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L/Ninja|Foot.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R/Ninja|Foot.R
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.L
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.R
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.L
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.R
+        weight: 1
+      - path: Ninja_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Ninja|Headband Wave
+      takeName: Ninja|Headband Wave
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Ninja
+        weight: 1
+      - path: Ninja/Ninja|Hips
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L/Ninja|Hand.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R/Ninja|Hand.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L/Ninja|Cloth_04.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R/Ninja|Cloth_04.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L/Ninja|Foot.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R/Ninja|Foot.R
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.L
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.R
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.L
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.R
+        weight: 1
+      - path: Ninja_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Ninja|Jump_idle
+      takeName: Ninja|Jump_idle
+      firstFrame: 0
+      lastFrame: 68
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Ninja
+        weight: 1
+      - path: Ninja/Ninja|Hips
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L/Ninja|Hand.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R/Ninja|Hand.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L/Ninja|Cloth_04.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R/Ninja|Cloth_04.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L/Ninja|Foot.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R/Ninja|Foot.R
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.L
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.R
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.L
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.R
+        weight: 1
+      - path: Ninja_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Ninja|Jump_run
+      takeName: Ninja|Jump_run
+      firstFrame: 0
+      lastFrame: 36
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Ninja
+        weight: 1
+      - path: Ninja/Ninja|Hips
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L/Ninja|Hand.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R/Ninja|Hand.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L/Ninja|Cloth_04.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R/Ninja|Cloth_04.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L/Ninja|Foot.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R/Ninja|Foot.R
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.L
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.R
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.L
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.R
+        weight: 1
+      - path: Ninja_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Ninja|Land_idle
+      takeName: Ninja|Land_idle
+      firstFrame: 0
+      lastFrame: 8
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Ninja
+        weight: 1
+      - path: Ninja/Ninja|Hips
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L/Ninja|Hand.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R/Ninja|Hand.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L/Ninja|Cloth_04.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R/Ninja|Cloth_04.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L/Ninja|Foot.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R/Ninja|Foot.R
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.L
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.R
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.L
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.R
+        weight: 1
+      - path: Ninja_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Ninja|Land_run
+      takeName: Ninja|Land_run
+      firstFrame: 0
+      lastFrame: 7
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Ninja
+        weight: 1
+      - path: Ninja/Ninja|Hips
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L/Ninja|Hand.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R/Ninja|Hand.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L/Ninja|Cloth_04.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R/Ninja|Cloth_04.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L/Ninja|Foot.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R/Ninja|Foot.R
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.L
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.R
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.L
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.R
+        weight: 1
+      - path: Ninja_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Ninja|Run
+      takeName: Ninja|Run
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Ninja
+        weight: 1
+      - path: Ninja/Ninja|Hips
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L/Ninja|Hand.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R/Ninja|Hand.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L/Ninja|Cloth_04.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R/Ninja|Cloth_04.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L/Ninja|Foot.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R/Ninja|Foot.R
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.L
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.R
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.L
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.R
+        weight: 1
+      - path: Ninja_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Ninja|Slide
+      takeName: Ninja|Slide
+      firstFrame: 0
+      lastFrame: 7
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Ninja
+        weight: 1
+      - path: Ninja/Ninja|Hips
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L/Ninja|Hand.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R/Ninja|Hand.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L/Ninja|Cloth_04.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R/Ninja|Cloth_04.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L/Ninja|Foot.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R/Ninja|Foot.R
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.L
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.R
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.L
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.R
+        weight: 1
+      - path: Ninja_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Ninja|Walk
+      takeName: Ninja|Walk
+      firstFrame: 0
+      lastFrame: 18
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Ninja
+        weight: 1
+      - path: Ninja/Ninja|Hips
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.L/Ninja|Arm Lower.L/Ninja|Hand.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Arm Upper.R/Ninja|Arm Lower.R/Ninja|Hand.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.L/Ninja|Cloth_02.L/Ninja|Cloth_03.L/Ninja|Cloth_04.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Chest/Ninja|Neck/Ninja|Head/Ninja|Cloth_01.R/Ninja|Cloth_02.R/Ninja|Cloth_03.R/Ninja|Cloth_04.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.L/Ninja|Leg Lower.L/Ninja|Foot.L
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R
+        weight: 1
+      - path: Ninja/Ninja|Hips/Ninja|Leg Upper.R/Ninja|Leg Lower.R/Ninja|Foot.R
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.L
+        weight: 1
+      - path: Ninja/Ninja|Knee Target.R
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.L
+        weight: 1
+      - path: Ninja/Ninja|Leg IK.R
+        weight: 1
+      - path: Ninja_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .25999999
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

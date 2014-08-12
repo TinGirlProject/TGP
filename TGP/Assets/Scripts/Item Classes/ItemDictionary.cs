@@ -12,7 +12,7 @@ public class ItemDictionary : MonoBehaviour
 	{
         itemRecipes = new Dictionary<string, CombinedItems>();
 
-        itemRecipes.Add("Elastic Band|Pebbles|Y Shaped Root", CombinedItems.SlingShot);
+        itemRecipes.Add("Elastic Band|Y Shaped Root", CombinedItems.SlingShot);
         itemRecipes.Add("RoundMagnets|Food Can", CombinedItems.Bomb);
 	}
 
