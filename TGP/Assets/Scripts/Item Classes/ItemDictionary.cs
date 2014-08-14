@@ -5,15 +5,24 @@ public class ItemDictionary : MonoBehaviour
 {
     public List<string> itemKeys;
     public List<Item> itemValues;
-    private static Dictionary<string, CombinedItems> itemRecipes;
+    private static Dictionary<string, Item> itemRecipes;
 
 	// Use this for initialization
 	void Start()
-	{
-        itemRecipes = new Dictionary<string, CombinedItems>();
+    {
+        itemRecipes = new Dictionary<string, Item>();
 
-        itemRecipes.Add("Elastic Band|Y Shaped Root", CombinedItems.SlingShot);
-        itemRecipes.Add("RoundMagnets|Food Can", CombinedItems.Bomb);
+        if (itemKeys.Count != itemValues.Count)
+        {
+            Log.RED("The amount of keys and values do not match.");
+        }
+        else
+        {
+            for (int i = 0; i < itemKeys.Count; i++)
+            {
+                itemRecipes.Add(itemKeys[i], itemValues[i]);
+            }
+        }
 	}
 
     public static Item GetItem(string item1, string item2, string item3, string item4)
@@ -28,13 +37,13 @@ public class ItemDictionary : MonoBehaviour
 
         if (itemRecipes.ContainsKey(combined))
         {
-            CombinedItems type;
+            Item type;
             itemRecipes.TryGetValue(combined, out type);
 
-            if (type != null)
-            {
-                newItem = GetItemFromType(type);
-            }
+            //if (type != null)
+            //{
+            //    newItem = GetItemFromType(type);
+            //}
         }
 
         return newItem;

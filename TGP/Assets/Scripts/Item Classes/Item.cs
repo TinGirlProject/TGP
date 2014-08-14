@@ -18,6 +18,8 @@ public class Item : ScriptableObject
     [HideInInspector]
     public int curAmount;
     public Texture2D icon;								// Item icon in inventory.
+    [HideInInspector]
+    public bool guiSelected = false;
 
     /// <summary>
     /// Default Constructor
@@ -30,6 +32,7 @@ public class Item : ScriptableObject
         curAmount = 0;
         maxAmount = 1;
         keyItem = false;
+        guiSelected = false;
     }
 
     /// <summary>
@@ -48,8 +51,20 @@ public class Item : ScriptableObject
         maxAmount = maxAmtIn;
         curAmount = curAmtIn;
         keyItem = canBeDestroyedIn;
+        guiSelected = false;
 
         icon = Resources.Load(PlayerGUI.s_Item_Resources_Path + name) as Texture2D;
+    }
+
+    public void CopyItem(Item toCopy)
+    {
+        this.name = toCopy.name;
+        this.description = toCopy.description;
+        this.keyItem = toCopy.keyItem;
+        this.maxAmount = toCopy.maxAmount;
+        this.curAmount = toCopy.curAmount;
+        this.icon = toCopy.icon;
+        this.guiSelected = false;
     }
 
     public virtual string ToolTip()

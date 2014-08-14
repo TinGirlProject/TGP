@@ -23,7 +23,9 @@ public class InSceneItem : MonoBehaviour
         {
             if (item)
             {
-                PlayerInventory.Inventory.Add(item);
+                Item newItem = ScriptableObject.CreateInstance<Item>();
+                newItem.CopyItem(item);
+                PlayerInventory.Inventory.Add(newItem);
                 Destroy(this.gameObject);
             }
             else
