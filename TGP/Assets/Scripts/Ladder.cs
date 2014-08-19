@@ -14,7 +14,6 @@ public class Ladder : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		playerInRange = false;
         top = transform.Find("LadderTop").gameObject;
 		bottom = transform.Find("LadderBottom").gameObject;
 	}
@@ -27,15 +26,7 @@ public class Ladder : MonoBehaviour
 
 	private void PlayerInRange(bool inRange)
 	{
-		playerInRange = inRange;
-	}
-
-	void OnGUI()
-	{
-		if (playerInRange)
-		{
-			GUI.Box(new Rect(Screen.width * 0.5f - 40, Screen.height * 0.20f, 80, 30), "Press E");
-		}
+        Messenger<bool>.Broadcast("ShowEPress", inRange);
 	}
 
     public GameObject Top

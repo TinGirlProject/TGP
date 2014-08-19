@@ -3,79 +3,89 @@ using System.Collections;
 
 public class Timer 
 {
-	private bool m_timeComplete;
-	private bool m_timerActive;
-	private float m_curTime;
-	private float m_defaultTime;
+	private bool _timeComplete;
+	private bool _timerActive;
+	private float _curTime;
+	private float _defaultTime;
 	
+    /// <summary>
+    /// Default time is 1.0 seconds.
+    /// </summary>
 	public Timer()
 	{
-		m_timeComplete = false;
-		m_timerActive = false;
-		m_defaultTime = 1.0f;
-		m_curTime = m_defaultTime;
+		_timeComplete = false;
+		_timerActive = false;
+		_defaultTime = 1.0f;
+		_curTime = _defaultTime;
 	}
 	
+    /// <summary>
+    /// Default time is passed in.
+    /// </summary>
+    /// <param name="defaultTime">What this timer's total time is.</param>
 	public Timer(float defaultTime)
 	{
-		m_timeComplete = false;
-		m_timerActive = false;
-		m_defaultTime = defaultTime;
-		m_curTime = m_defaultTime;
+		_timeComplete = false;
+		_timerActive = false;
+		_defaultTime = defaultTime;
+		_curTime = _defaultTime;
 	}
 	
+    /// <summary>
+    /// Countdown the time for this frame.
+    /// </summary>
 	public void UpdateTimer() 
 	{
-		if (m_timerActive)
+		if (_timerActive)
 		{
-			if (m_curTime > 0)
+			if (_curTime > 0)
 			{
-				m_curTime -= Time.deltaTime * Time.timeScale;
-				//Debug.Log ("Timer time: " + m_curTime);
+				_curTime -= Time.deltaTime * Time.timeScale;
+				//Debug.Log ("Timer time: " + _curTime);
 			}
 			else
 			{
-				m_timeComplete = true;
-				m_timerActive = false;
+				_timeComplete = true;
+				_timerActive = false;
 			}
 		}
 	}
 
 	public void StartTimer()
 	{
-		m_timerActive = true;
+		_timerActive = true;
 	}
 
 	public void PauseTimer()
 	{
-		m_timerActive = false;
+		_timerActive = false;
 	}
 
 	public void ResetTimer()
 	{
-		m_curTime = m_defaultTime;
-		m_timerActive = false;
-		m_timeComplete = false;
+		_curTime = _defaultTime;
+		_timerActive = false;
+		_timeComplete = false;
 	}
 
 	public bool IsTimeComplete
 	{
-		get { return m_timeComplete; }
+		get { return _timeComplete; }
 	}
 	
 	public bool IsTimerActive
 	{
-		get { return m_timerActive; }
+		get { return _timerActive; }
 	}
 
 	public float DefaultTime
 	{
-		get { return m_defaultTime; }
-		set { m_defaultTime = value; }
+		get { return _defaultTime; }
+		set { _defaultTime = value; }
 	}
 
 	public float CurrentTime
 	{
-		get { return m_curTime; }
+		get { return _curTime; }
 	}
 }

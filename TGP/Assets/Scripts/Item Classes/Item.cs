@@ -17,9 +17,12 @@ public class Item : ScriptableObject
     public int maxAmount;								// Greater than one if stackable.
     [HideInInspector]
     public int curAmount;
+    [HideInInspector]
+    public int valueAmount;
     public Texture2D icon;								// Item icon in inventory.
     [HideInInspector]
     public bool guiSelected = false;
+    public GameObject inSceneGameObject;
 
     /// <summary>
     /// Default Constructor
@@ -63,8 +66,10 @@ public class Item : ScriptableObject
         this.keyItem = toCopy.keyItem;
         this.maxAmount = toCopy.maxAmount;
         this.curAmount = toCopy.curAmount;
+        this.valueAmount = toCopy.valueAmount;
         this.icon = toCopy.icon;
         this.guiSelected = false;
+        this.inSceneGameObject = toCopy.inSceneGameObject;
     }
 
     public virtual string ToolTip()

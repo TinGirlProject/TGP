@@ -42,13 +42,5 @@ public class GameManager : MonoBehaviour
                 SpawnPlayer(playerSpawn.position);
 			}
 		}
-
-		if (Input.GetKeyUp(KeyCode.U))
-		{
-			if (Time.timeScale == 1)
-				Time.timeScale = 0.5f;
-			else
-				Time.timeScale = 1;
-		}
 	}
 }
