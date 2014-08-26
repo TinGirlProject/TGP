@@ -115,9 +115,9 @@ public class CameraScrolling : MonoBehaviour
 	    // Interpolate between the current camera position and the goal position.
 	    // See the documentation on Vector3.Lerp () for more information.
 
-        float x = Mathf.Lerp(transform.position.x, goalPosition.x, Time.deltaTime * springiness);
-        float y = Mathf.Lerp(transform.position.y, goalPosition.y, Time.deltaTime * springiness);
-        float z = Mathf.Lerp(transform.position.z, goalPosition.z, Time.deltaTime * zoomSpeed);
+        //float x = Mathf.Lerp(transform.position.x, goalPosition.x, Time.deltaTime * springiness);
+        //float y = Mathf.Lerp(transform.position.y, goalPosition.y, Time.deltaTime * springiness);
+        //float z = Mathf.Lerp(transform.position.z, goalPosition.z, Time.deltaTime * zoomSpeed);
 
 	    transform.position = Vector3.Lerp (transform.position, goalPosition, Time.deltaTime * springiness);	
     }

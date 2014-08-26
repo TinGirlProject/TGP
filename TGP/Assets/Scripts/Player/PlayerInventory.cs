@@ -7,10 +7,15 @@ public class PlayerInventory : MonoBehaviour
     private static int s_curInventorySlots;
     private static int s_maxInventorySlots;
 
+    private static bool s_hasSlingshot;
+
     void Start()
     {
         s_curInventorySlots = 10;
+        s_maxInventorySlots = 30;
         s_inventory = new List<Item>(s_curInventorySlots);
+
+        s_hasSlingshot = false;
     }
 
     public static bool AddItem(Item itemToAdd)
@@ -28,15 +33,22 @@ public class PlayerInventory : MonoBehaviour
                     if (s_inventory[cnt].maxAmount > 1)
                     {
                         // If the player has less than the max amount, add item to inventory
-                        if (s_inventory[cnt].curAmount < s_inventory[cnt].maxAmount)
+                        if ((s_inventory[cnt].curAmount + itemToAdd.valueAmount) < s_inventory[cnt].maxAmount)
                         {
-                            s_inventory[cnt].curAmount++;
+                            s_inventory[cnt].curAmount += itemToAdd.valueAmount;
 
                             /*
                              * Quest item stuff - if including 
                              */
-
                             return true;
+                        }
+                        else
+                        {
+                            int difference = (s_inventory[cnt].curAmount + itemToAdd.valueAmount) - itemToAdd.maxAmount;
+                            s_inventory[cnt].curAmount = itemToAdd.maxAmount;
+                            itemToAdd.valueAmount = difference;
+                            //s_inventory.Add(itemToAdd);
+                            return false;
                         }
                     }
                     // Non stackable
@@ -46,7 +58,8 @@ public class PlayerInventory : MonoBehaviour
                         if (s_inventory.Count < s_curInventorySlots)
                         {
                             s_inventory.Add(itemToAdd);
-                            Debug.Log("Player has \"" + itemToAdd.name + "\" and it is not stackable: \"" + itemToAdd.name + "\" added");
+                            itemToAdd.curAmount += itemToAdd.valueAmount;
+                            Log.BLUE(s_inventory[cnt].name + " added. Now have " + s_inventory[cnt].curAmount);
 
                             /*
                              * Quest item stuff - if including 
@@ -61,7 +74,20 @@ public class PlayerInventory : MonoBehaviour
             // New Item, add if player has room.
             if (s_inventory.Count < s_curInventorySlots)
             {
-                s_inventory.Add(itemToAdd);
+                if (itemToAdd.name == "Slingshot")
+                {
+                    if (!s_hasSlingshot)
+                    {
+                        s_hasSlingshot = true;
+                        s_inventory.Add(itemToAdd);
+                        itemToAdd.curAmount += itemToAdd.valueAmount;
+                    }
+                }
+                else
+                {
+                    s_inventory.Add(itemToAdd);
+                    itemToAdd.curAmount += itemToAdd.valueAmount;
+                }
 
                 /*
                  * Quest item stuff - if including 
@@ -73,11 +99,24 @@ public class PlayerInventory : MonoBehaviour
         // If not, add the item
         else
         {
-            s_inventory.Add(itemToAdd);
-
+            if (itemToAdd.name == "Slingshot")
+            {
+                if (!s_hasSlingshot)
+                {
+                    s_hasSlingshot = true;
+                    s_inventory.Add(itemToAdd);
+                    itemToAdd.curAmount += itemToAdd.valueAmount;
+                }
+            }
+            else
+            {
+                s_inventory.Add(itemToAdd);
+                itemToAdd.curAmount += itemToAdd.valueAmount;
+            }
             /*
              * Quest item stuff - if including 
              */
+            return true;
         }
         return false;
     }
@@ -100,6 +139,11 @@ public class PlayerInventory : MonoBehaviour
                 // Otherwise, remove the item completely
                 else
                 {
+                    if (s_inventory[cnt].name == "Slingshot")
+                    {
+                        s_hasSlingshot = false;
+                    }
+                    
                     s_inventory.RemoveAt(cnt);
                     return true;
                 }
@@ -123,6 +167,17 @@ public class PlayerInventory : MonoBehaviour
         return true;
     }
 
+    private static Item GetItemByName(string name)
+    {
+        foreach (Item item in s_inventory)
+        {
+            if (item.name == name)
+                return item;
+        }
+
+        return null;
+    }
+
     #region Setters and Getters
     public static List<Item> Inventory
     {
@@ -132,6 +187,35 @@ public class PlayerInventory : MonoBehaviour
     public static int InventorySlots
     {
         get { return s_curInventorySlots; }
+    }
+
+    public static bool HasSlingshot
+    {
+        get { return s_hasSlingshot; }
+    }
+
+    //public static bool HasAmmo
+    //{
+    //    get 
+    //    {
+    //        Item ammo = GetItemByName("Pebbles");
+    //        if (ammo)
+    //            return ammo.curAmount > 0;
+    //        else
+    //            return false;
+    //    }
+    //}
+
+    public static bool CanFireSlingshot
+    {
+        get
+        {
+            Item ammo = GetItemByName("Pebbles");
+            if (ammo)
+                return ammo.curAmount > 0 && s_hasSlingshot;
+            else
+                return false;
+        }
     }
     #endregion
 }

@@ -239,9 +239,13 @@ public class PlayerGUI : MonoBehaviour
                                 _showCombineNotification = false;
                             }
 
-                            Instantiate(item.inSceneGameObject,
-                                        transform.position + new Vector3(0, item.inSceneGameObject.transform.localScale.y * 1.5f, 0),
-                                        item.inSceneGameObject.transform.rotation);
+                            GameObject go = Instantiate(item.inSceneGameObject,
+                                            transform.position + new Vector3(0, transform.localScale.y * 2, 0),
+                                            item.inSceneGameObject.transform.rotation) as GameObject;
+
+                            go.name = go.name.Substring(0, go.name.IndexOf('('));
+                            go.GetComponent<InSceneItem>().item = item;
+
                             PlayerInventory.RemoveItem(item);
                         }
                     }

@@ -75,11 +75,11 @@ public class PlayerGUIOLD : MonoBehaviour
 		// Create a hatchet for testing.
 		if (Input.GetKeyDown(KeyCode.P))
 		{
-            Item testItem = new Item("Hatchet", "This is a test item", 1, 1, false);
+            //Item testItem = new Item("Hatchet", "This is a test item", 1, 1, false);
 
-            testItem.icon = Resources.Load("Item Icons/Weapons/" + testItem.name) as Texture2D;
+            //testItem.icon = Resources.Load("Item Icons/Weapons/" + testItem.name) as Texture2D;
 
-            PlayerInventoryOLD.AddItem(testItem);
+            //PlayerInventoryOLD.AddItem(testItem);
 		}
 		// Increase inventory for testing.
 		if (Input.GetKeyDown (KeyCode.O)) 

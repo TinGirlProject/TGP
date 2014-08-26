@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerController : Character 
 {
+    private bool _slingshotDrawn;
+
 	void Start()
     {
         base.Start();
@@ -21,6 +23,8 @@ public class PlayerController : Character
 		GameManager.listOfTimers.Add(exitLadderBottom);
 		GameManager.listOfTimers.Add(exitLadderTopLeft);
 		GameManager.listOfTimers.Add(exitLadderTopRight);
+
+        _slingshotDrawn = false;
 	}
 	
 	void Update()
@@ -118,9 +122,9 @@ public class PlayerController : Character
 			CheckMovement();
 			CheckJump();
 			CheckSlide();
-		}
-
-		if (curLadder != null && Input.GetKeyDown(KeyCode.E))
+        }
+        #region Ladder Handling
+        if (curLadder != null && Input.GetKeyDown(KeyCode.E) && inAirState != InAirState.CLIMBING)
 		{
 			animator.SetFloat("Speed", 0);
             switch (ladderState)
@@ -130,11 +134,13 @@ public class PlayerController : Character
                 curLadder.SendMessage("PlayerInRange", false, SendMessageOptions.RequireReceiver);
 				animator.SetTrigger("EnterLadderTopLeft");
 				enterLadderTopLeft.StartTimer();
+			    inAirState = InAirState.CLIMBING;
 				break;
 			case LadderState.ENTERTOPRIGHT:
 				canMove = false;
 				animator.SetTrigger("EnterLadderTopRight");
 				enterLadderTopRight.StartTimer();
+			    inAirState = InAirState.CLIMBING;
 				break;
 			case LadderState.ENTERBOTTOM:
 				if (inAirState != InAirState.CLIMBING)
@@ -143,7 +149,8 @@ public class PlayerController : Character
                     canMove = false;
                     curLadder.SendMessage("PlayerInRange", false, SendMessageOptions.RequireReceiver);
 					animator.SetTrigger("EnterLadderBottom");
-					enterLadderBottom.StartTimer();
+                    enterLadderBottom.StartTimer();
+                    inAirState = InAirState.CLIMBING;
 				}
 			break;
 			}
@@ -185,8 +192,19 @@ public class PlayerController : Character
 			canMove = false;
 			animator.SetTrigger("ExitLadderBottom");
 			exitLadderBottom.StartTimer();
-		}
-	}
+        }
+        #endregion
+
+        if (PlayerInventory.HasSlingshot)
+        {
+
+        }
+
+        if (PlayerInventory.CanFireSlingshot)
+        {
+            Log.BLUE("I can shoot");
+        }
+    }
 
     void CheckMovement()
     {

@@ -26,48 +26,53 @@ public class CameraTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // store where player entered
-        enterPosition = other.transform.position; 
+        if (other.tag == "Player")
+        {
+            // store where player entered
+            enterPosition = other.transform.position;
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-
-        Debug.Log(other.transform.position.x - enterPosition.x);
-        // store where player exited
-        if (Mathf.Abs(other.transform.position.x - enterPosition.x) > collider.bounds.size.x / 2)
+         if (other.tag == "Player")
         {
-            if (passedThrough)
+            Debug.Log(other.transform.position.x - enterPosition.x);
+            // store where player exited
+            if (Mathf.Abs(other.transform.position.x - enterPosition.x) > collider.bounds.size.x / 2)
             {
-                // set new values
-                cam.SetZoomSpeed(prev_zoomSpeed);
-                cam.SetSpringiness(prev_springiness);
-                cam.SetDistance(prev_distance);
-                cam.SetHeightOffset(prev_heightOffset);
-                cam.SetVelocityLookAhead(prev_velocityLookAhead);
-                cam.SetMaxLookAhead(prev_maxLookAhead);
+                if (passedThrough)
+                {
+                    // set new values
+                    cam.SetZoomSpeed(prev_zoomSpeed);
+                    cam.SetSpringiness(prev_springiness);
+                    cam.SetDistance(prev_distance);
+                    cam.SetHeightOffset(prev_heightOffset);
+                    cam.SetVelocityLookAhead(prev_velocityLookAhead);
+                    cam.SetMaxLookAhead(prev_maxLookAhead);
 
-                passedThrough = false;
-            }
-            else
-            {
-                // store pervious values
-                prev_distance = cam.GetDistance();
-                prev_springiness = cam.GetSpringiness();
-                prev_zoomSpeed = cam.GetZoomSpeed();
-                prev_heightOffset = cam.GetHeightOffSet();
-                prev_velocityLookAhead = cam.GetVelocityLookAhead();
-                prev_maxLookAhead = cam.GetMaxLookAhead();
+                    passedThrough = false;
+                }
+                else
+                {
+                    // store pervious values
+                    prev_distance = cam.GetDistance();
+                    prev_springiness = cam.GetSpringiness();
+                    prev_zoomSpeed = cam.GetZoomSpeed();
+                    prev_heightOffset = cam.GetHeightOffSet();
+                    prev_velocityLookAhead = cam.GetVelocityLookAhead();
+                    prev_maxLookAhead = cam.GetMaxLookAhead();
 
-                // set new values
-                cam.SetZoomSpeed(zoomSpeed);
-                cam.SetSpringiness(springiness);
-                cam.SetDistance(distance);
-                cam.SetHeightOffset(heightOffset);
-                cam.SetVelocityLookAhead(velocityLookAhead);
-                cam.SetMaxLookAhead(maxLookAhead);
+                    // set new values
+                    cam.SetZoomSpeed(zoomSpeed);
+                    cam.SetSpringiness(springiness);
+                    cam.SetDistance(distance);
+                    cam.SetHeightOffset(heightOffset);
+                    cam.SetVelocityLookAhead(velocityLookAhead);
+                    cam.SetMaxLookAhead(maxLookAhead);
 
-                passedThrough = true;
+                    passedThrough = true;
+                }
             }
         }
     }

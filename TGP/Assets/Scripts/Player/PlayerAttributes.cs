@@ -12,11 +12,13 @@ using System.Collections;
 public class PlayerAttributes : MonoBehaviour 
 {
 	private static AreaInfo _curAreaInfo;
+    public GameObject slingshotModel;
+    private static GameObject s_slingshotModel;
 
 	// Use this for initialization
 	void Start () 
 	{
-	
+        s_slingshotModel = slingshotModel;
 	}
 	
 	// Update is called once per frame

@@ -61,12 +61,12 @@ public class ItemDictionary : MonoBehaviour
         Item newItem = null;
         switch (type)
         {
-            case CombinedItems.SlingShot:
-                newItem = new Item("SlingShot", "Shoot things", 1, 1, false);
-                break;
-            case CombinedItems.Bomb:
-                newItem = new Item("Bomb", "Blow something up", 1, 1, false);
-                break;
+            //case CombinedItems.SlingShot:
+            //    newItem = new Item("SlingShot", "Shoot things", 1, 1, false);
+            //    break;
+            //case CombinedItems.Bomb:
+            //    newItem = new Item("Bomb", "Blow something up", 1, 1, false);
+            //    break;
         }
 
         return newItem;
