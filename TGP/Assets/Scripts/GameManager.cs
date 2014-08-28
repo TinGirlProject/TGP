@@ -6,15 +6,15 @@ public class GameManager : MonoBehaviour
 {
 	public GameObject player;
     public Transform playerSpawn;
-	private GameObject currentPlayer;
-    private CameraScrolling cam;
-	public static List<Timer> listOfTimers;
-	private Timer testTimer;
+	private GameObject _currentPlayer;
+    private CameraScrolling _cam;
+	public static List<Timer> s_listOfTimers;
+	private Timer _testTimer;
 	
 	void Awake() 
     {
-		listOfTimers = new List<Timer>();
-		cam = GetComponent<CameraScrolling>();
+		s_listOfTimers = new List<Timer>();
+		_cam = GetComponent<CameraScrolling>();
         SpawnPlayer(playerSpawn.position);
 
         //cam.SetTarget(player.transform);
@@ -23,19 +23,19 @@ public class GameManager : MonoBehaviour
 	// Spawn player
 	private void SpawnPlayer(Vector3 spawnPos) 
     {
-		currentPlayer = Instantiate(player, spawnPos, Quaternion.identity) as GameObject;
-		cam.SetTarget(currentPlayer.transform);
+		_currentPlayer = Instantiate(player, spawnPos, Quaternion.identity) as GameObject;
+		_cam.SetTarget(_currentPlayer.transform);
 	}
 
 	private void Update() 
     {
-		for (int cnt = 0; cnt < listOfTimers.Count; ++cnt)
+		for (int cnt = 0; cnt < s_listOfTimers.Count; ++cnt)
 		{
 			// if (gamestate != gamestate.pause)
-			listOfTimers[cnt].UpdateTimer();
+			s_listOfTimers[cnt].UpdateTimer();
 		}
 
-		if (!currentPlayer) 
+		if (!_currentPlayer) 
         {
 			if (Input.GetButtonDown("Respawn")) 
             {

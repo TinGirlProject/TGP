@@ -44,7 +44,7 @@ public class PlayerGUI : MonoBehaviour
     void Start()
     {
         _showCombineTimer = new Timer(3);
-        GameManager.listOfTimers.Add(_showCombineTimer);
+        GameManager.s_listOfTimers.Add(_showCombineTimer);
 
         _showCombineStyle.richText = true;
         _showCombineStyle.alignment = TextAnchor.MiddleLeft;

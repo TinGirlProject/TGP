@@ -11,14 +11,13 @@ using System.Collections;
 
 public class PlayerAttributes : MonoBehaviour 
 {
-	private static AreaInfo _curAreaInfo;
-    public GameObject slingshotModel;
-    private static GameObject s_slingshotModel;
+	private static AreaInfo s_curAreaInfo;
+    private static float s_slignshotForce = 10;
 
 	// Use this for initialization
 	void Start () 
 	{
-        s_slingshotModel = slingshotModel;
+        
 	}
 	
 	// Update is called once per frame
@@ -29,9 +28,9 @@ public class PlayerAttributes : MonoBehaviour
 
 	public static void UpdateArea(AreaInfo areaInfo)
 	{
-		_curAreaInfo = areaInfo;
+		s_curAreaInfo = areaInfo;
 
-		Debug.Log("New Area Entered: " + _curAreaInfo.AreaName);
+		Debug.Log("New Area Entered: " + s_curAreaInfo.AreaName);
 
 		if (PlayerQuests.ActiveQuests.Count > 0)
 		{
@@ -39,16 +38,24 @@ public class PlayerAttributes : MonoBehaviour
 			{
 				for (int j = 0; j < PlayerQuests.ActiveQuests[i].ActiveObjectives.Count; j++)
 				{
-					if (PlayerQuests.ActiveQuests[i].ActiveObjectives[j].CheckArea(_curAreaInfo.AreaName))
+					if (PlayerQuests.ActiveQuests[i].ActiveObjectives[j].CheckArea(s_curAreaInfo.AreaName))
 						return;
 				}
 			}
 		}
 	}
 
-	public static AreaInfo CurAreaInfo
+    #region Setters and Getters
+    public static AreaInfo CurAreaInfo
 	{
-		get { return _curAreaInfo; }
-		set { _curAreaInfo = value; }
-	}
+		get { return s_curAreaInfo; }
+		set { s_curAreaInfo = value; }
+    }
+
+    public static float SlingshotForce
+    {
+        get { return s_slignshotForce; }
+        set { s_slignshotForce = value; }
+    }
+    #endregion
 }

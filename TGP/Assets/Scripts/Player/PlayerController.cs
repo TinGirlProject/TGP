@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerController : Character 
 {
     private bool _slingshotDrawn;
+    public GameObject slingshotGO;
 
 	void Start()
     {
@@ -17,12 +18,12 @@ public class PlayerController : Character
 		exitLadderTopLeft = new Timer(1.0f);
 		exitLadderTopRight = new Timer(1.0f);
 
-		GameManager.listOfTimers.Add(enterLadderBottom);
-		GameManager.listOfTimers.Add(enterLadderTopLeft);
-		GameManager.listOfTimers.Add(enterLadderTopRight);
-		GameManager.listOfTimers.Add(exitLadderBottom);
-		GameManager.listOfTimers.Add(exitLadderTopLeft);
-		GameManager.listOfTimers.Add(exitLadderTopRight);
+		GameManager.s_listOfTimers.Add(enterLadderBottom);
+		GameManager.s_listOfTimers.Add(enterLadderTopLeft);
+		GameManager.s_listOfTimers.Add(enterLadderTopRight);
+		GameManager.s_listOfTimers.Add(exitLadderBottom);
+		GameManager.s_listOfTimers.Add(exitLadderTopLeft);
+		GameManager.s_listOfTimers.Add(exitLadderTopRight);
 
         _slingshotDrawn = false;
 	}
@@ -121,7 +122,7 @@ public class PlayerController : Character
 		{
 			CheckMovement();
 			CheckJump();
-			CheckSlide();
+			//CheckSlide();
         }
         #region Ladder Handling
         if (curLadder != null && Input.GetKeyDown(KeyCode.E) && inAirState != InAirState.CLIMBING)
@@ -197,12 +198,29 @@ public class PlayerController : Character
 
         if (PlayerInventory.HasSlingshot)
         {
+            if (Input.GetKeyUp(KeyCode.Alpha1))
+            {
+                if (!_slingshotDrawn)
+                {
+                    slingshotGO.SetActive(true);
+                    _slingshotDrawn = true;
+                    slingshotGO.SendMessage("SlingshotDrawn", _slingshotDrawn, SendMessageOptions.RequireReceiver);
+                }
+                else
+                {
+                    _slingshotDrawn = false;
+                    slingshotGO.SendMessage("SlingshotDrawn", _slingshotDrawn, SendMessageOptions.RequireReceiver);
+                    slingshotGO.SetActive(false);
+                }
+            }
 
-        }
-
-        if (PlayerInventory.CanFireSlingshot)
-        {
-            Log.BLUE("I can shoot");
+            if (_slingshotDrawn && PlayerInventory.CanFireSlingshot)
+            {
+                if (Input.GetMouseButtonUp(0))
+                {
+                    slingshotGO.SendMessage("Shoot", SendMessageOptions.RequireReceiver);
+                }
+            }
         }
     }
 
