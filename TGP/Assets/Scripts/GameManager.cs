@@ -15,9 +15,9 @@ public class GameManager : MonoBehaviour
     {
 		s_listOfTimers = new List<Timer>();
 		_cam = GetComponent<CameraScrolling>();
-        SpawnPlayer(playerSpawn.position);
+        //SpawnPlayer(playerSpawn.position);
 
-        //cam.SetTarget(player.transform);
+        _cam.SetTarget(player.transform);
 	}
 	
 	// Spawn player
@@ -35,12 +35,12 @@ public class GameManager : MonoBehaviour
 			s_listOfTimers[cnt].UpdateTimer();
 		}
 
-		if (!_currentPlayer) 
-        {
-			if (Input.GetButtonDown("Respawn")) 
-            {
-                SpawnPlayer(playerSpawn.position);
-			}
-		}
+        //if (!_currentPlayer) 
+        //{
+        //    if (Input.GetButtonDown("Respawn")) 
+        //    {
+        //        SpawnPlayer(playerSpawn.position);
+        //    }
+        //}
 	}
 }
