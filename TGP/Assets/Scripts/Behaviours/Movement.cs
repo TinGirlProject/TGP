@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
     public enum Direction
     {
         Left = -1,
+		NONE = 0,
         Right = 1
     }
     
@@ -23,6 +24,7 @@ public class Movement : MonoBehaviour
     private CollisionFlags _collisionFlags;
     private Animator _animator;
     private Direction _direction;
+	private Direction _previousDirection;
 
     private bool _run = false;
     private bool _jump = false;
@@ -40,15 +42,38 @@ public class Movement : MonoBehaviour
         _moveDirection = Vector3.zero;
         _run = false;
         _jump = false;
-        _direction = Direction.Left;
+        _direction = Direction.NONE;
+		_previousDirection = Direction.Left;
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        if (_controller.isGrounded)
+		Log.BLUE(_direction);
+		if (_controller.isGrounded)
         {
+			_airTime = 0;
 
+			_moveDirection = new Vector3((int)_direction, 0, 0);
+			_moveDirection.Normalize();
+			_moveDirection *= _walkSpeed;
+
+			if (_direction != Direction.NONE)
+			{
+				if (_run)
+				{
+					_moveDirection *= _runMultiplier;
+				}
+			}
+
+			if (_jump)
+			{
+				if (_airTime < _jumpTime)
+				{
+					_moveDirection.y += _jumpHeight;
+					_jump = false;
+				}
+			}
         }
         else
         {
@@ -86,21 +111,30 @@ public class Movement : MonoBehaviour
         switch (dir)
         {
             case Direction.Left:
-                if (_direction == Direction.Right)
+                if (_previousDirection == Direction.Right)
                 {
                     transform.Rotate(0, -180, 0);
-                    _direction = Direction.Left;
                 }
+                UpdateDirection(Direction.Left);
                 break;
             case Direction.Right:
-                if (_direction == Direction.Left)
+				if (_previousDirection == Direction.Left)
                 {
                     transform.Rotate(0, 180, 0);
-                    _direction = Direction.Right;
                 }
+                UpdateDirection(Direction.Right);
                 break;
+			case Direction.NONE:
+				_direction = Direction.NONE;
+				break;
             default:
                 break;
         }
     }
+
+	public void UpdateDirection(Direction dir)
+	{
+		_previousDirection = _direction;
+		_direction = dir;
+	}
 }
