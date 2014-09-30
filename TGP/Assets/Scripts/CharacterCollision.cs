@@ -36,7 +36,7 @@ public class CharacterCollision : MonoBehaviour
 	[SerializeField]
     private float xMaxValue;
 	[SerializeField]
-    private float yMinValue;
+    public float yMinValue;
 	[SerializeField]
     private float yMaxValue;
     #endregion
@@ -77,7 +77,7 @@ public class CharacterCollision : MonoBehaviour
     private void VerticalCollisions(float moveY)
     {
         // Check collisions above and below
-        c.ChangeState(Character.GroundedState.NONE);
+        //c.ChangeState(Character.GroundedState.NONE);
 
         Vector2 origin = new Vector2(transform.position.x, transform.position.y + size.y / 2);
         Vector2 direction = new Vector2(0, -1);
@@ -103,9 +103,9 @@ public class CharacterCollision : MonoBehaviour
         {
             onSlope = false;
         }
-
-        if (moveY != 0)
-        {
+        Debug.Log(moveY);
+        //if (moveY != 0)
+        //{
             for (int i = 0; i < collisionDivisionsX; i++)
             {
                 float dir = Mathf.Sign(moveY);
@@ -129,10 +129,10 @@ public class CharacterCollision : MonoBehaviour
                             connectedYDown = true;
                             yMinValue = hit.point.y;
                         }
-
                     }
-                    else if (hit.point.y > yMaxValue)
+                    else if (dir > 0 && hit.point.y > yMaxValue)
                     {
+                        Debug.Log(dir);
                         connectedYUp = true;
                         yMaxValue = hit.point.y - size.y;
                     }
@@ -147,7 +147,7 @@ public class CharacterCollision : MonoBehaviour
                     platform = null;
                 }
             }
-        }
+       // }
     }
 
     private void SidewaysCollisions(float moveX)
@@ -196,10 +196,10 @@ public class CharacterCollision : MonoBehaviour
     public void Position(Vector2 moveAmount)
     {
         // Store whether character hit wall
-        connectedXRight = false;
-        connectedXLeft = false;
-        connectedYUp = false;
-        connectedYDown = false;
+        //connectedXRight = false;
+        //connectedXLeft = false;
+        //connectedYUp = false;
+        //connectedYDown = false;
 
         pos = transform.position;
 
@@ -217,13 +217,15 @@ public class CharacterCollision : MonoBehaviour
         VerticalCollisions(moveAmount.y);
         SidewaysCollisions(moveAmount.x);
 
-        Vector2 finalTransform = new Vector2(moveAmount.x + deltaPlatformPos.x, moveAmount.y);
-        transform.Translate(finalTransform, Space.World);
-
-        
-		if (connectedYDown && transform.position.y + moveAmount.y < yMinValue)
+        if (!connectedYDown)
         {
-			transform.position = new Vector3(transform.position.x, yMinValue, 0);
+            if (c.getInAirState() != Character.InAirState.JUMPING)
+                c.ChangeState(Character.InAirState.FALLING);
+        }
+
+        if (connectedYDown && transform.position.y + moveAmount.y < yMinValue)
+        {
+            transform.position = new Vector3(transform.position.x, yMinValue, 0);
             if (c.getInAirState() != Character.InAirState.JUMPING)
             {
                 c.ChangeState(Character.InAirState.NONE);
@@ -238,7 +240,7 @@ public class CharacterCollision : MonoBehaviour
             }
         }
 
-        if (onSlope && c.getInAirState() == Character.InAirState.NONE)
+        if (c.getInAirState() == Character.InAirState.NONE)
         {
             transform.position = new Vector3(transform.position.x, groundValue, 0);
             c.ChangeState(Character.InAirState.NONE);
@@ -246,14 +248,17 @@ public class CharacterCollision : MonoBehaviour
 
         if (connectedXLeft && transform.position.x < xMinValue)
         {
-			transform.position = new Vector3(xMinValue, transform.position.y, 0);
+            transform.position = new Vector3(xMinValue, transform.position.y, 0);
             c.ChangeState(Character.PaceState.NONE);
         }
         else if (connectedXRight && transform.position.x > xMaxValue)
         {
-			transform.position = new Vector3(xMaxValue, transform.position.y, 0);
+            transform.position = new Vector3(xMaxValue, transform.position.y, 0);
             c.ChangeState(Character.PaceState.NONE);
         }
+
+        Vector2 finalTransform = new Vector2(moveAmount.x + deltaPlatformPos.x, moveAmount.y);
+        transform.Translate(finalTransform, Space.World);
     }
 
     // Set collider

@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
     //protected Weapon equippedWeapon;
 
     private CharacterCollision cp;
-    public GameObject ragdoll;
+    public  GameObject ragdoll;
 
     // Character Handling
     public class Movement
@@ -66,10 +66,10 @@ public class Character : MonoBehaviour
     public InAirState inAirState;
 
     public enum GroundedState { SLIDING, STANDING, CROUCHING, NONE };
-    private GroundedState groundedState;
+    public GroundedState groundedState;
 
     public enum PaceState { WALKING, RUNNING, NONE };
-    private PaceState paceState;
+    public PaceState paceState;
 
     // Wall Jumping
     private WallJumpState wallJumpState;
@@ -91,8 +91,8 @@ public class Character : MonoBehaviour
         animator = GetComponent<Animator>();
         
         ChangeState(InAirState.NONE);
-        ChangeState(GroundedState.STANDING);
-        ChangeState(PaceState.WALKING);
+        ChangeState(GroundedState.NONE);
+        ChangeState(PaceState.NONE);
 		ladderState = LadderState.NONE;
 		wallJumpState = WallJumpState.NONE;
 
@@ -101,25 +101,6 @@ public class Character : MonoBehaviour
 		enteredRight = false;
 		enteredBottom = false;
     }
-
-    #region Health
-    public void TakeDamage(float dmg)
-    {
-        health -= dmg;
-
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    protected void Die()
-    {
-        Ragdoll r = (Instantiate(ragdoll, transform.position, transform.rotation) as GameObject).GetComponent<Ragdoll>();
-        r.CopyPose(transform);
-        Destroy(this.gameObject);
-    }
-    #endregion
 
 	void OnTriggerEnter(Collider other)
 	{
@@ -166,7 +147,9 @@ public class Character : MonoBehaviour
                     // Set jump height
                     currentSpeedY = movement.jumpHeight;
 
-                    ChangeState(GroundedState.NONE);
+                    if (groundedState != GroundedState.NONE)
+                        ChangeState(GroundedState.NONE);
+
                     animator.SetBool("Jumping", true);
                     break;
                 case InAirState.FALLING:
@@ -174,6 +157,9 @@ public class Character : MonoBehaviour
                     {
                         currentSpeedY = 0;
                     }
+
+                    if (groundedState != GroundedState.NONE)
+                        ChangeState(GroundedState.NONE);
 
                     animator.SetBool("Jumping", false);
                     break;
@@ -184,7 +170,8 @@ public class Character : MonoBehaviour
                     // Stop jump
                     currentSpeedY = 0;
 
-                    ChangeState(GroundedState.STANDING);
+                    if (groundedState == GroundedState.NONE)
+                        ChangeState(GroundedState.STANDING);
                     break;
             }
 
@@ -300,7 +287,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected void Update()
+    protected void FixedUpdate()
     {
         // Handle movement speed
         switch (paceState)
@@ -375,7 +362,10 @@ public class Character : MonoBehaviour
         if (groundedState != GroundedState.NONE)
         {
             currentSpeedY = 0;
+            return;
         }
+
+        Debug.Log(inAirState);
 
         // Set state to falling if character is falling
         if (currentSpeedY < 0 && (inAirState != InAirState.FALLING && inAirState != InAirState.WALLHOLDING
