@@ -196,10 +196,10 @@ public class CharacterCollision : MonoBehaviour
     public void Position(Vector2 moveAmount)
     {
         // Store whether character hit wall
-        //connectedXRight = false;
-        //connectedXLeft = false;
-        //connectedYUp = false;
-        //connectedYDown = false;
+        connectedXRight = false;
+        connectedXLeft = false;
+        connectedYUp = false;
+        connectedYDown = false;
 
         pos = transform.position;
 
@@ -217,11 +217,11 @@ public class CharacterCollision : MonoBehaviour
         VerticalCollisions(moveAmount.y);
         SidewaysCollisions(moveAmount.x);
 
-        if (!connectedYDown)
-        {
-            if (c.getInAirState() != Character.InAirState.JUMPING)
-                c.ChangeState(Character.InAirState.FALLING);
-        }
+        //if (!connectedYDown)
+        //{
+        //    if (c.getInAirState() != Character.InAirState.JUMPING)
+        //        c.ChangeState(Character.InAirState.FALLING);
+        //}
 
         if (connectedYDown && transform.position.y + moveAmount.y < yMinValue)
         {

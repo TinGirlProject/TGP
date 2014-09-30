@@ -336,8 +336,8 @@ public class Character : MonoBehaviour
 			}
 
 			// Set animator parameters
-			animationSpeed = MathP.IncrementTowards(animationSpeed, Mathf.Abs(targetSpeedX), movement.acceleration);
-			animator.SetFloat("Speed", animationSpeed);
+			//animationSpeed = MathP.IncrementTowards(animationSpeed, Mathf.Abs(targetSpeedX), movement.acceleration);
+			animator.SetFloat("Speed", currentSpeedX);
 
 			// Left and right movement
 			if (groundedState != GroundedState.SLIDING)
@@ -352,7 +352,7 @@ public class Character : MonoBehaviour
 			}
 			else
 			{
-				currentSpeedX = MathP.IncrementTowards(currentSpeedX, moveDirX * targetSpeedX, movement.slideDeceleration);
+                currentSpeedX = moveDirX * targetSpeedX;
 			}
 		}
     }
