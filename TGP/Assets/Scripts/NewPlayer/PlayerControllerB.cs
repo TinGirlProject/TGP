@@ -93,7 +93,7 @@ public class PlayerControllerB : MonoBehaviour
                 Vector2 origin = Vector2.Lerp(startPoint, endPoint, lerpAmount);
 
 
-                hitInfos[i] = Physics2D.Raycast(origin, -Vector2.up, distance, Raylayers.downRay);
+                hitInfos[i] = Physics2D.Raycast(origin, -Vector2.up, distance, Raylayers.s_downRay);
 
                 if (hitInfos[i].fraction > 0)
                 {
@@ -158,7 +158,7 @@ public class PlayerControllerB : MonoBehaviour
                 Vector2 origin = Vector2.Lerp(startPoint, endPoint, lerpAmount);
 
                 //did I connect with the thing?
-                hitInfos[i] = Physics2D.Raycast(origin, direction, sideRayLength, Raylayers.onlyCollisions);
+                hitInfos[i] = Physics2D.Raycast(origin, direction, sideRayLength, Raylayers.s_onlyCollisions);
 
                 //there's a wall there don't go through it...
                 if (hitInfos[i].fraction > 0)
@@ -208,7 +208,7 @@ public class PlayerControllerB : MonoBehaviour
             {
                 Vector2 start = Vector2.Lerp(min, max, (float)i / (float)verticalRays);
                 Vector2 end = start + Vector2.up * (upRayLength + box.height / 2);
-                upRays[i] = Physics2D.Linecast(start, end, Raylayers.upRay);
+                upRays[i] = Physics2D.Linecast(start, end, Raylayers.s_upRay);
                 if (upRays[i].fraction > 0)
                 {
                     connection = true;

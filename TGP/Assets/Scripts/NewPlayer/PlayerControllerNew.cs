@@ -48,7 +48,7 @@ public class PlayerControllerNew : MonoBehaviour
   
     void Start()
     {
-        layerMask = 1 << LayerMask.NameToLayer(Raylayers.s_COLLLISIONS_NORMAL);
+        layerMask = Raylayers.s_onlyCollisions;
 
         boxCol = GetComponent<BoxCollider>();
         t = transform;
@@ -95,7 +95,7 @@ public class PlayerControllerNew : MonoBehaviour
                 float lerpAmount = (float)i / (float)(verticalRays - 1);
                 Vector2 origin = Vector2.Lerp(startPoint, endPoint, lerpAmount);
 
-                Physics.Raycast(origin, -Vector2.up, out hitInfos[i], distance, Raylayers.downRay);
+                Physics.Raycast(origin, -Vector2.up, out hitInfos[i], distance, Raylayers.s_downRay);
                 Debug.DrawRay(origin, -Vector2.up);
 
                 //Debug.Log(hitInfos[i].distance);
@@ -163,7 +163,7 @@ public class PlayerControllerNew : MonoBehaviour
                 Vector2 origin = Vector2.Lerp(startPoint, endPoint, lerpAmount);
 
                 //did I connect with the thing?
-                Physics.Raycast(origin, direction, out hitInfos[i], sideRayLength, Raylayers.onlyCollisions);
+                Physics.Raycast(origin, direction, out hitInfos[i], sideRayLength, Raylayers.s_onlyCollisions);
                 Debug.DrawRay(origin, direction);
 
                 //there's a wall there don't go through it...
