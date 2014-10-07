@@ -15,16 +15,19 @@ public class GameManager : MonoBehaviour
     {
 		s_listOfTimers = new List<Timer>();
 		_cam = GetComponent<CameraScrolling>();
-        SpawnPlayer(playerSpawn.position);
 
-        _cam.SetTarget(player.transform);
+        _currentPlayer = GameObject.Find("Player");
+
+        if (!_currentPlayer)
+            SpawnPlayer(playerSpawn.position);
+
+        _cam.SetTarget(_currentPlayer.transform);
 	}
 	
 	// Spawn player
 	private void SpawnPlayer(Vector3 spawnPos) 
     {
 		_currentPlayer = Instantiate(player, spawnPos, Quaternion.identity) as GameObject;
-		_cam.SetTarget(_currentPlayer.transform);
 	}
 
 	private void Update() 

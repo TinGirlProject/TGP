@@ -90,7 +90,7 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -949,8 +949,317 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    human: []
-    skeleton: []
+    human:
+    - boneName: Ninja|Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Leg Upper.L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Leg Upper.R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Leg Lower.L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Leg Lower.R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Foot.L
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Foot.R
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Chest
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Arm Upper.L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Arm Upper.R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Arm Lower.L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Arm Lower.R
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Hand.L
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Hand.R
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Cloth_01.L
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ninja|Cloth_01.R
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Player(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Camera
+      position: {x: 0, y: 0, z: 1.29999995}
+      rotation: {x: 7.1054282e-15, y: -.707106829, z: 7.1054282e-15, w: .707106829}
+      scale: {x: 1.00000012, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: Hemi
+      position: {x: 0, y: 3.25305295, z: 0}
+      rotation: {x: -3.77489506e-08, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Ninja
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: -3.77489506e-08, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Ninja|Hips
+      position: {x: 0, y: .982389569, z: -2.92674486e-07}
+      rotation: {x: -2.96345046e-08, y: .999934375, z: -.0114601562, w: 1.11867144e-15}
+      scale: {x: .99999994, y: .99999994, z: 1}
+      transformModified: 1
+    - name: Ninja|Chest
+      position: {x: -1.66266994e-14, y: .533182085, z: 4.84464691e-10}
+      rotation: {x: .0441520251, y: 4.34596359e-08, z: 1.31599079e-10, w: .999024868}
+      scale: {x: 1, y: 1, z: .999999881}
+      transformModified: 1
+    - name: Ninja|Neck
+      position: {x: 2.07833747e-14, y: .388709307, z: 8.94226303e-14}
+      rotation: {x: -.297607601, y: -4.89404925e-08, z: 1.50478607e-09, w: .95468837}
+      scale: {x: 1.00000012, y: .99999994, z: .99999994}
+      transformModified: 1
+    - name: Ninja|Head
+      position: {x: 1.47792884e-14, y: .175210685, z: 2.35660368e-13}
+      rotation: {x: .259976119, y: 4.79558011e-08, z: 6.54602239e-09, w: .965615034}
+      scale: {x: 1, y: 1.00000024, z: 1}
+      transformModified: 1
+    - name: Ninja|Cloth_01.L
+      position: {x: .157380506, y: .470140338, z: .196756423}
+      rotation: {x: .669695854, y: -1.33650886e-08, z: 2.8015485e-08, w: .742635548}
+      scale: {x: 1, y: .999999821, z: .999999881}
+      transformModified: 1
+    - name: Ninja|Cloth_02.L
+      position: {x: 1.81985502e-08, y: .0895009637, z: 1.93825016e-07}
+      rotation: {x: -.0722449645, y: -3.39376633e-08, z: 2.74817289e-08, w: .997386932}
+      scale: {x: 1.00000024, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: Ninja|Cloth_03.L
+      position: {x: -1.23035653e-08, y: .10488496, z: 1.82011007e-07}
+      rotation: {x: 6.38568931e-09, y: .967318714, z: .253563821, w: -2.6081505e-08}
+      scale: {x: .999999523, y: 1, z: .999999523}
+      transformModified: 1
+    - name: Ninja|Cloth_04.L
+      position: {x: 4.30341851e-09, y: .111962259, z: -1.01026359e-07}
+      rotation: {x: 7.23492519e-08, y: -.967557251, z: -.252652198, w: -5.68454173e-09}
+      scale: {x: .999999762, y: .999999702, z: .999999642}
+      transformModified: 1
+    - name: Ninja|Cloth_01.R
+      position: {x: -.157380477, y: .470140308, z: .196756363}
+      rotation: {x: .669695914, y: -5.54552599e-08, z: 2.58304063e-08, w: .742635548}
+      scale: {x: 1, y: .999999881, z: .999999642}
+      transformModified: 1
+    - name: Ninja|Cloth_02.R
+      position: {x: 1.50764112e-08, y: .0895010382, z: 3.90386319e-08}
+      rotation: {x: -.072244823, y: 1.08491056e-08, z: 1.81941662e-08, w: .997386992}
+      scale: {x: .999999881, y: 1, z: .99999994}
+      transformModified: 1
+    - name: Ninja|Cloth_03.R
+      position: {x: 8.14938872e-09, y: .104884975, z: 7.36935348e-08}
+      rotation: {x: 8.83564866e-09, y: .967318714, z: .253563792, w: 2.53565329e-08}
+      scale: {x: 1.00000024, y: 1.00000048, z: 1}
+      transformModified: 1
+    - name: Ninja|Cloth_04.R
+      position: {x: -5.01193753e-09, y: .111962184, z: 1.29238657e-07}
+      rotation: {x: 1.77946653e-08, y: -.967557132, z: -.252652377, w: 8.43902015e-09}
+      scale: {x: .999999762, y: .999999523, z: .999999702}
+      transformModified: 1
+    - name: Ninja|Arm Upper.L
+      position: {x: .251869202, y: .292583317, z: -.0604020655}
+      rotation: {x: .0603990965, y: .0619139038, z: .711588144, w: -.697252393}
+      scale: {x: .999999762, y: .999999881, z: 1}
+      transformModified: 1
+    - name: Ninja|Arm Lower.L
+      position: {x: 9.3225383e-09, y: .436319381, z: 1.93715088e-09}
+      rotation: {x: -.0280461144, y: .00120359112, z: -.0152807422, w: .999489188}
+      scale: {x: 1.00000036, y: 1.00000036, z: 1.00000048}
+      transformModified: 1
+    - name: Ninja|Hand.L
+      position: {x: -7.74860354e-09, y: .42725572, z: -5.81145265e-08}
+      rotation: {x: -.0334512182, y: .00616889261, z: -.0475499332, w: .998289526}
+      scale: {x: .999999523, y: .999999642, z: .999999404}
+      transformModified: 1
+    - name: Ninja|Arm Upper.R
+      position: {x: -.251869202, y: .292583048, z: -.0604020059}
+      rotation: {x: -.0603984632, y: .0619131513, z: .711588204, w: .697252452}
+      scale: {x: 1.0000006, y: 1.00000036, z: 1.00000048}
+      transformModified: 1
+    - name: Ninja|Arm Lower.R
+      position: {x: -4.26173195e-08, y: .436319411, z: 1.93715088e-09}
+      rotation: {x: -.0280461367, y: -.00120487355, z: .0152807692, w: .999489129}
+      scale: {x: .999999702, y: 1.00000048, z: 1.00000012}
+      transformModified: 1
+    - name: Ninja|Hand.R
+      position: {x: 3.09944141e-08, y: .427255869, z: -7.74860354e-08}
+      rotation: {x: -.0334506854, y: -.00616704253, z: .0475504063, w: .998289526}
+      scale: {x: .999999762, y: 1, z: 1.00000048}
+      transformModified: 1
+    - name: Ninja|Leg Upper.L
+      position: {x: .118451074, y: -.00941553991, z: .000215833366}
+      rotation: {x: -4.34208705e-05, y: .0378515162, z: .999279439, w: -.00281292736}
+      scale: {x: 1, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: Ninja|Leg Lower.L
+      position: {x: -7.74860354e-09, y: .362393975, z: -3.87430177e-09}
+      rotation: {x: .00589904841, y: .99891001, z: .0462997928, w: .000586343231}
+      scale: {x: .99999994, y: .99999994, z: .99999994}
+      transformModified: 1
+    - name: Ninja|Foot.L
+      position: {x: -1.09872778e-08, y: .48088184, z: -1.3075768e-08}
+      rotation: {x: -.00370685733, y: -.849241018, z: -.527833879, w: -.012934519}
+      scale: {x: 1.00000024, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: Ninja|Leg Upper.R
+      position: {x: -.118451074, y: -.00941560231, z: .000215802109}
+      rotation: {x: 4.22771445e-05, y: .0378586538, z: .999279141, w: .00281322794}
+      scale: {x: 1, y: 1.00000012, z: .99999994}
+      transformModified: 1
+    - name: Ninja|Leg Lower.R
+      position: {x: -1.16229053e-08, y: .362393916, z: 1.64657834e-08}
+      rotation: {x: .0462861545, y: .000585484202, z: .00589919928, w: .998910666}
+      scale: {x: 1.00000012, y: .999999702, z: 1.00000024}
+      transformModified: 1
+    - name: Ninja|Foot.R
+      position: {x: -.00274104485, y: .536528051, z: .0574580245}
+      rotation: {x: -.634225726, y: .00160680793, z: -.00266821589, w: .773141682}
+      scale: {x: .999999583, y: .999999583, z: 1.00000024}
+      transformModified: 1
+    - name: Ninja|Leg IK.L
+      position: {x: -.163191125, y: .466768444, z: -.117523268}
+      rotation: {x: -.499999911, y: -.50000006, z: -.49999994, w: .50000006}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Ninja|Knee Target.L
+      position: {x: -.678084612, y: 1.16974998, z: -.122409433}
+      rotation: {x: .500000119, y: .499999881, z: .500000119, w: -.499999911}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Ninja|Leg IK.R
+      position: {x: -.333303094, y: .372459203, z: .117522649}
+      rotation: {x: -.499999911, y: -.50000006, z: -.49999994, w: .50000006}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Ninja|Knee Target.R
+      position: {x: -.678084552, y: 1.16974998, z: .122409478}
+      rotation: {x: .500000119, y: .499999881, z: .500000119, w: -.499999911}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Ninja_Mesh
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: .500000179, y: .499999851, z: .500000179, w: -.499999851}
+      scale: {x: .0813640356, y: .0813640356, z: .0813640356}
+      transformModified: 1
     armTwist: .5
     foreArmTwist: .5
     upperLegTwist: .5
@@ -960,6 +1269,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 3
   additionalBone: 0
   userData: 

@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
     public Movement m_movement;
 
     private float m_speed;
-    private int m_direction;
+    private Movement.Direction m_direction;
 
     public Vector2 m_moveAmount;
 
@@ -21,14 +21,16 @@ public class Character : MonoBehaviour
         m_movement = GetComponent<Movement>();
         m_transform = transform;
 
-        m_speed = m_movement._walkSpeed;
+        Move(Movement.Direction.NONE);
+        Run(false);
+
         m_moveAmount = new Vector2();
     }
         
 	void FixedUpdate() 
     {
         // apply sideways movement
-        m_moveAmount.x = m_speed * m_direction * Time.deltaTime;
+        m_moveAmount.x = m_speed * (int)m_direction * Time.deltaTime;
         // apply gravity
         m_moveAmount.y -= m_movement._gravity * Time.deltaTime;
 
@@ -36,10 +38,13 @@ public class Character : MonoBehaviour
         {
             m_moveAmount.y += m_movement._jumpHeight * Time.deltaTime;
             m_jump = false;
+            SendMessage("Jumped", SendMessageOptions.DontRequireReceiver);
         }
 
         // check for collisions and get modified movement
         m_moveAmount = m_collisions.TestMove(m_moveAmount);
+
+        SendMessage("SetSpeed", Mathf.Abs(m_speed * (int)m_direction), SendMessageOptions.DontRequireReceiver);
 
         // move the character
         DoMove(m_moveAmount);
@@ -47,7 +52,7 @@ public class Character : MonoBehaviour
 
     void DoMove(Vector2 amount)
     {
-        m_transform.position += new Vector3(amount.x, amount.y, 0);
+        transform.Translate(amount.x, amount.y, 0, Space.World);
     }
 
     void Move(Movement.Direction dir)
@@ -55,18 +60,16 @@ public class Character : MonoBehaviour
         switch (dir)
         {
             case Movement.Direction.Left:
-                if (_previousDirection == Direction.Right)
-                {
-                    transform.Rotate(0, -180, 0);
-                }
-                m_direction = -1;
+                transform.localRotation = Quaternion.Euler(0, 90, 0);
+                m_direction = Movement.Direction.Left;
                 break;
             case Movement.Direction.Right:
-                transform.rotation = new Quaternion(0, 180, 0, 0);
-                m_direction = 1;
+                transform.localRotation = Quaternion.Euler(0, -90, 0);
+                m_direction = Movement.Direction.Right;
                 break;
             case Movement.Direction.NONE:
-                m_direction = 0;
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+                m_direction = Movement.Direction.NONE;
                 break;
         }
     }

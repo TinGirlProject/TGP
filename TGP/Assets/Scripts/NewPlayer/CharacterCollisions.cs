@@ -17,7 +17,7 @@ public class CharacterCollisions : MonoBehaviour
     // variables for raycasting: how many rays, etc
     public int _horizontalRays = 7;
     public int _verticalRays = 5;
-    public float _margin = 0.2f;	// I don't check the very edge of the collider
+    private float _margin = 0.4f;	// I don't check the very edge of the collider
 
     // angles and slopes
     float angleLeeway = 5f;
@@ -139,55 +139,58 @@ public class CharacterCollisions : MonoBehaviour
 
         int dir = (int)Mathf.Sign(moveX);
 
-        // check left or right of player
-        for (int i = 0; i < _horizontalRays; i++)
+        if (moveX != 0)
         {
-            // Left or right of collider (depending on dir)
-            float x = m_pos.x + m_center.x + m_size.x / 2 * dir;
-      
-            // Top, middle and then bottommost point of collider
-            float y = (m_trans.position.y + m_boxCol.center.y - m_boxCol.size.y / 2) + m_size.y / (_horizontalRays - 1) * i;
-
-            origin = new Vector2(x - _margin * dir, y);
-            direction = new Vector2(dir, 0);
-
-            ray = new Ray(origin, direction);
-            Debug.DrawRay(origin, direction, Color.red);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Abs(moveX) + _margin, layerMask))
+            // check left or right of player
+            for (int i = 0; i < _horizontalRays; i++)
             {
-                //// get the smallest between the ray hit point and the character
-                //float hitDistance = Vector2.Distance(hit.point, m_pos);
-                //if (hitDistance < Mathf.Abs(newMoveX))
-                //{
-                //    newMoveX = dir * hitDistance;
+                // Left or right of collider (depending on dir)
+                float x = m_pos.x + m_center.x + m_size.x / 2 * dir;
 
-                //    switch (dir)
-                //    {
-                //        case -1:
-                //            m_leftBlocked = true;
-                //            break;
-                //        case 1:
-                //            m_rightBlocked = true;
-                //            break;
-                //    }
-                //}
-                Log.ORANGE(dir);
-                switch (dir)
+                // Top, middle and then bottommost point of collider
+                float y = (m_trans.position.y + m_boxCol.center.y - m_boxCol.size.y / 2) + m_size.y / (_horizontalRays - 1) * i;
+
+                origin = new Vector2(x - _margin * dir, y);
+                direction = new Vector2(dir, 0);
+
+                ray = new Ray(origin, direction);
+                Debug.DrawRay(origin, direction, Color.red);
+
+                if (Physics.Raycast(ray, out hit, Mathf.Abs(moveX) + _margin, layerMask))
                 {
-                    case -1:
-                        m_leftBlocked = true;
-                        break;
-                    case 1:
-                        m_rightBlocked = true;
-                        break;
-                } 
+                    //// get the smallest between the ray hit point and the character
+                    //float hitDistance = Vector2.Distance(hit.point, m_pos);
+                    //if (hitDistance < Mathf.Abs(newMoveX))
+                    //{
+                    //    newMoveX = dir * hitDistance;
 
-                Debug.DrawRay(origin, direction, Color.red, Mathf.Abs(moveX));
-            }
-            else
-            {
-                Debug.DrawRay(origin, direction, Color.white, Mathf.Abs(moveX));
+                    //    switch (dir)
+                    //    {
+                    //        case -1:
+                    //            m_leftBlocked = true;
+                    //            break;
+                    //        case 1:
+                    //            m_rightBlocked = true;
+                    //            break;
+                    //    }
+                    //}
+                    Log.ORANGE(dir);
+                    switch (dir)
+                    {
+                        case -1:
+                            m_leftBlocked = true;
+                            break;
+                        case 1:
+                            m_rightBlocked = true;
+                            break;
+                    }
+
+                    Debug.DrawRay(origin, direction, Color.red, Mathf.Abs(moveX));
+                }
+                else
+                {
+                    Debug.DrawRay(origin, direction, Color.white, Mathf.Abs(moveX));
+                }
             }
         }
 
