@@ -3,34 +3,53 @@ using System.Collections;
 
 public class PlayerInput : MonoBehaviour 
 {
-	// Update is called once per frame
 	void Update () 
     {
-        //if (Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    SendMessage("Move", Movement.Direction.Left);
-        //}
-        //if (Input.GetKeyUp(KeyCode.LeftArrow))
-        //{
-        //    if (!Input.GetKey(KeyCode.RightArrow))
-        //    {
-        //        SendMessage("Move", Movement.Direction.NONE);
-        //    }
-        //}
-        //if (Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    SendMessage("Move", Movement.Direction.Right);
-        //}
-        //if (Input.GetKeyUp(KeyCode.RightArrow))
-        //{
-        //    if (!Input.GetKey(KeyCode.LeftArrow))
-        //    {
-        //        SendMessage("Move", Movement.Direction.NONE);
-        //    }
-        //}
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    SendMessage("Jump");
-        //}
+        // check for left and right movement
+        if (Input.GetButtonDown("Horizontal"))
+        {
+            if (Input.GetAxisRaw("Horizontal") < 0)
+            {
+                SendMessage("Move", Movement.Direction.Left);
+            }
+            else if (Input.GetAxisRaw("Horizontal") > 0)
+            {
+                SendMessage("Move", Movement.Direction.Right);
+            }
+            else if (Input.GetAxisRaw("Horizontal") == 0)
+            {
+                SendMessage("Move", Movement.Direction.NONE);
+            }
+        }
+        else if (Input.GetButtonUp("Horizontal"))
+        {
+            if (Input.GetAxisRaw("Horizontal") < 0)
+            {
+                SendMessage("Move", Movement.Direction.Left);
+            }
+            else if (Input.GetAxisRaw("Horizontal") > 0)
+            {
+                SendMessage("Move", Movement.Direction.Right);
+            }
+            else if (Input.GetAxisRaw("Horizontal") == 0)
+            {
+                SendMessage("Move", Movement.Direction.NONE);
+            }
+        }
+
+        // check for jump
+        if (Input.GetButtonDown("Jump"))
+        {
+            SendMessage("Jump");
+        }
+
+        if (Input.GetButtonDown("Run"))
+        {
+            SendMessage("Run", true);
+        }
+        else if (Input.GetButtonUp("Run"))
+        {
+            SendMessage("Run", false);
+        }
 	}
 }

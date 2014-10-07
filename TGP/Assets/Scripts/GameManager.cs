@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 		_cam = GetComponent<CameraScrolling>();
         SpawnPlayer(playerSpawn.position);
 
-        //cam.SetTarget(player.transform);
+        _cam.SetTarget(player.transform);
 	}
 	
 	// Spawn player

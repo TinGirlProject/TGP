@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerController : Character
+public class PlayerControllerOLD : CharacterOLD
 {
     private bool _slingshotDrawn;
     public GameObject slingshotGO;

@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(CharacterCollision))]
-public class Character : MonoBehaviour
+public class CharacterOLD : MonoBehaviour
 {
     // Character health
     protected float health;

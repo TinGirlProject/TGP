@@ -5,7 +5,7 @@ using System.Collections;
 [RequireComponent(typeof(Character))]
 public class CharacterCollision : MonoBehaviour 
 {
-    private Character c;
+    private CharacterOLD c;
 
     #region Collisions
     // Layer for wall/ground/ceiling collisions
@@ -63,7 +63,7 @@ public class CharacterCollision : MonoBehaviour
 
 	void Start () 
     {
-        c = GetComponent<Character>();
+        c = GetComponent<CharacterOLD>();
 
         collider = GetComponent<BoxCollider>();
         colliderScale = transform.localScale.x;
@@ -77,7 +77,7 @@ public class CharacterCollision : MonoBehaviour
     private void VerticalCollisions(float moveY)
     {
         // Check collisions above and below
-        //c.ChangeState(Character.GroundedState.NONE);
+        //c.ChangeState(CharacterOLD.GroundedState.NONE);
 
         Vector2 origin = new Vector2(transform.position.x, transform.position.y + size.y / 2);
         Vector2 direction = new Vector2(0, -1);
@@ -219,42 +219,42 @@ public class CharacterCollision : MonoBehaviour
 
         //if (!connectedYDown)
         //{
-        //    if (c.getInAirState() != Character.InAirState.JUMPING)
-        //        c.ChangeState(Character.InAirState.FALLING);
+        //    if (c.getInAirState() != CharacterOLD.InAirState.JUMPING)
+        //        c.ChangeState(CharacterOLD.InAirState.FALLING);
         //}
 
         if (connectedYDown && transform.position.y + moveAmount.y < yMinValue)
         {
             transform.position = new Vector3(transform.position.x, yMinValue, 0);
-            if (c.getInAirState() != Character.InAirState.JUMPING)
+            if (c.getInAirState() != CharacterOLD.InAirState.JUMPING)
             {
-                c.ChangeState(Character.InAirState.NONE);
+                c.ChangeState(CharacterOLD.InAirState.NONE);
             }
         }
         else if (connectedYUp && transform.position.y + moveAmount.y > yMaxValue)
         {
             transform.position = new Vector3(transform.position.x, yMaxValue, 0);
-            if (c.getInAirState() == Character.InAirState.JUMPING)
+            if (c.getInAirState() == CharacterOLD.InAirState.JUMPING)
             {
-                c.ChangeState(Character.InAirState.FALLING);
+                c.ChangeState(CharacterOLD.InAirState.FALLING);
             }
         }
 
-        if (c.getInAirState() == Character.InAirState.NONE)
+        if (c.getInAirState() == CharacterOLD.InAirState.NONE)
         {
             transform.position = new Vector3(transform.position.x, groundValue, 0);
-            c.ChangeState(Character.InAirState.NONE);
+            c.ChangeState(CharacterOLD.InAirState.NONE);
         }
 
         if (connectedXLeft && transform.position.x < xMinValue)
         {
             transform.position = new Vector3(xMinValue, transform.position.y, 0);
-            c.ChangeState(Character.PaceState.NONE);
+            c.ChangeState(CharacterOLD.PaceState.NONE);
         }
         else if (connectedXRight && transform.position.x > xMaxValue)
         {
             transform.position = new Vector3(xMaxValue, transform.position.y, 0);
-            c.ChangeState(Character.PaceState.NONE);
+            c.ChangeState(CharacterOLD.PaceState.NONE);
         }
 
         Vector2 finalTransform = new Vector2(moveAmount.x + deltaPlatformPos.x, moveAmount.y);

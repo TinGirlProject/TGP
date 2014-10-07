@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(BoxCollider))]
-public class PlayerControllerNew : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     //basic physics properties, all in units/second
     float acceleration = 6.5f;

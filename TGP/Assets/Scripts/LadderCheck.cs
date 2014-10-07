@@ -44,7 +44,7 @@ public class LadderCheck : MonoBehaviour
             }
             else
             {
-                if (other.GetComponent<PlayerController>().inAirState != Character.InAirState.CLIMBING)
+                if (other.GetComponent<PlayerControllerOLD>().inAirState != CharacterOLD.InAirState.CLIMBING)
                 {
                     SendMessageUpwards("PlayerInRange", true, SendMessageOptions.RequireReceiver);
                     other.SendMessage("SetCurLadder", transform.gameObject, SendMessageOptions.RequireReceiver);
@@ -76,7 +76,7 @@ public class LadderCheck : MonoBehaviour
                     }
                     else
                     {
-                        if (other.GetComponent<PlayerController>().inAirState != Character.InAirState.CLIMBING)
+                        if (other.GetComponent<PlayerControllerOLD>().inAirState != CharacterOLD.InAirState.CLIMBING)
                         {
                             msgSent = true;
                             SendMessageUpwards("PlayerInRange", true, SendMessageOptions.RequireReceiver);
