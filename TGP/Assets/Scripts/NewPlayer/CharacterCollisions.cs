@@ -5,8 +5,7 @@ using System.Collections;
 public class CharacterCollisions : MonoBehaviour 
 {
     private bool m_grounded;
-    private bool m_rightBlocked;
-    private bool m_leftBlocked;
+    private bool m_sideBlocked;
 
     //a layer mask that I set in the Start() function
     private int layerMask;
@@ -126,75 +125,100 @@ public class CharacterCollisions : MonoBehaviour
     /// <returns>A float with corrected move value on x axis.</returns>
     private float HorizontalCollisions(float moveX)
     {
-        m_rightBlocked = false;
-        m_leftBlocked = false;
+        if (moveX == 0)
+            return 0;
 
+        // origin and direction of the current ray
         Vector2 origin;
         Vector2 direction;
+
+        // ray and raycast hit being used
         Ray ray;
-        RaycastHit hit;
+        RaycastHit[] hits = new RaycastHit[_horizontalRays];
+        
+        // current direction on the x axis
+        int dir = (int)Mathf.Sign(moveX);
+
+        float length = Mathf.Abs(moveX) + _margin + m_boxCol.size.x / 2;
 
         // the amount to move after collisions
         float newMoveX = moveX;
 
-        int dir = (int)Mathf.Sign(moveX);
+        // if a ray connects, this is set to true
+        bool connected = false;
+        // used for slope calculations
+        bool connectedBefore = false;
 
-        if (moveX != 0)
+        // check left or right of player
+        for (int i = 0; i < _horizontalRays; i++)
         {
-            // check left or right of player
-            for (int i = 0; i < _horizontalRays; i++)
+            // Left or right of collider (depending on dir)
+            float x = m_pos.x + m_center.x + m_size.x / 2 * dir;
+
+            // Top, middle and then bottommost point of collider
+            float y = (m_trans.position.y + m_boxCol.center.y - m_boxCol.size.y / 2) + m_size.y / (_horizontalRays - 1) * i;
+
+            origin = new Vector2(x - _margin * dir, y);
+            direction = new Vector2(dir, 0);
+
+            ray = new Ray(origin, direction);
+            Debug.DrawRay(origin, direction, Color.red);
+
+            if (Physics.Raycast(ray, out hits[i], length, layerMask))
             {
-                // Left or right of collider (depending on dir)
-                float x = m_pos.x + m_center.x + m_size.x / 2 * dir;
+                //// get the smallest between the ray hit point and the character
+                //float hitDistance = Vector2.Distance(hit.point, m_pos);
+                //if (hitDistance < Mathf.Abs(newMoveX))
+                //{
+                //    newMoveX = dir * hitDistance;
 
-                // Top, middle and then bottommost point of collider
-                float y = (m_trans.position.y + m_boxCol.center.y - m_boxCol.size.y / 2) + m_size.y / (_horizontalRays - 1) * i;
+                //    switch (dir)
+                //    {
+                //        case -1:
+                //            m_leftBlocked = true;
+                //            break;
+                //        case 1:
+                //            m_rightBlocked = true;
+                //            break;
+                //    }
+                //}
 
-                origin = new Vector2(x - _margin * dir, y);
-                direction = new Vector2(dir, 0);
+                // the character has connected with something!
+                
 
-                ray = new Ray(origin, direction);
-                Debug.DrawRay(origin, direction, Color.red);
-
-                if (Physics.Raycast(ray, out hit, Mathf.Abs(moveX) + _margin, layerMask))
+                float angle = Vector2.Angle(hits[i].normal, Vector2.up);
+                if (Mathf.Abs(angle -90) < angleLeeway)
                 {
-                    //// get the smallest between the ray hit point and the character
-                    //float hitDistance = Vector2.Distance(hit.point, m_pos);
-                    //if (hitDistance < Mathf.Abs(newMoveX))
-                    //{
-                    //    newMoveX = dir * hitDistance;
-
-                    //    switch (dir)
-                    //    {
-                    //        case -1:
-                    //            m_leftBlocked = true;
-                    //            break;
-                    //        case 1:
-                    //            m_rightBlocked = true;
-                    //            break;
-                    //    }
-                    //}
-                    Log.ORANGE(dir);
-                    switch (dir)
-                    {
-                        case -1:
-                            m_leftBlocked = true;
-                            break;
-                        case 1:
-                            m_rightBlocked = true;
-                            break;
-                    }
-
-                    Debug.DrawRay(origin, direction, Color.red, Mathf.Abs(moveX));
+                    connected = true;
                 }
                 else
                 {
-                    Debug.DrawRay(origin, direction, Color.white, Mathf.Abs(moveX));
+                    
                 }
+                Log.BLUE(Mathf.Abs(angle - 90));
+
+                // check if the previous ray collided as well as the current one
+                if (connectedBefore)
+                {
+                    // check the normal of the thing we are colliding with to the up vector
+                    float angle2 = Vector2.Angle(hits[i].point - hits[i - 1].point, Vector2.right);
+
+                    Log.RED(angle2);
+                }
+                connectedBefore = true;
+
+                Debug.DrawRay(origin, direction, Color.red, Mathf.Abs(moveX));
+            }
+            else
+            {
+                Debug.DrawRay(origin, direction, Color.white, Mathf.Abs(moveX));
             }
         }
 
-        if (m_leftBlocked || m_rightBlocked)
+        // set if blocked on either side
+        m_sideBlocked = connected;
+
+        if (m_sideBlocked)
         {
             newMoveX = 0;
         }

@@ -47,14 +47,27 @@ public class Character : MonoBehaviour
         SendMessage("SetSpeed", Mathf.Abs(m_speed * (int)m_direction), SendMessageOptions.DontRequireReceiver);
 
         // move the character
-        DoMove(m_moveAmount);
+        FinalMove(m_moveAmount);
 	}
 
-    void DoMove(Vector2 amount)
+    /// <summary>
+    /// Actually translate the characcter along the x / y axis.
+    /// NO COLLISIONS ARE CHECKED HERE!
+    /// </summary>
+    /// <param name="amount">Vector2 represting the final amount to move.</param>
+    void FinalMove(Vector2 amount)
     {
         transform.Translate(amount.x, amount.y, 0, Space.World);
     }
 
+    /// <summary>
+    /// Set the direction of the player.
+    /// Uses enum Movement.Direction.
+    /// </summary>
+    /// <param name="dir">
+    /// Movement.Direction represting the current direction of the character.
+    /// Valid entries are Left, Right, NONE.
+    /// </param>
     void Move(Movement.Direction dir)
     {
         switch (dir)
@@ -74,6 +87,10 @@ public class Character : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Make the character jump.
+    /// Only works if the character is currently grounded.
+    /// </summary>
     void Jump()
     {
         if (m_collisions.isGrounded())
@@ -82,6 +99,13 @@ public class Character : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the movement speed of the character.
+    /// </summary>
+    /// <param name="run">
+    /// true sets current speed to movement._runSpeed.
+    /// false sets current speed to movement._walkSpeed.
+    /// </param>
     void Run(bool run)
     {
         switch (run)
