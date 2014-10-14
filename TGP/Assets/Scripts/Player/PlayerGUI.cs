@@ -1,8 +1,7 @@
-﻿/// <summary>
-/// 
-/// </summary>
-using UnityEngine;
+﻿using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System.Collections;
 
 public class PlayerGUI : MonoBehaviour
@@ -127,8 +126,11 @@ public class PlayerGUI : MonoBehaviour
             {
                 GUI.Box(new Rect(5, Screen.height - (131 + 5),
                     _showCombineStyle.CalcSize(new GUIContent(_showCombineGUIString)).x + 1, 30), _showCombineGUIString, _showCombineStyle);
+
+                #if UNITY_EDITOR
                 Utility.DrawOutline(new Rect(5, Screen.height - (131 + 5), 
                     _showCombineStyle.CalcSize(new GUIContent(_showCombineGUIString)).x + 1, 30), Color.black);
+                #endif
             }
         }
         else
@@ -266,6 +268,7 @@ public class PlayerGUI : MonoBehaviour
                                  _showCombineStyle.CalcSize(new GUIContent(item.curAmount.ToString())).x + 2,
                                  _showCombineStyle.CalcSize(new GUIContent(item.curAmount.ToString())).y), item.curAmount.ToString(), _showCombineStyle);
 
+            #if UNITY_EDITOR
             if (rect.Contains(cur.mousePosition))
             {
                 if (_firstSelectedItem != item && _secondSelectedItem != item)
@@ -274,6 +277,7 @@ public class PlayerGUI : MonoBehaviour
 
             if (item.guiSelected)
                 Utility.DrawOutline(rect, Color.red);
+#endif
         }
         SetToolTip();
     }

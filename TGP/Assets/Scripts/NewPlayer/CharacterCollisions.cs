@@ -49,17 +49,19 @@ public class CharacterCollisions : MonoBehaviour
     /// </summary>
     /// <param name="moveX">Amount to move along the y axis</param>
     /// <returns>A float with corrected move value on y axis.</returns>
-    private float VerticalCollisions(float moveY)
+    private Vector2 VerticalCollisions(Vector2 amount)
     {
         Vector2 origin;
         Vector2 direction;
         Ray ray;
         RaycastHit hit;
 
-        int dir = (int)Mathf.Sign(moveY);
+        int dir = (int)Mathf.Sign(amount.y);
+        float length = Mathf.Abs(amount.y) + _margin + m_boxCol.size.x / 2;
         
         // the amount to move after collisions
-        float newMoveY = moveY;
+        Vector2 newAmount = amount;
+
         bool connected = false;
 
         // check top or bottom of player
@@ -75,23 +77,23 @@ public class CharacterCollisions : MonoBehaviour
 
             ray = new Ray(origin, direction);
 
-            if (Physics.Raycast(ray, out hit, Mathf.Abs(moveY) + _margin, layerMask))
+            if (Physics.Raycast(ray, out hit, Mathf.Abs(amount.y) + _margin, layerMask))
             {
                 // get the smallest between the ray hit point and the character
                 float hitDistance = Vector2.Distance(new Vector2(hit.point.x, y), hit.point);
 
                 //Log.BOLD(hitDistance);
-                if (hitDistance < Mathf.Abs(newMoveY))
+                if (hitDistance < Mathf.Abs(newAmount.y))
                 {
-                    newMoveY = hitDistance * dir;
+                    newAmount.y = hitDistance * dir;
                     connected = true;
                 }
 
-                Debug.DrawRay(origin, direction, Color.red, Mathf.Abs(moveY));
+                Debug.DrawRay(origin, direction, Color.red, Mathf.Abs(amount.y));
             }
             else
             {
-                Debug.DrawRay(origin, direction, Color.white, Mathf.Abs(moveY));
+                Debug.DrawRay(origin, direction, Color.white, Mathf.Abs(amount.y));
             }
         }
 
@@ -104,7 +106,7 @@ public class CharacterCollisions : MonoBehaviour
         // dont move when the character is grounded
         if (m_grounded)
         {
-            newMoveY = 0;
+            newAmount.y = 0;
         }
 
         // if the character just connected with the ground, position it precisely on the ground
@@ -114,7 +116,7 @@ public class CharacterCollisions : MonoBehaviour
             m_grounded = true;
         }
 
-        return newMoveY;
+        return newAmount;
     }
     
     /// <summary>
@@ -123,10 +125,10 @@ public class CharacterCollisions : MonoBehaviour
     /// </summary>
     /// <param name="moveX">Amount to move along the x axis</param>
     /// <returns>A float with corrected move value on x axis.</returns>
-    private float HorizontalCollisions(float moveX)
+    private Vector2 HorizontalCollisions(Vector2 amount)
     {
-        if (moveX == 0)
-            return 0;
+        if (amount.x == 0)
+            return amount;
 
         // origin and direction of the current ray
         Vector2 origin;
@@ -137,12 +139,11 @@ public class CharacterCollisions : MonoBehaviour
         RaycastHit[] hits = new RaycastHit[_horizontalRays];
         
         // current direction on the x axis
-        int dir = (int)Mathf.Sign(moveX);
-
-        float length = Mathf.Abs(moveX) + _margin + m_boxCol.size.x / 2;
+        int dir = (int)Mathf.Sign(amount.x);
+        float length = Mathf.Abs(amount.x) + _margin + m_boxCol.size.x / 2;
 
         // the amount to move after collisions
-        float newMoveX = moveX;
+        Vector2 newAmount = amount;
 
         // if a ray connects, this is set to true
         bool connected = false;
@@ -193,9 +194,13 @@ public class CharacterCollisions : MonoBehaviour
                 }
                 else
                 {
-                    
+                    Debug.DrawRay(origin, direction, Color.red, Mathf.Abs(amount.x));
+                    Debug.DrawRay(origin, new Vector2(0, -1), Color.red, Mathf.Abs(amount.y));
+                    Log.GREEN(newAmount.x * Mathf.Tan(-angle));
+                    newAmount.y = newAmount.x * Mathf.Tan(-angle);
                 }
-                Log.BLUE(Mathf.Abs(angle - 90));
+                Log.BLUE(newAmount);
+                Log.RED(angle);
 
                 // check if the previous ray collided as well as the current one
                 if (connectedBefore)
@@ -207,11 +212,11 @@ public class CharacterCollisions : MonoBehaviour
                 }
                 connectedBefore = true;
 
-                Debug.DrawRay(origin, direction, Color.red, Mathf.Abs(moveX));
+                
             }
             else
             {
-                Debug.DrawRay(origin, direction, Color.white, Mathf.Abs(moveX));
+                Debug.DrawRay(origin, direction, Color.white, Mathf.Abs(amount.x));
             }
         }
 
@@ -220,10 +225,10 @@ public class CharacterCollisions : MonoBehaviour
 
         if (m_sideBlocked)
         {
-            newMoveX = 0;
+            newAmount.x = 0;
         }
 
-        return newMoveX;
+        return newAmount;
     }
 
     /// <summary>
@@ -236,8 +241,8 @@ public class CharacterCollisions : MonoBehaviour
         // get the characters position
         m_pos = m_trans.position;
 
-        amount.x = HorizontalCollisions(amount.x);
-        amount.y = VerticalCollisions(amount.y);
+        amount = HorizontalCollisions(amount);
+        amount = VerticalCollisions(amount);
 
         return amount;
     }

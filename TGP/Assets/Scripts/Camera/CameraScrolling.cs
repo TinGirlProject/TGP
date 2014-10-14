@@ -107,7 +107,7 @@ public class CameraScrolling : MonoBehaviour
 
     // You almost always want camera motion to go inside of LateUpdate (), so that the camera follows
     // the target _after_ it has moved.  Otherwise, the camera may lag one frame behind.
-    void LateUpdate() 
+    void FixedUpdate() 
     {
 	    // Where should our camera be looking right now?
         Vector3 goalPosition = GetGoalPosition();
