@@ -35,9 +35,9 @@ public class GameManager : MonoBehaviour
 			s_listOfTimers[cnt].UpdateTimer();
 		}
 
-        //if (!_currentPlayer) 
+        //if (!_currentPlayer)
         //{
-        //    if (Input.GetButtonDown("Respawn")) 
+        //    if (Input.GetButtonDown("Respawn"))
         //    {
         //        SpawnPlayer(playerSpawn.position);
         //    }

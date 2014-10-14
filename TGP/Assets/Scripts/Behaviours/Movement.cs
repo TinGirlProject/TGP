@@ -49,7 +49,6 @@ public class Movement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-		Log.BLUE(_direction);
 		if (_controller.isGrounded)
         {
 			_airTime = 0;
