@@ -6,6 +6,7 @@ public class CharacterCollisions : MonoBehaviour
 {
     private bool m_grounded;
     private bool m_sideBlocked;
+    private bool m_onSlope;
 
     //a layer mask that I set in the Start() function
     private int layerMask;
@@ -19,7 +20,7 @@ public class CharacterCollisions : MonoBehaviour
     private float _margin = 0.4f;	// I don't check the very edge of the collider
 
     // angles and slopes
-    float angleLeeway = 5f;
+    float angleLeeway = 70f;
 
     // components
     Transform m_trans;
@@ -61,6 +62,7 @@ public class CharacterCollisions : MonoBehaviour
         
         // the amount to move after collisions
         Vector2 newAmount = amount;
+        float inGround = 0;
 
         bool connected = false;
 
@@ -72,6 +74,7 @@ public class CharacterCollisions : MonoBehaviour
             // Bottom or top of collider (depending on dir)
             float y = m_pos.y + m_center.y + m_size.y / 2 * dir;
 
+            // origin and direction of the current ray
             origin = new Vector2(x, y - _margin * dir);
             direction = new Vector2(0, dir);
 
@@ -82,13 +85,37 @@ public class CharacterCollisions : MonoBehaviour
                 // get the smallest between the ray hit point and the character
                 float hitDistance = Vector2.Distance(new Vector2(hit.point.x, y), hit.point);
 
-                //Log.BOLD(hitDistance);
+                // move the player the exact amount onto the floor
                 if (hitDistance < Mathf.Abs(newAmount.y))
                 {
                     newAmount.y = hitDistance * dir;
                     connected = true;
                 }
 
+                if (m_grounded)
+                {
+                    // get the amount to move on the y axis if walking over a small bump
+                    float bottom = m_trans.position.y;
+                    float hitPoint = hit.point.y;
+                    if (hitPoint - bottom > inGround && dir == -1)
+                    {
+                        // move the player up!!
+                        inGround = (hitPoint - bottom);
+                    }
+
+                    // calculate the angle of the slope
+                    float angle = Vector2.Angle(hit.normal, Vector2.up);
+                    Log.BLUE(angle);
+                    if (Mathf.Abs(angle) != 0)
+                    {
+                        // check if the character is on a slope
+                        m_onSlope = true;
+                    }
+                    else
+                    {
+                        m_onSlope = false;
+                    }
+                }
                 Debug.DrawRay(origin, direction, Color.red, Mathf.Abs(amount.y));
             }
             else
@@ -96,15 +123,27 @@ public class CharacterCollisions : MonoBehaviour
                 Debug.DrawRay(origin, direction, Color.white, Mathf.Abs(amount.y));
             }
         }
+       
+        // position the character up a step
+        if (inGround > 0 && m_grounded)
+        {
+            transform.Translate(0, inGround, 0);
+        }
+
+        if (m_onSlope)
+        {
+            m_trans.position = new Vector3(m_trans.position.x, hit.point.y, 0);
+        }
 
         // check and set if grounded before setting the y movement
         if (!connected)
         {
             m_grounded = false;
+            m_onSlope = false;
         }
 
         // dont move when the character is grounded
-        if (m_grounded)
+        if (m_grounded && newAmount.y < 0)
         {
             newAmount.y = 0;
         }
@@ -136,7 +175,7 @@ public class CharacterCollisions : MonoBehaviour
 
         // ray and raycast hit being used
         Ray ray;
-        RaycastHit[] hits = new RaycastHit[_horizontalRays];
+        RaycastHit hit;
         
         // current direction on the x axis
         int dir = (int)Mathf.Sign(amount.x);
@@ -145,10 +184,7 @@ public class CharacterCollisions : MonoBehaviour
         // the amount to move after collisions
         Vector2 newAmount = amount;
 
-        // if a ray connects, this is set to true
         bool connected = false;
-        // used for slope calculations
-        bool connectedBefore = false;
 
         // check left or right of player
         for (int i = 0; i < _horizontalRays; i++)
@@ -157,7 +193,7 @@ public class CharacterCollisions : MonoBehaviour
             float x = m_pos.x + m_center.x + m_size.x / 2 * dir;
 
             // Top, middle and then bottommost point of collider
-            float y = (m_trans.position.y + m_boxCol.center.y - m_boxCol.size.y / 2) + m_size.y / (_horizontalRays - 1) * i;
+            float y = (m_trans.position.y + m_boxCol.center.y + m_boxCol.size.y / 2) - m_size.y / (_horizontalRays - 1) * i;
 
             origin = new Vector2(x - _margin * dir, y);
             direction = new Vector2(dir, 0);
@@ -165,54 +201,23 @@ public class CharacterCollisions : MonoBehaviour
             ray = new Ray(origin, direction);
             Debug.DrawRay(origin, direction, Color.red);
 
-            if (Physics.Raycast(ray, out hits[i], length, layerMask))
+            if (Physics.Raycast(ray, out hit, length, layerMask))
             {
-                //// get the smallest between the ray hit point and the character
-                //float hitDistance = Vector2.Distance(hit.point, m_pos);
-                //if (hitDistance < Mathf.Abs(newMoveX))
-                //{
-                //    newMoveX = dir * hitDistance;
-
-                //    switch (dir)
-                //    {
-                //        case -1:
-                //            m_leftBlocked = true;
-                //            break;
-                //        case 1:
-                //            m_rightBlocked = true;
-                //            break;
-                //    }
-                //}
-
-                // the character has connected with something!
-                
-
-                float angle = Vector2.Angle(hits[i].normal, Vector2.up);
-                if (Mathf.Abs(angle -90) < angleLeeway)
+                float angle = Vector2.Angle(hit.normal, Vector2.up);
+                if (Mathf.Abs(angle) > angleLeeway)
                 {
-                    connected = true;
+                    // if the character is grounded allow him to walk over things he hits with the bottom ray
+                    // otherwise stop him
+                    if (m_grounded)
+                    {
+                        if (i != _horizontalRays - 1 && !connected)
+                            connected = true;
+                    }
+                    else
+                    {
+                        connected = true;
+                    }
                 }
-                else
-                {
-                    Debug.DrawRay(origin, direction, Color.red, Mathf.Abs(amount.x));
-                    Debug.DrawRay(origin, new Vector2(0, -1), Color.red, Mathf.Abs(amount.y));
-                    Log.GREEN(newAmount.x * Mathf.Tan(-angle));
-                    newAmount.y = newAmount.x * Mathf.Tan(-angle);
-                }
-                Log.BLUE(newAmount);
-                Log.RED(angle);
-
-                // check if the previous ray collided as well as the current one
-                if (connectedBefore)
-                {
-                    // check the normal of the thing we are colliding with to the up vector
-                    float angle2 = Vector2.Angle(hits[i].point - hits[i - 1].point, Vector2.right);
-
-                    Log.RED(angle2);
-                }
-                connectedBefore = true;
-
-                
             }
             else
             {
@@ -220,12 +225,22 @@ public class CharacterCollisions : MonoBehaviour
             }
         }
 
-        // set if blocked on either side
-        m_sideBlocked = connected;
+        // only prevent movement when the character connects with more than one ray
+        if (!connected)
+        {
+            m_sideBlocked = false;
+        }
 
+        // stop movement if sideblocked 
         if (m_sideBlocked)
         {
             newAmount.x = 0;
+        }
+
+        // check and set if grounded before setting the y movement
+        if (connected)
+        {
+            m_sideBlocked = true;
         }
 
         return newAmount;
