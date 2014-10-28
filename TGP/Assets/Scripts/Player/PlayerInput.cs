@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerInput : MonoBehaviour 
+public class PlayerInput : MonoBehaviour
 {
-	// Update is called once per frame
+    public const string LEFTMOUSEDOWN = "LeftMouseDown";
+    public const string LEFTMOUSE = "LeftMouse";
+    public const string LEFTMOUSEUP = "LeftMouseUp";
+    public const string RIGHTMOUSEDOWN = "RightMouseDown";
+    public const string RIGHTMOUSE = "RightMouse";
+    public const string RIGHTMOUSEUP = "RightMouseUp";
+
+    // Update is called once per frame
 	void Update () 
     {
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -32,5 +39,20 @@ public class PlayerInput : MonoBehaviour
 		{
 			SendMessage("Jump");
 		}
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            Messenger.Broadcast(LEFTMOUSEUP);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+
+        }
 	}
 }

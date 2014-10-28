@@ -13,14 +13,11 @@ public class Wrench : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            Use();
-        }
+        
     }
 
     void Use()
     {
-        
+        _head.Activate();
     }
 }

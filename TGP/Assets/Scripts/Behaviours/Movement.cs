@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     }
     
     private float _walkSpeed = 4;
+    private float _airSpeed = 2;
     private float _runMultiplier = 2;
     private float _gravity = 9.8f;
     private float _airTime = 0;
@@ -76,6 +77,10 @@ public class Movement : MonoBehaviour
         }
         else
         {
+            _moveDirection = new Vector3((int)_direction * _walkSpeed, _controller.velocity.y, 0);
+            //_moveDirection.Normalize();
+            //_moveDirection *= _walkSpeed;
+
             if ((_collisionFlags & CollisionFlags.CollidedBelow) == 0)
             {
                 _airTime += Time.deltaTime;
@@ -92,6 +97,8 @@ public class Movement : MonoBehaviour
 
         // Move controller
         _collisionFlags = _controller.Move(_moveDirection * Time.deltaTime);
+
+        transform.SetZ(0);
 	}
 
     public void Run()

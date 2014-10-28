@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WrenchHead : MonoBehaviour
+public abstract class WrenchHead : MonoBehaviour
 {
     protected string _name;
     protected string _description;
     protected string _neededComponent;
     protected uint _range;
 
-    public void Init(string name, string description, string neededComponent, uint range)
+    public virtual void Init(string name, string description, string neededComponent, uint range)
     {
         _name = name;
         _description = description;
@@ -16,7 +16,7 @@ public class WrenchHead : MonoBehaviour
         _range = range;
     }
 
-    public virtual void Activate() { }
+    public abstract void Activate();
 
     public string Name
     {
