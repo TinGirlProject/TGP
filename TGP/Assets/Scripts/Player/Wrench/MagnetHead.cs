@@ -5,6 +5,6 @@ public class MagnetHead : WrenchHead
 {
     public override void Activate()
     {
-        Log.ORANGE("Magnet");
+        Log.ORANGE(_name + ": " + _description);
     }
 }

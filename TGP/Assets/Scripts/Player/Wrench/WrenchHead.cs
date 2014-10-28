@@ -3,9 +3,13 @@ using System.Collections;
 
 public abstract class WrenchHead : MonoBehaviour
 {
+    [SerializeField]
     protected string _name;
+    [SerializeField]
     protected string _description;
+    [SerializeField]
     protected string _neededComponent;
+    [SerializeField]
     protected uint _range;
 
     public virtual void Init(string name, string description, string neededComponent, uint range)
