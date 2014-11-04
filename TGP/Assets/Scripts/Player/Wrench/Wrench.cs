@@ -3,12 +3,14 @@ using System.Collections.Generic;
 
 public class Wrench : MonoBehaviour 
 {
+    public const string USEHEAD = "Use Head";
+
     private List<WrenchUpgrade> _upgrades;
-    public WrenchHead _head;
+    public WrenchHead head;
 
     void Awake()
     {
-        Messenger.AddListener("UseHead", Use);
+        Messenger.AddListener(USEHEAD, Use);
     }
 
     void Start()
@@ -23,6 +25,6 @@ public class Wrench : MonoBehaviour
 
     void Use()
     {
-        _head.Activate();
+        head.Activate();
     }
 }

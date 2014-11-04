@@ -10,14 +10,17 @@ public abstract class WrenchHead : MonoBehaviour
     [SerializeField]
     protected string _neededComponent;
     [SerializeField]
-    protected uint _range;
+    protected int _range;
 
-    public virtual void Init(string name, string description, string neededComponent, uint range)
+    protected Wrench _wrench;
+
+    public InputMessage msg;
+
+    protected virtual void Start()
     {
-        _name = name;
-        _description = description;
-        _neededComponent = neededComponent;
-        _range = range;
+        _wrench = GetComponentInParent<Wrench>();
+        if (!_wrench)
+            Log.RED("Could not get parent 'Wrench' component!");
     }
 
     public abstract void Activate();
@@ -40,7 +43,7 @@ public abstract class WrenchHead : MonoBehaviour
         set { _neededComponent = value; }
     }
 
-    public uint Range
+    public int Range
     {
         get { return _range; }
         set { _range = value; }

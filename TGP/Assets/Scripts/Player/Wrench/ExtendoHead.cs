@@ -3,10 +3,11 @@ using System.Collections;
 
 public class ExtendoHead : WrenchHead
 {
-    void Awake()
+    protected override void Start()
     {
-        Log.YELLOW("Awake?");
-        Messenger.AddListener(PlayerInput.LEFTMOUSEUP, CheckUseCondition);
+        base.Start();
+
+        Messenger.AddListener(PlayerInput.s_InputStrings[(int)msg], this.CheckUseCondition);
     }
 
     public override void Activate()
@@ -17,7 +18,13 @@ public class ExtendoHead : WrenchHead
     public void CheckUseCondition()
     {
         // Check to make sure wrench should be used
-
-        Messenger.Broadcast("UseHead");
+        if (_wrench)
+        {
+            if (_wrench.head)
+            {
+                if (_wrench.head is ExtendoHead)
+                    Messenger.Broadcast(Wrench.USEHEAD);
+            }
+        }
     }
 }

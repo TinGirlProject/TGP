@@ -3,17 +3,10 @@ using System.Collections;
 
 public class PlayerInput : MonoBehaviour
 {
-    #region Mouse Constants
-    public const string LEFTMOUSEDOWN = "LeftMouseDown";
-    public const string LEFTMOUSE = "LeftMouse";
-    public const string LEFTMOUSEUP = "LeftMouseUp";
-    public const string RIGHTMOUSEDOWN = "RightMouseDown";
-    public const string RIGHTMOUSE = "RightMouse";
-    public const string RIGHTMOUSEUP = "RightMouseUp";
-    public const string MIDDLEMOUSEDOWN = "MiddleMouseDown";
-    public const string MIDDLEMOUSE = "MiddleMouse";
-    public const string MIDDLEMOUSEUP = "MiddleMouseUp";
-    #endregion
+    public static string[] s_InputStrings = {  "Mouse_Left_Down", "Mouse_Left", "Mouse_Left_Up",
+                                            "Mouse_Right_Down", "Mouse_Right", "Mouse_Right_Up",
+                                            "Mouse_Middle_Down", "Mouse_Middle", "Mouse_Middle_Up",
+                                            "Key_E_Down", "Key_E", "Key_E_Up" };
 
     // Update is called once per frame
 	void Update () 
@@ -44,51 +37,78 @@ public class PlayerInput : MonoBehaviour
 		{
 			SendMessage("Jump");
         }
+
         #region Mouse Input
         if (Input.GetMouseButtonDown(0))
         {
-            Messenger.Broadcast(LEFTMOUSEDOWN, MessengerMode.DONT_REQUIRE_LISTENER);
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.MOUSE_LEFTDOWN], MessengerMode.DONT_REQUIRE_LISTENER);
         }
-
         if (Input.GetMouseButton(0))
         {
-            Messenger.Broadcast(LEFTMOUSE, MessengerMode.DONT_REQUIRE_LISTENER);
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.MOUSE_LEFT], MessengerMode.DONT_REQUIRE_LISTENER);
         }
-
         if (Input.GetMouseButtonUp(0))
         {
-            Messenger.Broadcast(LEFTMOUSEUP, MessengerMode.DONT_REQUIRE_LISTENER);
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.MOUSE_LEFTUP], MessengerMode.DONT_REQUIRE_LISTENER);
         }
-
         if (Input.GetMouseButtonDown(1))
         {
-            Messenger.Broadcast(RIGHTMOUSEDOWN, MessengerMode.DONT_REQUIRE_LISTENER);
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.MOUSE_RIGHTDOWN], MessengerMode.DONT_REQUIRE_LISTENER);
         }
-
         if (Input.GetMouseButton(1))
         {
-            Messenger.Broadcast(RIGHTMOUSE, MessengerMode.DONT_REQUIRE_LISTENER);
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.MOUSE_RIGHT], MessengerMode.DONT_REQUIRE_LISTENER);
         }
-
         if (Input.GetMouseButtonUp(1))
         {
-            Messenger.Broadcast(RIGHTMOUSEUP, MessengerMode.DONT_REQUIRE_LISTENER);
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.MOUSE_RIGHTUP], MessengerMode.DONT_REQUIRE_LISTENER);
         }
-
         if (Input.GetMouseButtonDown(2))
         {
-            Messenger.Broadcast(MIDDLEMOUSEDOWN, MessengerMode.DONT_REQUIRE_LISTENER);
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.MOUSE_MIDDLEDOWN], MessengerMode.DONT_REQUIRE_LISTENER);
         }
-
         if (Input.GetMouseButton(2))
         {
-            Messenger.Broadcast(MIDDLEMOUSE, MessengerMode.DONT_REQUIRE_LISTENER);
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.MOUSE_MIDDLE], MessengerMode.DONT_REQUIRE_LISTENER);
         }
-
         if (Input.GetMouseButtonUp(2))
         {
-            Messenger.Broadcast(MIDDLEMOUSEUP, MessengerMode.DONT_REQUIRE_LISTENER);
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.MOUSE_MIDDLEUP], MessengerMode.DONT_REQUIRE_LISTENER);
+        }
+        #endregion
+
+        #region Keyboard Input
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.KEY_EDOWN], MessengerMode.DONT_REQUIRE_LISTENER);
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.KEY_E], MessengerMode.DONT_REQUIRE_LISTENER);
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            Messenger.Broadcast(s_InputStrings[(int)InputMessage.KEY_EUP], MessengerMode.DONT_REQUIRE_LISTENER);
         }
         #endregion
     }
+}
+
+/// <summary>
+/// Enum to allow in editor changes to controls.
+/// </summary>
+public enum InputMessage
+{
+    MOUSE_LEFTDOWN,
+    MOUSE_LEFT,
+    MOUSE_LEFTUP,
+    MOUSE_RIGHTDOWN,
+    MOUSE_RIGHT,
+    MOUSE_RIGHTUP,
+    MOUSE_MIDDLEDOWN,
+    MOUSE_MIDDLE,
+    MOUSE_MIDDLEUP,
+    KEY_EDOWN,
+    KEY_E,
+    KEY_EUP
 }

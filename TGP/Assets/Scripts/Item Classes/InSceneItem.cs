@@ -62,4 +62,10 @@ public class InSceneItem : MonoBehaviour
             _inRange = false;
         }
     }
+
+    void PlayerHit()
+    {
+        // Do item specific stuff
+        Destroy(this.gameObject);
+    }
 }
