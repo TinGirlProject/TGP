@@ -4,30 +4,32 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-	public GameObject player;
-    public Transform playerSpawn;
-	private GameObject _currentPlayer;
-    private CameraScrolling _cam;
+	public GameObject _player;
+    public Transform _playerSpawn;
+
+	private GameObject m_currentPlayer;
+    private CameraScrolling m_cam;
+
 	public static List<Timer> s_listOfTimers;
-	private Timer _testTimer;
+	private Timer m_testTimer;
 	
 	void Awake() 
     {
 		s_listOfTimers = new List<Timer>();
-		_cam = GetComponent<CameraScrolling>();
+		m_cam = GetComponent<CameraScrolling>();
 
-        _currentPlayer = GameObject.Find("Player");
+        m_currentPlayer = GameObject.Find(_player.name);
 
-        if (!_currentPlayer)
-            SpawnPlayer(playerSpawn.position);
+        if (!m_currentPlayer)
+            SpawnPlayer(_playerSpawn.position);
 
-        _cam.SetTarget(_currentPlayer.transform);
+        m_cam.SetTarget(m_currentPlayer.transform);
 	}
 	
 	// Spawn player
 	private void SpawnPlayer(Vector3 spawnPos) 
     {
-		_currentPlayer = Instantiate(player, spawnPos, Quaternion.identity) as GameObject;
+		m_currentPlayer = Instantiate(_player, spawnPos, Quaternion.identity) as GameObject;
 	}
 
 	private void Update() 
@@ -38,11 +40,11 @@ public class GameManager : MonoBehaviour
 			s_listOfTimers[cnt].UpdateTimer();
 		}
 
-		if (!_currentPlayer) 
+		if (!m_currentPlayer) 
         {
 			if (Input.GetButtonDown("Respawn")) 
             {
-                SpawnPlayer(playerSpawn.position);
+                SpawnPlayer(_playerSpawn.position);
 			}
 		}
 	}
