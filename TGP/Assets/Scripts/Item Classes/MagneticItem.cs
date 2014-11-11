@@ -5,43 +5,48 @@ using System.Collections;
 public class MagneticItem : MonoBehaviour 
 {
     public float magneticForce = 5;
+    private float _indexModifier;
     private float _magRange;
+    [SerializeField]
     private bool _haveTarget;
     private bool _stuck;
-    private Vector3 _target;
+    private Vector3 _targetPos;
     private MagnetHead _magHead;
 
 	// Use this for initialization
 	void Start () 
     {
         rigidbody.interpolation = RigidbodyInterpolation.Extrapolate;
+        _indexModifier = 10;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () 
     {
-        if (!_stuck)
-        {
+        //if (!_stuck)
+        //{
             if (_haveTarget)
             {
-                Vector3 magField = _target - transform.position;
-                float index = (10 - magField.magnitude) / 10;
-                rigidbody.AddForce(magneticForce * magField * index);
+                Vector3 magField = _targetPos - transform.position;
+                //float index = (_indexModifier - magField.magnitude) / _indexModifier;
+                //Vector3 vec = magneticForce * magField * index;
+                //Log.BLUE(transform.name + " force vector: " + vec);
+                rigidbody.AddForce(magneticForce * magField.normalized);
             }
 
-            float dis = Vector3.Distance(_target, transform.position);
+            //float dis = Vector3.Distance(_target, transform.position);
 
-            if(dis < 0.55f)
-            {
-                _stuck = true;
-                rigidbody.isKinematic = true;
-                transform.parent = _magHead.transform;
-            }
-        }
-        else
-        {
-            transform.position = _magHead.transform.position;
-        }
+            //if(dis < 0.55f)
+            //{
+            //    _stuck = true;
+            //    rigidbody.isKinematic = true;
+            //    transform.parent = _magHead.transform;
+            //}
+        //}
+        //else
+        //{
+        //    transform.position = _magHead.transform.position;
+        //}
 	}
 
     void SetAttractionTarget(MagnetHead mag)
@@ -50,7 +55,7 @@ public class MagneticItem : MonoBehaviour
         rigidbody.useGravity = false;
         _magRange = mag.Range;
         _magHead = mag;
-        _target = mag.transform.position;
+        _targetPos = mag.transform.position;
     }
 
     void RemoveAttractionTarget()
@@ -61,7 +66,7 @@ public class MagneticItem : MonoBehaviour
         rigidbody.isKinematic = false;
         _stuck = false;
         _magHead = null;
-        _target = Vector3.zero;
+        _targetPos = Vector3.zero;
     }
 
     void OnCollisionEnter(Collision col)

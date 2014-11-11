@@ -45,8 +45,6 @@ public class MagnetHead : WrenchHead
             {
                 _inRangeObjects[i].SendMessage("SetAttractionTarget", this, SendMessageOptions.RequireReceiver);
             }
-
-            Log.GREEN(_inRangeObjects.Count);
         }
     }
 
